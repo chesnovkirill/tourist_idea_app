@@ -1,0 +1,22 @@
+language: ruby
+
+rvm:
+ - 2.4.1
+
+env:
+  global:
+    - CC_TEST_REPORTER_ID=e6aac9f4c47188e63a0d55783af1bd62a8789d9c668486a976de122e1d844faf
+language: ruby
+rvm:
+  - 2.4.1
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
+  - bundle exec rake db:test:prepare
+  - bundle exec rspec
+  - bundle exec cucumber --tags=~wip
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
