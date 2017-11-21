@@ -27,6 +27,17 @@ ActiveRecord::Schema.define(version: 20171121014030) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "adventures", force: :cascade do |t|
+    t.string "number_of_people"
+    t.string "country"
+    t.string "city"
+    t.string "description"
+    t.string "details"
+    t.datetime "adventure_date"
+    t.float "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

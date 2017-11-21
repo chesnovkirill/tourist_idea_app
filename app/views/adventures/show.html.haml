@@ -1,0 +1,29 @@
+%h2 Details about Adventure
+
+%ul#details
+  %li
+    Number of people:
+    = @adventure.number_of_people
+  %li
+    Country:
+    = @adventure.country
+  %li
+    City:
+    = @adventure.city
+  %li
+    Description:
+    = @adventure.description
+  %li
+    Offer:
+    = @adventure.price
+  %li
+    Scheduled for:
+    = @adventure.adventure_date.strftime("%B %d, %Y")
+
+%h3 Description:
+
+%p#details= @adventure.details
+
+= link_to 'Edit info', edit_adventure_path(@adventure)
+= link_to 'Back to adventure list', adventures_path
+= link_to 'Delete', adventure_path(@adventure), :method => :delete
