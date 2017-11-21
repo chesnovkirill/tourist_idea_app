@@ -8,9 +8,8 @@ class CreateAdventures < ActiveRecord::Migration[5.1]
             t.string 'details'
             t.datetime 'adventure_date'
             t.float 'price'
-            # Add fields that let Rails automatically keep track
-            # of when movies are added or modified:
-            t.timestamps
+
+            add_reference :preferences, :user, foreign_key: true
         end
     end
 end

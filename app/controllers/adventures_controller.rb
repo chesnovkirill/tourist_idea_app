@@ -15,7 +15,10 @@ class AdventuresController < ApplicationController
         params.require(:adventure).permit(:number_of_people,:country,:description,:adventure_date,:price)
         date = Date.new params[:adventure]["adventure_date(1i)"].to_i, params[:adventure]["adventure_date(2i)"].to_i, params[:adventure]["adventure_date(3i)"].to_i
         temp={"number_of_people"=>params[:adventure]["number_of_people"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"]}
-        @adventure = Adventure.create!(temp)
+
+        @adventure = current_user.adventures.build(temp)
+        current_user.save
+
         flash[:notice] ="#Adventure was successfully created."
         redirect_to adventures_path
     end
@@ -23,7 +26,7 @@ class AdventuresController < ApplicationController
         @adventure = Adventure.find params[:id]
         @countries = ISO3166::Country.all
     end
-    
+
     def update
         @adventure = Adventure.find params[:id]
         date = Date.new params[:adventure]["adventure_date(1i)"].to_i, params[:adventure]["adventure_date(2i)"].to_i, params[:adventure]["adventure_date(3i)"].to_i
