@@ -1,11 +1,13 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
+
+ruby  '2.4.1'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
 
-
+gem 'rake', '< 11.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use Puma as the app server
@@ -16,10 +18,12 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-# use Haml for templates
-gem 'haml'
-gem 'countries'
-gem 'cities'
+
+gem 'haml-rails', '>= 0.3.4'
+gem 'rack_session_access'
+
+gem 'bootstrap-sass' , '~> 3.2.0'
+gem 'autoprefixer-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -35,14 +39,18 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'devise'
+gem 'countries'
+gem 'cities'
 
 group :development, :test do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-  gem 'sqlite3'
 end
 
 group :development do
@@ -55,18 +63,18 @@ group :development do
 end
 
 group :test do
-    gem 'rspec-rails', '~>3.6'
-    gem 'test-unit'
-    gem 'minitest'
-    gem 'shoulda-matchers', '3', :require => false
-    gem 'simplecov', '~> 0.8.2', :require => false
-    gem 'simplecov-shield'
+  gem 'rspec-rails', '~>3.6'
+  gem 'test-unit'
+  gem 'minitest'
+  gem 'shoulda-matchers', '3', :require => false
+  gem 'simplecov', '~> 0.8.2', :require => false
+  gem 'simplecov-shield'
 
-    gem 'cucumber-rails', :require => false
-    gem 'cucumber-rails-training-wheels' # basic imperative step defs
-    gem 'database_cleaner' # required by Cucumber
-    gem 'autotest-rails'
-    gem 'metric_fu'        # collect code metrics
+  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails-training-wheels' # basic imperative step defs
+  gem 'database_cleaner' # required by Cucumber
+  gem 'autotest-rails'
+  gem 'metric_fu'        # collect code metrics
 end
 
 group :production do
