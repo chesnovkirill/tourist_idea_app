@@ -1,4 +1,5 @@
 class AdventuresController < ApplicationController
+    before_action :correct_user, only: [:edit, :update, :destroy]
     def index
         @adventures = Adventure.all
     end
@@ -22,13 +23,12 @@ class AdventuresController < ApplicationController
         flash[:notice] ="#Adventure was successfully created."
         redirect_to adventures_path
     end
+
     def edit
-        @adventure = Adventure.find params[:id]
         @countries = ISO3166::Country.all
     end
 
     def update
-        @adventure = Adventure.find params[:id]
         date = Date.new params[:adventure]["adventure_date(1i)"].to_i, params[:adventure]["adventure_date(2i)"].to_i, params[:adventure]["adventure_date(3i)"].to_i
         temp={"number_of_people"=>params[:adventure]["number_of_people"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"]}
         @adventure.update_attributes!(temp)
@@ -36,9 +36,15 @@ class AdventuresController < ApplicationController
         redirect_to adventure_path(@adventure)
     end
     def destroy
-        @adventure = Adventure.find(params[:id])
         @adventure.destroy
         flash[:notice] = "Adventure deleted."
         redirect_to adventures_path
+    end
+
+    def correct_user
+        @adventure = Adventure.find(params[:id])
+        if current_user.id != @adventure.user_id
+            redirect_to root_path
+        end
     end
 end
