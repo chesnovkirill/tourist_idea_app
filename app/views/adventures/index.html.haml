@@ -1,0 +1,25 @@
+%h1 All Adventures
+
+%table#adventures
+    %thread
+        %tr
+            %th Number of People
+            %th Country
+            %th City
+            %th Description
+            %th Details
+            %th Scheduled for
+            %th Price
+    %tbody
+        - @adventures.each do |adventure|
+            %tr
+                %td= adventure.number_of_people
+                %td= adventure.country
+                %td= adventure.city
+                %td= adventure.description
+                %td= adventure.details
+                %td= adventure.adventure_date
+                %td= adventure.price
+                %td= link_to "Details", adventure_path(adventure)
+= link_to 'Add new adventure', new_adventure_path
+ 

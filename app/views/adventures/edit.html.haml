@@ -1,0 +1,26 @@
+%h2 Edit Adventure
+
+= form_tag adventure_path(@adventure), :method => :put do
+
+  = label :adventure, :number_of_people, 'I'
+  = select :adventure, :number_of_people, ['Only me','+1','+2','+3','+4', '+5', 'me and more than 5 others']
+
+  = label :adventure, :country, 'in (What country are you going to?)'
+  = select :adventure, :country, @countries
+
+  = label :adventure, :city, 'What city are you going to?'
+  = text_field :adventure, :city
+
+  = label :adventure, :description, 'Ask locals anything'
+  = text_field :adventure, :description
+ 
+  = label :adventure, :details, 'Details'
+  = text_field :adventure, :details
+
+  = label :adventure, :adventure_date, 'choose date'
+  = date_select :adventure, :adventure_date
+
+  = label :adventure, :price, 'I am willing to offer'
+  = number_field :adventure, :price
+
+  = submit_tag 'Save Changes'
