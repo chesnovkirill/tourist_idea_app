@@ -2,13 +2,13 @@
 
 = form_tag adventures_path, :method => :post do
 
-  = label :adventure, :number_of_people, 'I'
-  = select :adventure, :number_of_people, ['Only me','+1','+2','+3','+4', '+5', 'me and more than 5 others']
+  = label :adventure, :number_of_people, 'Myself and'
+  = select :adventure, :number_of_people, ['No others','+1','+2','+3','+4', '+5', 'more than 5 others']
 
-  = label :adventure, :country, 'in (What country are you going to?)'
+  = label :adventure, :country, 'Country:'
   = select :adventure, :country, @countries
 
-  = label :adventure, :city, 'What city are you going to?'
+  = label :adventure, :city, 'City:'
   = text_field :adventure, :city
 
   = label :adventure, :description, 'Ask locals anything'
@@ -17,7 +17,7 @@
   = label :adventure, :details, 'Details'
   = text_field :adventure, :details
 
-  = label :adventure, :adventure_date, 'choose date'
+  = label :adventure, :adventure_date, 'Choose date'
   = date_select :adventure, :adventure_date, :start_year => Date.today.year
 
   = label :adventure, :price, 'I am willing to offer'
