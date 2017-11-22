@@ -41,6 +41,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'countries'
 gem 'cities'
+gem 'carrierwave', '~> 1.0'
+gem 'slim'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

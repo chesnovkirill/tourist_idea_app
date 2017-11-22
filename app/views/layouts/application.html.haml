@@ -1,5 +1,9 @@
 !!! 5
 %html
+  %ul.hmenu
+    = render 'devise/menu/registration_items'
+    = render 'devise/menu/login_items'
+
   %head
     %title ExperienceMaker!
     = stylesheet_link_tag 'application'

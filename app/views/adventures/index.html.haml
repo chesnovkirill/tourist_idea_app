@@ -18,8 +18,8 @@
                 %td= adventure.city
                 %td= adventure.description
                 %td= adventure.details
-                %td= adventure.adventure_date
-                %td= adventure.price
+                %td= adventure.adventure_date.strftime("%B %d, %Y")
+                %td= number_to_currency(adventure.price)
                 %td= link_to "Details", adventure_path(adventure)
 = link_to 'Add new adventure', new_adventure_path
  

@@ -9,7 +9,8 @@ class CreateAdventures < ActiveRecord::Migration[5.1]
             t.datetime 'adventure_date'
             t.float 'price'
 
-            add_reference :preferences, :user, foreign_key: true
+
         end
+        add_reference :adventures, :user, foreign_key: true
     end
 end

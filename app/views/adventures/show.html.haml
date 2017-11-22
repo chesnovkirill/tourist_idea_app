@@ -15,7 +15,7 @@
     = @adventure.description
   %li
     Offer:
-    = @adventure.price
+    = number_to_currency(@adventure.price)
   %li
     Scheduled for:
     = @adventure.adventure_date.strftime("%B %d, %Y")

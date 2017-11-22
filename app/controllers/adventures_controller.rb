@@ -43,7 +43,8 @@ class AdventuresController < ApplicationController
 
     def correct_user
         @adventure = Adventure.find(params[:id])
-        if current_user.id != @adventure.user_id
+        if current_user != @adventure.user
+            flash[:notice] ="Sorry, you can't change other's adventures"
             redirect_to root_path
         end
     end
