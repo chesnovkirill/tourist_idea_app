@@ -1,5 +1,5 @@
 #!/bin/sh
 
-heroku pg:reset DATABASE --confirm bsc-workshift-manager
+heroku pg:reset DATABASE --confirm ask-the-locals
 heroku run rake db:migrate
 heroku run rake db:seed
