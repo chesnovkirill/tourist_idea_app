@@ -1,4 +1,9 @@
 h2 Sign up
+%script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
+%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css", :rel => "stylesheet"}/
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"}
+%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+%meta{:charset => "UTF-8"}/
 
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
 = devise_error_messages!

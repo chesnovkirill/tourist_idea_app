@@ -1,6 +1,18 @@
 %h2 Details about Adventure
-
-%ul#details
+%script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
+%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css", :rel => "stylesheet"}/
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"}
+%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+%meta{:charset => "UTF-8"}/
+:css
+  /* visited link */
+  a:visited {
+    color: #C7EA46;
+  }
+  a:hover {
+    color: white;
+  }
+%ul@adventure.details
   %li
     Number of people:
     = @adventure.number_of_people
@@ -20,10 +32,9 @@
     Scheduled for:
     = @adventure.adventure_date.strftime("%B %d, %Y")
 
-%h3 Description:
 
-%p#details= @adventure.details
 
-= link_to 'Edit info', edit_adventure_path(@adventure)
-= link_to 'Back to adventure list', adventures_path
-= link_to 'Delete', adventure_path(@adventure), :method => :delete
+= link_to '<i class="big write icon"></i>'.html_safe, edit_adventure_path(@adventure)
+= link_to '<i class="big reply icon"></i>'.html_safe, adventures_path
+= link_to '<i class="big trash outline icon"></i>'.html_safe, adventure_path(@adventure), :method => :delete
+

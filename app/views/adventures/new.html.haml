@@ -1,4 +1,9 @@
 %h2 Create New Adventure
+%script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
+%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css", :rel => "stylesheet"}/
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"}
+%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+%meta{:charset => "UTF-8"}/
 
 = form_tag adventures_path, :method => :post do
 
@@ -12,10 +17,10 @@
   = text_field :adventure, :city
 
   = label :adventure, :description, 'Ask locals anything'
-  = text_field :adventure, :description
+  = text_area :adventure, :description
 
   = label :adventure, :details, 'Details'
-  = text_field :adventure, :details
+  = text_area :adventure, :details
 
   = label :adventure, :adventure_date, 'choose date'
   = date_select :adventure, :adventure_date, :start_year => Date.today.year
@@ -24,3 +29,4 @@
   = number_field :adventure, :price
 
   = submit_tag 'Save Changes'
+= link_to 'Back to adventure list', adventures_path
