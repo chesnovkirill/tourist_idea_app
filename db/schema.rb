@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122211415) do
+ActiveRecord::Schema.define(version: 20171124014611) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "number_of_people"
+    t.string "action_adventure"
     t.string "country"
     t.string "city"
     t.string "description"
@@ -22,6 +23,15 @@ ActiveRecord::Schema.define(version: 20171122211415) do
     t.float "price"
     t.integer "user_id"
     t.index ["user_id"], name: "index_adventures_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "name"
+    t.text "body"
+    t.integer "adventure_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["adventure_id"], name: "index_comments_on_adventure_id"
   end
 
   create_table "users", force: :cascade do |t|

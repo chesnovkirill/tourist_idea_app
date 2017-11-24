@@ -17,6 +17,9 @@
     Number of people:
     = @adventure.number_of_people
   %li
+    Action or Adventure:
+    = @adventure.action_adventure
+  %li
     Country:
     = @adventure.country
   %li
@@ -31,8 +34,14 @@
   %li
     Scheduled for:
     = @adventure.adventure_date.strftime("%B %d, %Y")
-
-
+%br/
+%h5
+  = @adventure.comments.count
+  Comments
+%h4
+  = render @adventure.comments
+%h3 Add a Comment:
+= render 'comments/form'
 
 = link_to '<i class="big write icon"></i>'.html_safe, edit_adventure_path(@adventure)
 = link_to '<i class="big reply icon"></i>'.html_safe, adventures_path

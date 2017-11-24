@@ -2,6 +2,7 @@ class CreateAdventures < ActiveRecord::Migration[5.1]
     def change
         create_table 'adventures' do |t|
             t.string 'number_of_people'
+            t.string 'action_adventure'
             t.string 'country'
             t.string 'city'
             t.string 'description'

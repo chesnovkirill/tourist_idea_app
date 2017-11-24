@@ -4,14 +4,6 @@
   = devise_error_messages!
 
   %div
-    = f.label :first_name
-    %br/
-    = f.text_field :first_name, autofocus: true
-  %div
-    = f.label :last_name
-    %br/
-    = f.text_field :last_name
-  %div
     = f.label :email
     %br/
     = f.email_field :email
@@ -23,36 +15,4 @@
     = f.label :password_confirmation
     %br/
     = f.password_field :password_confirmation, autocomplete: "off"
-  %div
-    = f.label :date_of_birth
-    %br/
-    = f.date_select :date_of_birth
-  %div
-    = f.label :country_of_residence
-    %br/
-    = f.text_field :country_of_residence
-  %div
-    = f.label :city_of_residence
-    %br/
-    = f.text_field :city_of_residence
-  %div
-    = f.label :contact_phone
-    %br/
-    = f.text_field :contact_phone
-  %div
-    = f.label :education
-    %br/
-    = f.text_field :education
-  %div
-    = f.label :work
-    %br/
-    = f.text_field :work
-  %div
-    = f.label :interests
-    %br/
-    = f.text_field :interests
-  %div
-    = f.label :capabilities
-    %br/
-    = f.text_field :capabilities
   %div= f.submit "Update"

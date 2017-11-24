@@ -13,9 +13,9 @@ class AdventuresController < ApplicationController
         # default: render 'new' template
     end
     def create
-        params.require(:adventure).permit(:number_of_people,:country,:description,:adventure_date,:price)
+        params.require(:adventure).permit(:number_of_people,:action_adventure,:country,:description,:adventure_date,:price)
         date = Date.new params[:adventure]["adventure_date(1i)"].to_i, params[:adventure]["adventure_date(2i)"].to_i, params[:adventure]["adventure_date(3i)"].to_i
-        temp={"number_of_people"=>params[:adventure]["number_of_people"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"]}
+        temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"]}
 
         @adventure = current_user.adventures.build(temp)
         current_user.save
@@ -30,7 +30,7 @@ class AdventuresController < ApplicationController
 
     def update
         date = Date.new params[:adventure]["adventure_date(1i)"].to_i, params[:adventure]["adventure_date(2i)"].to_i, params[:adventure]["adventure_date(3i)"].to_i
-        temp={"number_of_people"=>params[:adventure]["number_of_people"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"]}
+        temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"]}
         @adventure.update_attributes!(temp)
         flash[:notice] = "Adventure was successfully updated."
         redirect_to adventure_path(@adventure)

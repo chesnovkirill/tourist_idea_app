@@ -4,12 +4,14 @@
 %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"}
 %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
 %meta{:charset => "UTF-8"}/
-= link_to '<i class="big add square icon"></i>'.html_safe, new_adventure_path
+%h3
+  = link_to '<i class="big add square icon"></i>'.html_safe, new_adventure_path
 
 %table#adventures
   %thread
     %tr
       %th Number of People
+      %th Action or Adventure?
       %th Country
       %th City
       %th Description
@@ -20,6 +22,7 @@
     - @adventures.each do |adventure|
       %tr
         %td= adventure.number_of_people
+        %td= adventure.action_adventure
         %td= adventure.country
         %td= adventure.city
         %td= adventure.description

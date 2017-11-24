@@ -10,6 +10,9 @@
   = label :adventure, :number_of_people, 'I'
   = select :adventure, :number_of_people, ['Only me','+1','+2','+3','+4', '+5', 'me and more than 5 others']
 
+  = label :adventure, :action_adventure, 'need'
+  = select :adventure, :action_adventure, ['action','advice']
+
   = label :adventure, :country, 'in (What country are you going to?)'
   = select :adventure, :country, @countries
 
@@ -22,8 +25,9 @@
   = label :adventure, :details, 'Details'
   = text_area :adventure, :details
 
-  = label :adventure, :adventure_date, 'choose date'
-  = date_select :adventure, :adventure_date, :start_year => Date.today.year
+  #my_div.field
+    = label :adventure, :adventure_date, 'choose date'
+    = date_select :adventure, :adventure_date, :start_year => Date.today.year
 
   = label :adventure, :price, 'I am willing to offer'
   = number_field :adventure, :price
