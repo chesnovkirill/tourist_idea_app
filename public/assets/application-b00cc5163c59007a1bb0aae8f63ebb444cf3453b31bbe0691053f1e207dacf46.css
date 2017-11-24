@@ -1,0 +1,87 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+ ul {
+   position: relative;
+   text-align: left;
+   right: -400px;
+   list-style-type: none;
+   font-size: 200%;
+   line-height: 150%;
+
+
+}
+
+h2 {
+  font-size: 400%;
+  text-align: center;
+  list-style-type: none;
+
+}
+
+h1 {
+  font-size: 400%;
+  text-align: center;
+  list-style-type: none;
+
+}
+
+h3 {
+  text-align: center;
+  position: relative;
+  right: -550px;
+  width: 100px;
+  padding: 50px;
+
+}
+
+button {
+  text-align: center;
+  position: relative;
+  right: -550px;
+  width: 100px;
+  padding: 50px;
+}
+
+i {
+  position: relative;
+  right: -550px;
+  width: 100px;
+  padding: 50px;
+}
+
+html {
+  margin: 100;
+  padding: 100;
+  list-style-type: none;
+}
+
+table {
+  table-layout: fixed;
+  width: 800px;
+  text-align: center;
+  position: relative;
+  right: -300px;
+  padding: 50px;
+}
+
+head {
+  position: relative;
+  text-align: right;
+  list-style-type: none;
+  font-size: 200%;
+  line-height: 150%;
+}
