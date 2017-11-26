@@ -41,8 +41,9 @@
           .ui.form
             .field
               #{text_area :adventure, :details}
-          = label :adventure, :price, 'I am willing to offer'
-          = number_field :adventure, :price
+          %h1
+            = label :adventure, :price, 'I am willing to offer'
+            = number_field :adventure, :price
           %button.ui.inverted.olive.button Save Changes
 
 .ui.centered.grid
@@ -55,7 +56,9 @@
             .ui.segment
               .content
               .meta
-                %p Name: #{current_user.first_name} needs #{ad.action_adventure}
+                %p #{ad.user.first_name} needs #{ad.action_adventure}
+                %p
+                  %img.ui.small.avatar.image{:src => ad.user.avatar_url.to_s}/
                 %p Number of people: #{ad.number_of_people}
                 %p #{ad.city},  #{ad.country} #{ad.adventure_date.strftime("%B %d, %Y")}
                 %p #{ad.description}
@@ -64,19 +67,26 @@
                 #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :delete}
                 %br/
                 = ad.comments.count
-                Comments
+                answers
+                %p
                 = render ad.comments
-                Add a Comment:
+                Answer:
                 = form_for([ad,ad.comments.build]) do |f|
                   %p
-                    = f.label :name
-                    = f.text_field :name
+                    #{current_user.first_name}
                   %p
-                    = f.label :body
                     = f.text_area :body
                   %p
+                    Choose which of your capabilities to include:
+                  %p
+                    #{current_user.capabilities}
+                  %p
+                    Any othern relevant capabilities?
+                  %p
+                    = f.text_area :capabilities
+                  %p
+                    = f.label :price, 'I would like to get'
+                    = f.number_field :price
+                    instead
+                  %p
                     = f.submit
-        
-
-
- 

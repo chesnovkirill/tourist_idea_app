@@ -1,7 +1,5 @@
 - if user_signed_in?
-  %li
-    = link_to '<i class="olive sign out icon"></i>'.html_safe, destroy_user_session_path, method: :delete
+  = link_to '<i class="olive sign out icon"></i>'.html_safe, destroy_user_session_path, method: :delete
 - else
-  %li
-    = link_to '<i class="olive add user icon"></i>'.html_safe, new_user_session_path
+  = link_to '<i class="olive add user icon"></i>'.html_safe, new_user_session_path
 

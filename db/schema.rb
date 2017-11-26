@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122211415) do
+ActiveRecord::Schema.define(version: 20171126184901) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "number_of_people"
@@ -28,10 +28,12 @@ ActiveRecord::Schema.define(version: 20171122211415) do
   create_table "comments", force: :cascade do |t|
     t.string "name"
     t.text "body"
+    t.text "capabilities"
+    t.string "price"
     t.integer "adventure_id"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
     t.index ["adventure_id"], name: "index_comments_on_adventure_id"
   end
 
