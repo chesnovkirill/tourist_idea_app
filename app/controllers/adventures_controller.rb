@@ -1,7 +1,9 @@
 class AdventuresController < ApplicationController
     before_action :correct_user, only: [:edit, :update, :destroy]
     def index
+        @adventure = Adventure.new
         @adventures = Adventure.all
+        @countries = ISO3166::Country.all
     end
     def show
         id = params[:id]
@@ -33,12 +35,12 @@ class AdventuresController < ApplicationController
         temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"]}
         @adventure.update_attributes!(temp)
         flash[:notice] = "Adventure was successfully updated."
-        redirect_to adventure_path(@adventure)
+        redirect_to adventures_path
     end
     def destroy
         @adventure.destroy
         flash[:notice] = "Adventure deleted."
-        redirect_to adventures_path
+        redirect_to root_path
     end
 
     def correct_user

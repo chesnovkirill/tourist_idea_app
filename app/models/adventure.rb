@@ -1,4 +1,4 @@
 class Adventure < ActiveRecord::Base
-    belongs_to :user, dependent: :destroy
+    belongs_to :user
     has_many :comments
 end

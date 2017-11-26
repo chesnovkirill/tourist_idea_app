@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20171122211415) do
     t.string "name"
     t.text "body"
     t.integer "adventure_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["adventure_id"], name: "index_comments_on_adventure_id"
