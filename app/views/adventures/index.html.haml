@@ -1,66 +1,81 @@
-%h1 Create New Adventure
+
 %script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
 %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css", :rel => "stylesheet"}/
 %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"}
 %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
 %meta{:charset => "UTF-8"}/
-= render 'devise/menu/registration_items'
-= render 'devise/menu/login_items'
-.ui.centered.grid
-  .ui.centered.items
-    = form_tag adventures_path, :method => :post do
-      = label :adventure, :number_of_people, 'I'
-      = select :adventure, :number_of_people, ['Only me','+1','+2','+3','+4', '+5', 'me and more than 5 others']
-      = label :adventure, :action_adventure, 'need'
-      = select :adventure, :action_adventure, ['action','advice']
-      = label :adventure, :country, 'in (What country are you going to?)'
-      = select :adventure, :country, @countries
-      %p
-      = label :adventure, :city, 'What city are you going to?'
-      = text_field :adventure, :city
-      = label :adventure, :adventure_date, 'choose date'
-      = date_select :adventure, :adventure_date, :start_year => Date.today.year
-      .ui.form
-        .field
-          %label User Input
-          %input{"adventure" => "description", :type => "text"}/
-      = label :adventure, :details, 'Details'
-      = text_area :adventure, :details
-      = label :adventure, :price, 'I am willing to offer'
-      = number_field :adventure, :price
-      = submit_tag 'Save Changes'
-
-
-%h2 All Adventures
+:css
+  /* visited link */
+  select {
+    color: #7fa046;
+  }
+  h1 {
+    color: olive
+  }
 .ui.centered.grid
   .ui.centered.items
     .ui.segments
-      - @adventures.each do |ad|
-        .twenty.wide.item
-          .ui.segment
-            .content
-            .meta
-              %p Name: #{current_user.first_name} needs #{ad.action_adventure}
-              %p Number of people: #{ad.number_of_people}
-              %p #{ad.city},  #{ad.country} #{ad.adventure_date.strftime("%B %d, %Y")}
-              %p #{ad.description}
-              %p #{ad.details}
-              #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
-              #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :delete}
-              %br/
-              = ad.comments.count
-              Comments
-              = render ad.comments
-              Add a Comment:
-              = form_for([ad,ad.comments.build]) do |f|
-                %p
-                  = f.label :name
-                  = f.text_field :name
-                %p
-                  = f.label :body
-                  = f.text_area :body
-                %p
-                  = f.submit
+      .ui.inverted.segment
+        #{render 'devise/menu/registration_items'}
+        #{render 'devise/menu/login_items'}
+        %h1 Create New Adventure
+        = form_tag adventures_path, :method => :post do
+          = label :adventure, :number_of_people, 'I'
+          = select :adventure, :number_of_people, ['Only me','+1','+2','+3','+4', '+5', 'me and more than 5 others']
+          = label :adventure, :action_adventure, 'need'
+          = select :adventure, :action_adventure, ['action','advice']
+          = label :adventure, :country, 'in (What country are you going to?)'
+          = select :adventure, :country, @countries
+          %p
+          = label :adventure, :city, 'What city are you going to?'
+          = text_field :adventure, :city
+          = label :adventure, :adventure_date, 'choose date'
+          = date_select :adventure, :adventure_date, :start_year => Date.today.year
+          %p
+          = label :adventure, :description, 'Ask locals anything'
+          .ui.form
+            .field
+              #{text_area :adventure, :description}
+          %p
+          = label :adventure, :description, 'Any details?'
+          .ui.form
+            .field
+              #{text_area :adventure, :details}
+          = label :adventure, :price, 'I am willing to offer'
+          = number_field :adventure, :price
+          %button.ui.inverted.olive.button Save Changes
+
+.ui.centered.grid
+  .fifteen.wide.column
+    .ui.centered.items
+      %h2 All Adventures
+      .ui.segments
+        - @adventures.each do |ad|
+          .twenty.wide.item
+            .ui.segment
+              .content
+              .meta
+                %p Name: #{current_user.first_name} needs #{ad.action_adventure}
+                %p Number of people: #{ad.number_of_people}
+                %p #{ad.city},  #{ad.country} #{ad.adventure_date.strftime("%B %d, %Y")}
+                %p #{ad.description}
+                %p #{ad.details}
+                #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
+                #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :delete}
+                %br/
+                = ad.comments.count
+                Comments
+                = render ad.comments
+                Add a Comment:
+                = form_for([ad,ad.comments.build]) do |f|
+                  %p
+                    = f.label :name
+                    = f.text_field :name
+                  %p
+                    = f.label :body
+                    = f.text_area :body
+                  %p
+                    = f.submit
         
 
 
