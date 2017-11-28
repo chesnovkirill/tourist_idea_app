@@ -22,7 +22,7 @@
         .header.item
           = link_to 'My Profile', user_path(current_user.id)
         .right.aligned.header.item
-          = link_to "Log Out", destroy_user_session_path, :method => :delete
+          = link_to "Log Out", destroy_user_session_path, :method => :get
     - else
       .ui.menu
         .header.item
