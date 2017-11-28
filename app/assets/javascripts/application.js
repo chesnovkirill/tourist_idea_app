@@ -13,23 +13,3 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
-<script>
-  $(document).ready(function(){
-     if($('#action_adventure').val() != "advice"){
-        $("#my_div").css('display','none')
-     }
-     else{
-        $("#my_div").css('display','block')
-     }
-
-     $('#action_adventure').change(function(){
-        if($(this).val() != "advice"){
-          $("#my_div").css('display','none')
-        }
-        else{
-          $("#my_div").css('display','block')
-        }
-     })
-  });
-
-</script>
