@@ -54,7 +54,7 @@
               .eight.wide.column
                 #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} needs #{ad.action_adventure}
                 %p
-                %a.img.ui.small.circular.image{:href => "user_path(ad.user.id)"}
+                %a.img.ui.small.circular.image{:href => user_path(ad.user.id)}
                   %img{:src => ad.user.avatar_url.to_s}/
                 %p Number of people: #{ad.number_of_people}
                 %p #{ad.city},  #{ad.country} #{ad.adventure_date.strftime("%B %d, %Y")}
