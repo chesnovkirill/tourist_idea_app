@@ -1,9 +1,5 @@
 
-%script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
-%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css", :rel => "stylesheet"}/
-%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"}
-%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-%meta{:charset => "UTF-8"}/
+
 :css
   /* visited link */
   select {
@@ -12,12 +8,11 @@
   h1 {
     color: olive
   }
+
 .ui.centered.grid
   .ui.centered.items
     .ui.segments
       .ui.inverted.segment
-        #{render 'devise/menu/registration_items'}
-        #{render 'devise/menu/login_items'}
         %h1 Create New Adventure
         = form_tag adventures_path, :method => :post do
           = label :adventure, :number_of_people, 'I'
@@ -56,9 +51,11 @@
             .ui.segment
               .content
               .meta
-                %p #{ad.user.first_name} needs #{ad.action_adventure}
+              .eight.wide.column
+                #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} needs #{ad.action_adventure}
                 %p
-                  %img.ui.small.avatar.image{:src => ad.user.avatar_url.to_s}/
+                %a.img.ui.small.circular.image{:href => "user_path(ad.user.id)"}
+                  %img{:src => ad.user.avatar_url.to_s}/
                 %p Number of people: #{ad.number_of_people}
                 %p #{ad.city},  #{ad.country} #{ad.adventure_date.strftime("%B %d, %Y")}
                 %p #{ad.description}
@@ -69,7 +66,10 @@
                 = ad.comments.count
                 answers
                 %p
-                = render ad.comments
+                - ad.comments.each do |c|
+                  .ui.very.padded.segment
+                    %p
+                      = render c
                 Answer:
                 = form_for([ad,ad.comments.build]) do |f|
                   %p
@@ -84,6 +84,8 @@
                     Any othern relevant capabilities?
                   %p
                     = f.text_area :capabilities
+                  %p
+                    = f.file_field :image, multiple:true
                   %p
                     = f.label :price, 'I would like to get'
                     = f.number_field :price

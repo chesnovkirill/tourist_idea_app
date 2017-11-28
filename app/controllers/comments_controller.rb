@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
     def create
         @adventure = Adventure.find(params[:adventure_id])
-        @comment = @adventure.comments.create(params[:comment].permit(:name, :body, :capabilities, :price))
+        @comment = @adventure.comments.create(params[:comment].permit(:name, :body, :capabilities, :price, :image))
         @comment.user_id = current_user.id
         @name = @comment.user.first_name
         @comment.save

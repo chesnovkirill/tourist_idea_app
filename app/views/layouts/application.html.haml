@@ -3,6 +3,11 @@
   %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", :rel => "stylesheet"}/
   %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"}
   %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
+  %script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
+  %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css", :rel => "stylesheet"}/
+  %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"}
+  %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %meta{:charset => "UTF-8"}/
   %head
     %title ExperienceMaker!
     = stylesheet_link_tag 'application'
@@ -10,6 +15,21 @@
     = csrf_meta_tags
 
   %body
+    - if user_signed_in?
+      .ui.menu
+        .header.item
+          = link_to "Home", root_path
+        .header.item
+          = link_to 'My Profile', user_path(current_user.id)
+        .right.aligned.header.item
+          = link_to "Log Out", destroy_user_session_path, method: :delete
+    - else
+      .ui.menu
+        .header.item
+          = link_to "Home", root_path
+        .right.aligned.header.item
+          = link_to "Sign up", new_registration_path(resource_name)
+
     -# this goes just inside %body:
     - if flash[:notice]
       #notice.message= flash[:notice]

@@ -1,0 +1,38 @@
+.ui.centered.grid
+  .ui.centered.items
+    .ui.segments
+      %p
+      %h2
+        #{@user.first_name}'s Profile
+      %p
+        %img.ui.small.avatar.image{:src => @user.avatar_url.to_s}/
+      %p
+        = link_to "Edit Profile", edit_user_registration_path
+      .ui.segment
+        Name: #{@user.last_name}
+      .ui.segment
+        Gender: #{@user.gender}
+      .ui.segment
+        E-mail: #{@user.email}
+      .ui.segment
+        Date of Birth: #{@user.date_of_birth}
+      .ui.segment
+        Country of Residence: #{@user.country_of_residence}
+      .ui.segment
+        City of Residence: #{@user.city_of_residence}
+      .ui.segment
+        Contact Phone: #{@user.contact_phone}
+      .ui.segment
+        Education: #{@user.education}
+      .ui.segment
+        Work: #{@user.work}
+      .ui.segment
+        Interests: #{@user.interests}
+      .ui.segment
+        Capabilities: #{@user.capabilities}
+
+
+
+
+
+

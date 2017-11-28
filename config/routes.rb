@@ -5,4 +5,5 @@ Rails.application.routes.draw do
       resources :comments
   end
   root :to => redirect('/adventures')
+  get 'users/:id', to: "users#show", as: "user"
 end

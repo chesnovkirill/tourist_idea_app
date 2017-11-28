@@ -1,18 +1,22 @@
-%p
-  #{comment.user.first_name}
-%p
-  = comment.body
-%p
-  #{comment.user.first_name}'s capabilities:
-  #{comment.user.capabilities}
-  = comment.capabilities
-%p
-  #{comment.user.first_name}'s price:
-  = comment.price
-%h4
-  = time_ago_in_words(comment.created_at)
-  ago
-  = comment.created_at
-%p
-  = link_to 'Delete',[comment.adventure,comment], method: :delete, data: { confirm: 'Are you sure?' }
+.ui.centered.grid
+  .five.wide.column
+    %h2
+      #{comment.user.first_name}
+    %p
+      = comment.body
+    %p
+      #{comment.user.first_name}'s capabilities:
+      #{comment.user.capabilities}
+      = comment.capabilities
+    %p
+    #{comment.user.first_name}'s price:
+    = comment.price
+    %p
+      %img.ui.big.image{:src => comment.image_urls.to_s}/
+    %h4
+    = time_ago_in_words(comment.created_at)
+    ago
+    = comment.created_at
+    %p
+      = link_to 'Delete',[comment.adventure,comment], method: :delete, data: { confirm: 'Are you sure?' }
 
