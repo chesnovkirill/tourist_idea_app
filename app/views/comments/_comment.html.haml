@@ -17,6 +17,7 @@
     = time_ago_in_words(comment.created_at)
     ago
     = comment.created_at
+    %p.lead= link_to 'Choose This Guide', new_chat_room_path, class: 'btn btn-primary'
     %p
       = link_to 'Delete',[comment.adventure,comment], method: :delete, data: { confirm: 'Are you sure?' }
 

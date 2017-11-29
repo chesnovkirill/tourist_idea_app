@@ -35,6 +35,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'redis', '~> 3.2'
+gem 'bootstrap', '~> 4.0.0.alpha3'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -44,6 +46,7 @@ gem 'cities'
 gem 'carrierwave', '~> 1.0'
 gem 'slim'
 gem 'rails_12factor', group: :production
+gem 'jquery-rails'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
