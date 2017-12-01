@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     end
     resources :chat_rooms, only: [:new, :create, :show, :index]
     root :to => redirect('/adventures')
-    get 'users/:id', to: "users#show", as: "user"
+    resources :users
     mount ActionCable.server => '/cable'
   end

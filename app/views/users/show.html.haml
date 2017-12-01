@@ -3,33 +3,52 @@
     .ui.segments
       %p
       %h2
-        #{@user.first_name}'s Profile
+        - if @user.first_name
+          -if @var || @user.id == current_user.id
+            #{@user.first_name} #{@user.last_name}'s Profile
+          -else
+            #{@user.first_name}'s Profile
+        - else
+          Anon's Profile
       %p
         %img.ui.small.avatar.image{:src => @user.avatar_url.to_s}/
       %p
+      -if @user.id == current_user.id
         = link_to "Edit Profile", edit_user_registration_path
-      .ui.segment
-        Name: #{@user.last_name}
-      .ui.segment
-        Gender: #{@user.gender}
-      .ui.segment
-        E-mail: #{@user.email}
-      .ui.segment
-        Date of Birth: #{@user.date_of_birth}
-      .ui.segment
-        Country of Residence: #{@user.country_of_residence}
-      .ui.segment
-        City of Residence: #{@user.city_of_residence}
-      .ui.segment
-        Contact Phone: #{@user.contact_phone}
-      .ui.segment
-        Education: #{@user.education}
-      .ui.segment
-        Work: #{@user.work}
-      .ui.segment
-        Interests: #{@user.interests}
-      .ui.segment
-        Capabilities: #{@user.capabilities}
+      - if @user.gender
+        .ui.segment
+          Gender: #{@user.gender}
+      -if @var || @user.id == current_user.id
+        .ui.segment
+          E-mail: #{@user.email}
+      - if @user.date_of_birth
+        .ui.segment
+          Date of Birth: #{@user.date_of_birth.strftime("%m/%d/%Y")}
+      - if @user.country_of_residence
+        .ui.segment
+          Country of Residence: #{@user.country_of_residence}
+      - if @user.city_of_residence
+        .ui.segment
+          City of Residence: #{@user.city_of_residence}
+      -if @var || @user.id == current_user.id
+        - if @user.contact_phone
+          .ui.segment
+            Contact Phone: #{@user.contact_phone}
+      - if @user.education
+        .ui.segment
+          Educational Interests: #{@user.education}
+      -if @var || @user.id == current_user.id
+        - if @user.work
+          .ui.segment
+            Professional Interests: #{@user.work}
+      -if @var || @user.id == current_user.id
+        - if @user.interests
+          .ui.segment
+            Hobbies: #{@user.interests}
+      -if @var || @user.id == current_user.id
+        - if @user.capabilities
+          .ui.segment
+            Capabilities: #{@user.capabilities}
 
 
 

@@ -47,6 +47,8 @@ gem 'carrierwave', '~> 1.0'
 gem 'slim'
 gem 'rails_12factor', group: :production
 gem 'jquery-rails'
+gem 'geokit-rails'
+gem "nifty-generators", :group => :development
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
@@ -89,3 +91,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'mocha', group: :test

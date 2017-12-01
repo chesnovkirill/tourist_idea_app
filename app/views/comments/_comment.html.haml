@@ -18,6 +18,5 @@
     ago
     = comment.created_at
     %p.lead= link_to 'Choose This Guide', new_chat_room_path, class: 'btn btn-primary'
-    %p
-      = link_to 'Delete',[comment.adventure,comment], method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to_if comment.adventure.user_id == current_user.id || comment.user_id == current_user.id, 'Delete', [comment.adventure,comment], method: :delete, data: { confirm: 'Are you sure?' }
 

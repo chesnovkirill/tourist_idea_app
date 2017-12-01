@@ -9,6 +9,7 @@ class CreateAdventures < ActiveRecord::Migration[5.1]
             t.string 'details'
             t.datetime 'adventure_date'
             t.float 'price'
+            t.datetime 'created_at'
 
 
         end

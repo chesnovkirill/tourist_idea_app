@@ -17,3 +17,15 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require cable
+<script language="javascript" type="text/javascript">
+    function showHide(elementId) {
+        if (document.getElementById) {
+            var element = document.getElementById(elementId);
+            if (element.style.visibility == 'hidden') {
+                element.style.visibility = 'visible';
+            } else if (element.style.visibility == 'visible') {
+                element.style.visibility = 'hidden';
+            }
+        }
+    }
+    </script>

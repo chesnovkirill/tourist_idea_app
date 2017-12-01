@@ -7,8 +7,8 @@ class User < ApplicationRecord
   has_many :comments
   has_many :chat_rooms
   has_many :messages
+  has_many :friendships
+  has_many :users, :through => :friendships
   mount_uploader :avatar, AvatarUploader
-  def name
-      email.split('@')[0]
-  end
+  
 end

@@ -11,6 +11,7 @@ class AdventuresController < ApplicationController
     end
     def new
         @adventure = Adventure.new
+        @adventure.created_at = Time.now
         @countries = ISO3166::Country.all
         # default: render 'new' template
     end

@@ -1,14 +1,3 @@
-
-
-:css
-  /* visited link */
-  select {
-    color: #7fa046;
-  }
-  h1 {
-    color: olive
-  }
-
 .ui.centered.grid
   .ui.centered.items
     .ui.segments
@@ -46,7 +35,7 @@
     .ui.centered.items
       %h2 All Adventures
       .ui.segments
-        - @adventures.each do |ad|
+        - @adventures.sort {|a,b| b.created_at <=> a.created_at }.each do |ad|
           .twenty.wide.item
             .ui.segment
               .content
@@ -58,8 +47,14 @@
                   %img{:src => ad.user.avatar_url.to_s}/
                 %p Number of people: #{ad.number_of_people}
                 %p #{ad.city},  #{ad.country} #{ad.adventure_date.strftime("%B %d, %Y")}
-                %p #{ad.description}
-                %p #{ad.details}
+                %p
+                  #{ad.description}
+                Details
+                %p
+
+
+
+                  #{ad.details}
                 #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
                 #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :delete}
                 %br/

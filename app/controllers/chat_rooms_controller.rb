@@ -8,7 +8,7 @@ class ChatRoomsController < ApplicationController
     end
     
     def create
-        @chat_room = current_user.chat_rooms.build(chat_room_params)
+        @chat_room = current_user.chat_rooms.build
         if @chat_room.save
             flash[:success] = 'Chat added!'
             redirect_to @chat_room
@@ -24,7 +24,4 @@ class ChatRoomsController < ApplicationController
     
     private
     
-    def chat_room_params
-        params.require(:chat_room).permit(:title)
-    end
 end
