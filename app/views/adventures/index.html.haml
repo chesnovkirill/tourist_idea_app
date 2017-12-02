@@ -41,25 +41,41 @@
               .content
               .meta
               .eight.wide.column
-                #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} needs #{ad.action_adventure}
+                - if ad.user.first_name
+                  #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} needs #{ad.action_adventure}
+                - else
+                  #{link_to "Anon", user_path(ad.user.id)} needs #{ad.action_adventure}
                 %p
                 %a.img.ui.small.circular.image{:href => user_path(ad.user.id)}
                   %img{:src => ad.user.avatar_url.to_s}/
                 %p Number of people: #{ad.number_of_people}
-                %p #{ad.city},  #{ad.country} #{ad.adventure_date.strftime("%B %d, %Y")}
+                - if ad.city != ""
+                  %p #{ad.city},  #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}
+                - else
+                  %p Any city in #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}
                 %p
                   #{ad.description}
-                Details
-                %p
-
-
-
+                - if ad.details != ""
+                  Details
+                  %p
                   #{ad.details}
-                #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
-                #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :delete}
+                - if ad.price
+                  - if ad.user.first_name
+                    #{ad.user.first_name}'s offer: $#{ad.price}
+                  - else
+                    Anon's offer: $#{ad.price}
+                - else
+                  - if ad.user.first_name
+                    #{ad.user.first_name} would like to get this #{ad.action_adventure} for free
+                  - else
+                    Anon would like to get this #{ad.action_adventure} for free
+
+                - if ad.user.id == current_user.id
+                  #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
+                  #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :delete}
                 %br/
                 = ad.comments.count
-                answers
+                answer(s)
                 %p
                 - ad.comments.each do |c|
                   .ui.very.padded.segment
@@ -71,13 +87,16 @@
                     #{current_user.first_name}
                   %p
                     = f.text_area :body
-                  %p
-                    Choose which of your capabilities to include:
-                  %p
-                    #{current_user.capabilities}
-                  %p
-                    Any othern relevant capabilities?
-                  %p
+                  - if current_user.capabilities
+                    %p
+                      Choose which of your capabilities to include:
+                    %p
+                      #{current_user.capabilities}
+                    %p
+                      Any other relevant capabilities?
+                  - else
+                    Any relevant capabilities?
+                    %p
                     = f.text_area :capabilities
                   %p
                     = f.file_field :image, multiple:true

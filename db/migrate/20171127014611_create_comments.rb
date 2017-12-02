@@ -4,7 +4,7 @@ class CreateComments < ActiveRecord::Migration[5.1]
       t.string :name
       t.text :body
       t.text :capabilities
-      t.string :price
+      t.float :price
       t.references :adventure, foreign_key: true
       t.timestamps
     end

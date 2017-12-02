@@ -1,5 +1,7 @@
 %h1 My Messages
 
-%ul
-  = render @chat_rooms
+- current_user.chat_rooms.each do |c|
+  .ui.very.padded.segment
+    %p
+      = link_to "Anon", chat_room_path(c.id)
 

@@ -1,5 +1,3 @@
-%h1= @chat_room.title
-
 #messages{"data-chat-room-id" => "#{@chat_room.id}"}
   = render @chat_room.messages
 = form_for @message, url: '#' do |f|

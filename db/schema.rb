@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20171201014107) do
 
   create_table "chat_rooms", force: :cascade do |t|
     t.integer "user_id"
+    t.string "host_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_chat_rooms_on_user_id"
@@ -37,7 +38,7 @@ ActiveRecord::Schema.define(version: 20171201014107) do
     t.string "name"
     t.text "body"
     t.text "capabilities"
-    t.string "price"
+    t.float "price"
     t.integer "adventure_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
