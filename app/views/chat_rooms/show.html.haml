@@ -1,6 +1,5 @@
-#messages{"data-chat-room-id" => "#{@chat_room.id}"}
-  = render @chat_room.messages
-= form_for @message, url: '#' do |f|
+= render @chat_room.messages
+= form_for @message, url: chat_room_create_msg_path(@chat_room.id) do |f|
   .form-group
     = f.label :body
     = f.text_area :body, class: 'form-control'

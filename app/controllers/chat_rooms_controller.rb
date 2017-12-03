@@ -13,6 +13,12 @@ class ChatRoomsController < ApplicationController
         end
     end
     
+    def create_msg
+        msg = ChatRoom.find(params[:chat_room_id]).messages.build(body: params[:message][:body], user: current_user)
+        msg.save
+        redirect_to chat_room_path(params[:chat_room_id])
+    end
+    
     def show
         @chat_room = ChatRoom.includes(:messages).find_by(id: params[:id])
         @message = Message.new

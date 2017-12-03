@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resources :adventures do
       resources :comments
     end
-    resources :chat_rooms, only: [:new, :create, :show, :index]
+    resources :chat_rooms, only: [:new, :create, :show, :index] do
+        post "/create_message", :to => "chat_rooms#create_msg", :as => "create_msg"
+    end
     root :to => redirect('/adventures')
     resources :friendships
     resources :users
