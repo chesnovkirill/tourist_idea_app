@@ -1,7 +1,13 @@
-%h1 My Messages
+%h1 My Chats With Adventure Seekers
 
-- current_user.chat_rooms.each do |c|
+- ChatRoom.where(host_id: current_user.id).each do |c|
   .ui.very.padded.segment
     %p
-      = link_to "Anon", chat_room_path(c.id)
+      = link_to "#{User.find(c.user_id).first_name}", chat_room_path(c.id)
 
+%h1 My Chats With Hosts
+
+- ChatRoom.where(user_id: current_user.id).each do |c|
+  .ui.very.padded.segment
+    %p
+      = link_to "#{User.find(c.host_id).first_name}", chat_room_path(c.id)

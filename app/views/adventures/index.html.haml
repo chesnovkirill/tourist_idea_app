@@ -81,28 +81,30 @@
                   .ui.very.padded.segment
                     %p
                       = render c
-                Answer:
-                = form_for([ad,ad.comments.build]) do |f|
-                  %p
-                    #{current_user.first_name}
-                  %p
-                    = f.text_area :body
-                  - if current_user.capabilities
+
+                - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil
+                  Answer:
+                  = form_for([ad,ad.comments.build]) do |f|
                     %p
-                      Choose which of your capabilities to include:
+                      #{current_user.first_name}
                     %p
-                      #{current_user.capabilities}
+                      = f.text_area :body
+                    - if current_user.capabilities
+                      %p
+                        Choose which of your capabilities to include:
+                      %p
+                        #{current_user.capabilities}
+                      %p
+                        Any other relevant capabilities?
+                    - else
+                      Any relevant capabilities?
+                      %p
+                      = f.text_area :capabilities
                     %p
-                      Any other relevant capabilities?
-                  - else
-                    Any relevant capabilities?
+                      = f.file_field :image, multiple:true
                     %p
-                    = f.text_area :capabilities
-                  %p
-                    = f.file_field :image, multiple:true
-                  %p
-                    = f.label :price, 'I would like to get'
-                    = f.number_field :price
-                    instead
-                  %p
-                    = f.submit
+                      = f.label :price, 'I would like to get'
+                      = f.number_field :price
+                      instead
+                    %p
+                      = f.submit
