@@ -1,0 +1,1 @@
+var clone=require("clone");module.exports=function(e,n){return e=e||{},Object.keys(n).forEach(function(o){"undefined"==typeof e[o]&&(e[o]=clone(n[o]))}),e};
