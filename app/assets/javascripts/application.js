@@ -12,10 +12,10 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require_tree .
 //= require cable
 <script language="javascript" type="text/javascript">
     function showHide(elementId) {
