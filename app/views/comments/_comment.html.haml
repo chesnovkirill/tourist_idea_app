@@ -1,5 +1,5 @@
 .ui.centered.grid
-  .five.wide.column
+  .nine.wide.column
     %h2
       - if comment.user.first_name
         #{link_to "#{comment.user.first_name}", user_path(comment.user.id)}
@@ -9,12 +9,13 @@
       = comment.body
     - if comment.user.capabilities != nil || comment.capabilities != ""
       %p
-        - if comment.user.first_name
-          #{comment.user.first_name}'s capabilities:
-        - else
-          Anon's capabilities:
-        #{comment.user.capabilities}
-        = comment.capabilities
+        - if comment.user.capabilities != ""
+          - if comment.user.first_name
+            #{comment.user.first_name}'s capabilities:
+          - else
+            Anon's capabilities:
+          #{comment.user.capabilities}
+          = comment.capabilities
     - if comment.price == comment.adventure.price
       -if comment.user.first_name
         #{comment.user.first_name} agrees with #{comment.adventure.action_adventure}-seeker's offer
@@ -31,14 +32,16 @@
     %p
       %img.ui.big.image{:src => comment.image_urls.to_s}/
     %h4
+    Created
     = time_ago_in_words(comment.created_at)
-    ago
-    = comment.created_at
-    - if comment.user.id != current_user.id && current_user.friendships.find_by(:friend_user_id => comment.user.id) == nil && User.find(comment.user.id).friendships.find_by(:friend_user_id => current_user) == nil && comment.user.id == comment.adventure.user.id
+    ago, on
+    = comment.created_at.strftime("%D")
+    - if comment.user.id != current_user.id && current_user.friendships.find_by(:friend_user_id => comment.user.id) == nil && User.find(comment.user.id).friendships.find_by(:friend_user_id => current_user) == nil && comment.user.id != comment.adventure.user.id
       = form_for :chat_room, method: :post, url: friendships_path, class: 'btn btn-primary'  do |f|
         = f.hidden_field :host_name, value: comment.user.first_name
         = f.hidden_field :friend_id, value: comment.user.id
         = f.submit 'Choose This Guide'
     - if comment.adventure.user_id == current_user.id || comment.user_id == current_user.id
+      %p
       = link_to 'Delete', [comment.adventure,comment], method: :delete, data: { confirm: 'Are you sure?' }
 
