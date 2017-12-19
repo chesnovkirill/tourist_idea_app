@@ -11,13 +11,21 @@
 
     :javascript
       $(document).ready(function() {
-          $('#showHiddenBlock').click(function() {
-              $('#initiallyHiddenBlock').slideToggle();
+          $('.showHiddenBlock').click(function() {
+              $(this).parent().children('.initiallyHiddenBlock').slideToggle();
+          });
+      });
+      $(document).ready(function() {
+          $('.showHiddenBlock2').click(function() {
+              $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
           });
       });
 
     :css
-      #initiallyHiddenBlock {
+      .initiallyHiddenBlock {
+          display: none;
+      }
+      .initiallyHiddenBlock2 {
           display: none;
       }
   %body
@@ -101,9 +109,9 @@
                 %p
                   #{ad.description}
                 - if ad.details != ""
-                  %button.ui.inverted.blue.button.toggle-btn#showHiddenBlock{:type => "button"} Details
+                  %button.ui.inverted.blue.button.toggle-btn.showHiddenBlock{:type => "button"} Details
                   %p
-                  %d#initiallyHiddenBlock
+                  .initiallyHiddenBlock
                     %h2 Details
                     %p
                     #{ad.details}
@@ -130,11 +138,15 @@
                 %br/
                 = ad.comments.count
                 answer(s)
-                %p
-                - ad.comments.each do |c|
-                  .ui.very.padded.segment
+                - if ad.comments.count > 0
+                  %button.ui.inverted.blue.button.toggle-btn.showHiddenBlock2{:type => "button"} Show Comments
+                  %p
+                  .initiallyHiddenBlock2
                     %p
-                      = render c
+                    - ad.comments.each do |c|
+                      .ui.very.padded.segment
+                        %p
+                          = render c
 
                 - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil
                   Answer:
