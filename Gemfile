@@ -48,7 +48,8 @@ gem 'slim'
 gem 'rails_12factor', group: :production
 gem 'jquery-rails'
 gem 'geokit-rails'
-gem "nifty-generators", :group => :development
+gem 'ransack'
+
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

@@ -8,9 +8,13 @@ class FriendshipsController < ApplicationController
         else
             flash[:notice] = "Unable to add friend."
         end
+        @adventure = Adventure.find(params[:chat_room][:adventure_id])
+        temp = {"completed"=>true}
+        @adventure.update_attributes!(temp)
         @chat_room = current_user.chat_rooms.build(user_id: current_user.id, host_id: t.id)
         @chat_room.save
         params.delete :friend_user_id
+        params.delete :adventure_id
         redirect_to chat_room_path(@chat_room.id)
     end
     

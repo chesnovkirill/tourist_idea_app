@@ -10,6 +10,7 @@ class CreateAdventures < ActiveRecord::Migration[5.1]
             t.datetime 'adventure_date'
             t.float 'price'
             t.datetime 'created_at'
+            t.boolean 'completed'
 
 
         end

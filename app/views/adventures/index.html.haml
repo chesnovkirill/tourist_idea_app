@@ -20,6 +20,32 @@
               $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
           });
       });
+      $(document).ready(function() {
+          $('.slideHideToggle').click(function() {
+              $(this).parent().children('.HideShow').slideToggle();
+          });
+      });
+      function myFunction() {
+          var input, filter, ul, li, a, i;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          ul = document.getElementById("myUL");
+          li = ul.getElementsByTagName("li");
+          for (i = 0; i < li.length; i++) {
+              a = li[i].getElementsByTagName("a")[0];
+              if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                  li[i].style.display = "";
+              } else {
+                  li[i].style.display = "none";
+              }
+          }
+      }
+
+      var arr= ["test", "apple", "orange"];
+      $('#myInput').autocomplete({
+        lookup: arr
+      });
+
 
     :css
       .initiallyHiddenBlock {
@@ -28,10 +54,47 @@
       .initiallyHiddenBlock2 {
           display: none;
       }
+      #myInput {
+          background-image: url('/css/searchicon.png');
+          background-position: 10px 12px;
+          background-repeat: no-repeat;
+          width: 100%;
+          font-size: 16px;
+          padding: 12px 20px 12px 40px;
+          border: 1px solid #ddd;
+          margin-bottom: 12px;
+      }
+      .a.variable {
+        color: #1d4e89;
+        clear:left
+      }
+      .inline {
+        color: #1d4e89;
+        display: inline;
+      }
+
+
   %body
 .ui.centered.grid
   .ui.centered.items
     .ui.segments
+      .ui.inverted.teal.segment
+        .classname
+          = search_form_for @search do |f|
+            .inline
+              = f.label :country_cont, "Country Name"
+            .inline
+              = f.text_field :country_cont
+            .inline
+              = f.label :price_gteq, "Price between"
+            .inline
+              = f.number_field :price_gteq
+            .inline
+              = f.label :price_lteq, "and"
+            .inline
+              = f.number_field :price_lteq
+            %button.ui.inverted.white.button Search
+
       .ui.inverted.blue.segment
         %h1 Create New Adventure
         = form_tag adventures_path, :method => :post do
@@ -47,17 +110,20 @@
           /!  %option{:number_of_people => "me and more than 5 others"} and more than 5 others
           /! :javascript
           /!  $('#quantity-select').dropdown();
-
-          = select :adventure, :number_of_people, ['Only me','+1','+2','+3','+4', '+5', 'me and more than 5 others']
+          %a.variable
+            = select :adventure, :number_of_people, ['Only me','+1','+2','+3','+4', '+5', 'me and more than 5 others']
           = label :adventure, :action_adventure, 'need'
-          = select :adventure, :action_adventure, ['action','advice']
+          %a.variable
+            = select :adventure, :action_adventure, ['action','advice']
           = label :adventure, :country, 'in (What country are you going to?)'
-          = select :adventure, :country, @countries
+          %a.variable
+            = select :adventure, :country, @countries
           %p
-          = label :adventure, :city, 'What city are you going to?'
-          = text_field :adventure, :city
+          %a.variable
+            = text_field :adventure, :city, :placeholder => 'Destination City'
           = label :adventure, :adventure_date, 'choose date'
-          = date_select :adventure, :adventure_date, :start_year => Date.today.year
+          %a.variable
+            = date_select :adventure, :adventure_date, :start_year => Date.today.year
           %p
           = label :adventure, :description, 'Ask locals anything'
           .ui.form
@@ -68,6 +134,7 @@
           .ui.form
             .field
               #{text_area :adventure, :details}
+          = hidden_field :adventure, :completed, value: false
           %p
           .ui.two.column.grid
             .column
@@ -79,7 +146,7 @@
             .column
               .ui.form
                 .sixteen.wide.field
-                  #{number_field :adventure, :price}
+                  #{number_field :adventure, :price, value: 0}
           %p
           %button.ui.inverted.teal.button Save Changes
 
@@ -89,11 +156,13 @@
       %h2 All Adventures
       .ui.segments
         - @adventures.sort {|a,b| b.created_at <=> a.created_at }.each do |ad|
+          #myUL
           .twenty.wide.item
             .ui.segment
               .content
               .meta
               .eight.wide.column
+                #{ad.completed}
                 - if ad.user.first_name
                   #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} needs #{ad.action_adventure}
                 - else
@@ -116,7 +185,7 @@
                     %p
                     #{ad.details}
                 %p
-                - if ad.price
+                - if ad.price != 0
                   - if ad.user.first_name
                     #{ad.user.first_name}'s offer: $#{ad.price}
                   - else
@@ -139,7 +208,7 @@
                 = ad.comments.count
                 answer(s)
                 - if ad.comments.count > 0
-                  %button.ui.inverted.blue.button.toggle-btn.showHiddenBlock2{:type => "button"} Show Comments
+                  %button.ui.inverted.blue.button.toggle-btn.showHiddenBlock2{:type => "button"} Comments
                   %p
                   .initiallyHiddenBlock2
                     %p
@@ -148,7 +217,7 @@
                         %p
                           = render c
 
-                - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil
+                - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
                   Answer:
                   = form_for([ad,ad.comments.build]) do |f|
                     %p
@@ -169,8 +238,14 @@
                     %p
                       = f.file_field :image, multiple:true
                     %p
-                      = f.label :price, 'I would like to get'
-                      = f.number_field :price
-                      instead
+                      .ui.toggle.checkbox.slideHideToggle
+                        %input{:name => "public", :type => "checkbox"}/
+                        %label Agree to #{ad.action_adventure}-seeker's offer
+                    .HideShow
+                      %p
+                        = f.label :price, 'I would like to get'
+                        = f.number_field :price, value: ad.price
+                        instead
                     %p
-                      = f.submit
+                    %p
+                      %button.ui.blue.button Create Comment

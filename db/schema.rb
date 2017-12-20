@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20171201014107) do
     t.datetime "adventure_date"
     t.float "price"
     t.datetime "created_at"
+    t.boolean "completed"
     t.integer "user_id"
     t.index ["user_id"], name: "index_adventures_on_user_id"
   end
