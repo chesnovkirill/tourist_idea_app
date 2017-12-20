@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20171201014107) do
     t.text "body"
     t.integer "user_id"
     t.integer "chat_room_id"
+    t.boolean "read"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
