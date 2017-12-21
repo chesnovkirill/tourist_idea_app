@@ -1,3 +1,17 @@
+%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+%meta{:charset => "utf-8"}/
+%script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
+%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css", :rel => "stylesheet", :type => "text/css"}/
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"}
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"}
+
+:javascript
+  $(document).ready(function(){
+      $(".mymodalg").click(function(){
+      $('.ui.modal').modal('show');
+      });
+  });
+
 .ui.centered.grid
   .nine.wide.column
     %h2
@@ -33,12 +47,30 @@
     = time_ago_in_words(comment.created_at)
     ago, on
     = comment.created_at.strftime("%D")
-    - if comment.user.id != current_user.id && current_user.friendships.find_by(:friend_user_id => comment.user.id) == nil && User.find(comment.user.id).friendships.find_by(:friend_user_id => current_user) == nil && comment.user.id != comment.adventure.user.id && current_user.id == comment.adventure.user.id && comment.adventure.completed != true
-      = form_for :chat_room, method: :post, url: friendships_path, class: 'btn btn-primary'  do |f|
-        = f.hidden_field :host_name, value: comment.user.first_name
-        = f.hidden_field :friend_id, value: comment.user.id
-        = f.hidden_field :adventure_id, value: comment.adventure.id
-        = f.submit 'Choose This Guide'
+    - if comment.user.id != current_user.id && comment.user.id != comment.adventure.user.id && current_user.id == comment.adventure.user.id && comment.adventure.completed != true
+      .mymodalg
+        %button.ui.button Choose This Guide
+      .ui.container
+        .ui.modal
+          %i.close.icon
+          .header
+            Choose Payment Method:
+          .content
+            %p
+            %h2
+              We apologise, but online payment is currently under construction. Please give the money to your guide in person.
+            = form_for :chat_room, method: :post, url: friendships_path, class: 'btn btn-primary'  do |f|
+              = f.hidden_field :host_name, value: comment.user.first_name
+              = f.hidden_field :friend_id, value: comment.user.id
+              = f.hidden_field :adventure_id, value: comment.adventure.id
+              %b
+              .two.ui.buttons
+                %button.massive.ui.left.attached.button
+                  %i.money.icon
+                  Pay in Person
+                %button.massive.ui.disabled.right.attached.button
+                  %i.credit.card.alternative.icon
+                  Pay Online
     - if comment.adventure.user_id == current_user.id || comment.user_id == current_user.id
       %p
       = link_to 'Delete', [comment.adventure,comment], method: :delete, data: { confirm: 'Are you sure?' }

@@ -3,11 +3,11 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
-    %title Semantic UI
+    %script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css", :rel => "stylesheet", :type => "text/css"}/
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"}
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"}
-    %script{:src => "https://code.jquery.com/jquery-1.12.4.min.js"}
+
 
     :javascript
       $(document).ready(function() {
@@ -46,7 +46,6 @@
         lookup: arr
       });
 
-
     :css
       .initiallyHiddenBlock {
           display: none;
@@ -72,29 +71,15 @@
         color: #1d4e89;
         display: inline;
       }
+      .ui.centered.grid.my {
+        position: relative;
+        top: 30px;
+      }
 
-
-  %body
-.ui.centered.grid
+%body
+.ui.centered.grid.my
   .ui.centered.items
     .ui.segments
-      .ui.inverted.teal.segment
-        .classname
-          = search_form_for @search do |f|
-            .inline
-              = f.label :country_cont, "Country Name"
-            .inline
-              = f.text_field :country_cont
-            .inline
-              = f.label :price_gteq, "Price between"
-            .inline
-              = f.number_field :price_gteq
-            .inline
-              = f.label :price_lteq, "and"
-            .inline
-              = f.number_field :price_lteq
-            %button.ui.inverted.white.button Search
-
       .ui.inverted.blue.segment
         %h1 Create New Adventure
         = form_tag adventures_path, :method => :post do
@@ -150,7 +135,7 @@
           %p
           %button.ui.inverted.teal.button Save Changes
 
-.ui.centered.grid
+.ui.centered.grid.my
   .ten.wide.column
     .ui.centered.items
       %h2 All Adventures
@@ -207,8 +192,9 @@
                 %br/
                 = ad.comments.count
                 answer(s)
+                %p
                 - if ad.comments.count > 0
-                  %button.ui.inverted.blue.button.toggle-btn.showHiddenBlock2{:type => "button"} Comments
+                  %button.fluid.ui.inverted.blue.button.toggle-btn.showHiddenBlock2{:type => "button"} Comments
                   %p
                   .initiallyHiddenBlock2
                     %p
