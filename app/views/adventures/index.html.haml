@@ -147,7 +147,6 @@
               .content
               .meta
               .eight.wide.column
-                #{ad.completed}
                 - if ad.user.first_name
                   #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} needs #{ad.action_adventure}
                 - else

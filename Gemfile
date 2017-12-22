@@ -49,6 +49,8 @@ gem 'rails_12factor', group: :production
 gem 'jquery-rails'
 gem 'geokit-rails'
 gem 'ransack'
+gem 'omniauth-facebook' # Facebook authentication
+gem "koala", "~> 1.10.0rc" # Facebook API
 
 
 group :development, :test do
