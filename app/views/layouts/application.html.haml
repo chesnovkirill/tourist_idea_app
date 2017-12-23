@@ -132,9 +132,7 @@
     - if user_signed_in?
       %ul
         %li
-          = link_to root_path do
-            .logostyle
-              = image_tag 'logos/t.png', width: '90px'
+
         %li
           %a{:href => user_path(current_user.id)} My Profile
         %li
