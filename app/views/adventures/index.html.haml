@@ -108,9 +108,9 @@
     = form_tag adventures_path, :method => :post do
       %a.variable
         %select.select_box_style{:name => "adventure[action_adventure]"}
-        %option{:selected => "selected", :value => ""} Choose Action or  Advise
-        %option{:value => "action"} Action
-        %option{:value => "advice"} Advise
+          %option{:selected => "selected", :value => ""} Choose Action or  Advise
+          %option{:value => "action"} Action
+          %option{:value => "advice"} Advise
       %a.variable
         %select.select_box_style{:name => "adventure[number_of_people]"}
           %option{:selected => "selected", :value => ""} How Many People?
