@@ -8,6 +8,8 @@
   %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
 
   %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css", :rel => "stylesheet"}/
+  %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+
   %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"}
   %script{:src => "jquery.autocomplete.min.js"}
  
@@ -23,6 +25,7 @@
         padding: 0;
         overflow: hidden;
         background-color: #333;
+        height: 70px;
     }
 
     li {
@@ -34,7 +37,7 @@
         display: block;
         color: white;
         text-align: center;
-        padding: 14px 16px;
+        padding: 24px 16px;
         text-decoration: none;
     }
     .spetialcase {
@@ -50,6 +53,75 @@
         background-color: #111;
     }
 
+    lo {
+        float: right;
+    }
+
+    .container-1 .styled{
+        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        position: relative;
+        top: 15px;
+        right: 20px;
+        width: 300px;
+        height: 40px;
+        background: #325C74;
+        border: none;
+        font-size: 12pt;
+        float: left;
+        color: #e7e7e7;
+        padding-left: 40px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 4px;
+    }
+
+    .container-1 .styled:hover, .container-1 .styled:focus, .container-1 .styled:active{
+        outline:none;
+        background-color: #e7e7e7;
+        color: #325C74;
+    }
+
+    i.fa.fa-search {
+        position: relative;
+        left: 100px;
+        z-index: 1;
+    }
+
+    .inline {
+        display: inline;
+    }
+
+    .button4 {
+        position: relative;
+        top: 15px;
+        right: 20px;
+        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        background: #325C74;
+        color: #e7e7e7;
+        border: none;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        height: 40px;
+        width: 70px;
+    }
+
+    .button4:hover {
+        background-color: #e7e7e7;
+        color: #325C74;
+    }
+
+    i.search.icon {
+       color: #e7e7e7;
+       position: relative;
+       top: 25px;
+       left: 10px;
+       z-index: 1;
+    }
+
+    .logostyle {
+        position: relative;
+        top: -20px;
+    }
+
   %head
     %title ExperienceMaker!
     = stylesheet_link_tag 'application'
@@ -60,19 +132,27 @@
     - if user_signed_in?
       %ul
         %li
-          %a{:href => root_path} Home
-        %li
-          - if @search
-            = search_form_for @search do |f|
-              .inline
-                = f.text_field :city_cont, :placeholder => 'City Name'
-              %button.ui.inverted.white.button Search
+          = link_to root_path do
+            .logostyle
+              = image_tag 't.png', width: '90px'
         %li
           %a{:href => user_path(current_user.id)} My Profile
         %li
           %a{:href => chat_rooms_path} Messages
         %li
           %a{:href => destroy_user_session_path, :method => :get} Log Out
+        - if @search
+          %lo
+            = search_form_for @search do |f|
+              .box
+                .container-1
+                  .inline
+                    = f.text_field :city_cont, :placeholder => 'Find Adventures in any City', class: 'styled'
+                  .inline
+                    %button.button.button4 Search
+
+          %lo
+            %i.search.icon
     - else
       .ui.menu
         .header.item

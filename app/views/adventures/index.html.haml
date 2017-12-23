@@ -76,64 +76,87 @@
         top: 30px;
       }
 
+      body {
+        background-color: #f0f8ff;
+      }
+      .new_adventure {
+        position: relative;
+        left: 200px;
+        width: 1000px;
+        background-color: #c8cfd6;
+        border: 10px solid white;
+        padding: 25px;
+        margin: 25px;
+      }
+
+      .select_box_style {
+        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        text-align: center;
+        color: #e7e7e7;
+        border: none;
+        height: 40px;
+        width: 200px;
+        background: #325C74;
+      }
+
 %body
-.ui.centered.grid.my
-  .ui.centered.items
-    .ui.segments
-      .ui.inverted.blue.segment
-        %h1 Create New Adventure
-        = form_tag adventures_path, :method => :post do
-          = label :adventure, :number_of_people, 'I'
-          /! .ui.container
-          /!  %select#quantity-select.ui.select.dropdown{:adventure.number_of_people => "number_of_people"}
-          /!   %option{:number_of_people => "Only me"} Only me
-          /!   %option{:number_of_people => "+1"} +1
-          /!   %option{:number_of_people => "+2"} +2
-          /!   %option{:number_of_people => "+3"} +3
-          /!  %option{:number_of_people => "+4"} +4
-          /!  %option{:number_of_people => "+5"} +5
-          /!  %option{:number_of_people => "me and more than 5 others"} and more than 5 others
-          /! :javascript
-          /!  $('#quantity-select').dropdown();
-          %a.variable
-            = select :adventure, :number_of_people, ['Only me','+1','+2','+3','+4', '+5', 'me and more than 5 others']
-          = label :adventure, :action_adventure, 'need'
-          %a.variable
-            = select :adventure, :action_adventure, ['action','advice']
-          = label :adventure, :country, 'in (What country are you going to?)'
-          %a.variable
-            = select :adventure, :country, @countries
-          %p
-          %a.variable
-            = text_field :adventure, :city, :placeholder => 'Destination City'
-          = label :adventure, :adventure_date, 'choose date'
-          %a.variable
-            = date_select :adventure, :adventure_date, :start_year => Date.today.year
-          %p
-          = label :adventure, :description, 'Ask locals anything'
-          .ui.form
-            .field
-              #{text_area :adventure, :description}
-          %p
-          = label :adventure, :description, 'Any details?'
-          .ui.form
-            .field
-              #{text_area :adventure, :details}
+  .new_adventure
+    = form_tag adventures_path, :method => :post do
+      %a.variable
+        %select.select_box_style{:name => "adventure[action_adventure]"}
+        %option{:selected => "selected", :value => ""} Choose Action or  Advise
+        %option{:value => "action"} Action
+        %option{:value => "advice"} Advise
+      %a.variable
+        %select.select_box_style{:name => "adventure[number_of_people]"}
+          %option{:selected => "selected", :value => ""} How Many People?
+          %option{:value => "Only me"} Only me
+          %option{:value => "+1"} Me +1
+          %option{:value => "+2"} Me +2
+          %option{:value => "+3"} Me +3
+          %option{:value => "+4"} Me +4
+          %option{:value => "+5"} Me +5
+          %option{:value => "me and more than 5 others"} Me and more than 5 others
+
+
+
+      %a.variable
+        = select :adventure, :country, @countries
+      %p
+      %a.variable
+        = text_field :adventure, :city, :placeholder => 'Destination City'
+        = label :adventure, :adventure_date, 'choose date'
+      %a.variable
+        = date_select :adventure, :adventure_date, :start_year => Date.today.year
+      %p
+        = label :adventure, :description, 'Ask locals anything'
+      .ui.form
+        .field
+          #{text_area :adventure, :description}
+      %p
+        = label :adventure, :description, 'Any details?'
+      .ui.form
+        .field
+          #{text_area :adventure, :details}
           = hidden_field :adventure, :completed, value: false
-          %p
-          .ui.two.column.grid
-            .column
-            .left.aligned.column
-              %h1
-                = label :adventure, :price, 'I am willing to offer:'
-          .ui.two.column.centered.grid
-            .column
-            .column
-              .ui.form
-                .sixteen.wide.field
-                  #{number_field :adventure, :price, value: 0}
-          %p
-          %button.ui.inverted.teal.button Save Changes
+      %p
+      .ui.two.column.grid
+        .column
+          .left.aligned.column
+            %h1
+              = label :adventure, :price, 'I am willing to offer:'
+      .ui.two.column.centered.grid
+        .column
+        .column
+          .ui.form
+            .sixteen.wide.field
+              #{number_field :adventure, :price, value: 0}
+      %p
+      %button.ui.inverted.teal.button Save Changes
 
 .ui.centered.grid.my
   .ten.wide.column
