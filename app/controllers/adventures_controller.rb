@@ -32,7 +32,7 @@ class AdventuresController < ApplicationController
             graph = Koala::Facebook::API.new("EAAdFTd7zE9ABACdBQuuNdfVhoBsF5cYdA6PQSvW9OlRmPRhyGRz0EUZA5BpfXZAJRAaZBp9ZCu31FHpjVZCZAnm4WvmqTvP5FxkdYLZAbJU37qxxyQ0Huqu1bqaQGnytgcYzPGAbl1PjMSBj1ZAa4ZBt4kQUVURF2ThJYVG9WJYvxBwZDZD")
             graph.put_object(553202955027429, "feed", {
                          :name => "Test post",
-                         :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence} needs an #{@adventure.action_adventure} in #{@adventure.city},  #{@adventure.country} on #{@adventure.adventure_date.strftime("%b, %e %Y")}! #{@adventure.user.first_name} asked: "#{@adventure.description}". Eager to pay: $#{@adventure.price} for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com"
+                         :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence} needs an #{@adventure.action_adventure} in #{@adventure.city},  #{@adventure.country} on #{@adventure.adventure_date.strftime("%b, %e %Y")}! #{@adventure.user.first_name} asked: "@adventure.description". Eager to pay: $#{@adventure.price} for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com"
                          
                          })
         else
