@@ -32,7 +32,7 @@ class AdventuresController < ApplicationController
         graph = Koala::Facebook::API.new("EAAdFTd7zE9ABACdBQuuNdfVhoBsF5cYdA6PQSvW9OlRmPRhyGRz0EUZA5BpfXZAJRAaZBp9ZCu31FHpjVZCZAnm4WvmqTvP5FxkdYLZAbJU37qxxyQ0Huqu1bqaQGnytgcYzPGAbl1PjMSBj1ZAa4ZBt4kQUVURF2ThJYVG9WJYvxBwZDZD")
         graph.put_object(553202955027429, "feed", {
                          :name => "Test post",
-                         :message => "#{@adventure.user.first_name} needs an #{@adventure.action_adventure} in #{@adventure.city},  #{@adventure.country} on #{@adventure.adventure_date.strftime("%B %d, %Y")}! Do you know someone who would like to get #{@adventure.user.first_name} 's #{@adventure.price} dollars for this? Send him or her this link: https://ask-the-locals.herokuapp.com"
+                         :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence} needs an #{@adventure.action_adventure} in #{@adventure.city},  #{@adventure.country} on #{@adventure.adventure_date.strftime("%b, %Y")}! #{@adventure.user.first_name}: #{@adventure.description}. Eager to pay: #{@adventure.price} dollars for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com"
                          
                          })
         redirect_to adventures_path
