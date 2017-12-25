@@ -1,0 +1,30 @@
+%table
+  %thread
+    %tr
+      %th First Name
+      %th Last Name
+      %th City of Residence
+      %th Country of Residence
+      %th Email
+      %th Mobile
+      %th Last Login
+      %th User's Profile
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.first_name
+        %td= user.last_name
+        %td= user.city_of_residence
+        %td= user.country_of_residence
+        %td= user.email
+        %td= user.contact_phone
+        %td= user.last_sign_in_at
+        %td= link_to('Profile', user_path(user.id))
+
+
+
+
+
+
+
+
