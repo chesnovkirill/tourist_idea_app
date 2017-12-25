@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     def destroy
         @adventure = Adventure.find(params[:adventure_id])
         @comment = @adventure.comments.find(params[:id])
-        @comment.destroy
+        @comment.delete
         redirect_to adventures_path
     end
 end
