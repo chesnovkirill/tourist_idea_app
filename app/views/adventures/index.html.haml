@@ -204,7 +204,7 @@
                   - else
                     Anon would like to get this #{ad.action_adventure} for free
                 %p
-                - if user_signed_in?
+                - if user_signed_in? && ad.completed != true
                   - if ad.user.id == current_user.id
                     #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
                     #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :delete}
