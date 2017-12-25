@@ -40,7 +40,6 @@
         #{comment.user.first_name} would like to get #{comment.price} instead
       - else
         Anon would like to get #{comment.price} instead
-    #{comment.image_urls.to_s}
     - if comment.image_urls.to_s != '[]'
       %p
         %img.ui.big.image{:src => comment.image_urls.to_s}/
