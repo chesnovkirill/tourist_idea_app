@@ -1,5 +1,6 @@
 class AdventuresController < ApplicationController
     before_action :correct_user, only: [:edit, :update, :destroy]
+    before_action :authenticate_user!, only: [:edit, :update, :destroy, :create, :new]
     def index
         @search = Adventure.search(params[:q])
         @adventure = Adventure.new

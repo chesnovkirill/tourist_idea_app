@@ -128,19 +128,28 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
 
-  %body
-    - if user_signed_in?
+    %body
       %ul
         %li
           = link_to root_path do
             .logostyle
               = image_tag "logos/t.png", width: '90px'
-        %li
-          %a{:href => user_path(current_user.id)} My Profile
-        %li
-          %a{:href => chat_rooms_path} Messages
-        %li
-          %a{:href => destroy_user_session_path, :method => :get} Log Out
+        - if user_signed_in?
+          %li
+            %a{:href => user_path(current_user.id)} My Profile
+          %li
+            %a{:href => chat_rooms_path} Messages
+          %li
+            %a{:href => destroy_user_session_path, :method => :get} Log Out
+          - if current_user.admin
+            %li
+              %a{:href => users_path} User List
+        - else
+          %ul
+            %li
+              %a{:href => new_registration_path(resource_name)} Sign up
+            %li
+              %a{:href => new_user_session_path} Login
         - if @search
           %lo
             = search_form_for @search do |f|
@@ -153,15 +162,8 @@
 
           %lo
             %i.search.icon
-        - if current_user.admin
-          %li
-            %a{:href => users_path} User List
-    - else
-      .ui.menu
-        .header.item
-          = link_to "Home", root_path
-        .right.aligned.header.item
-          = link_to "Sign up", new_registration_path(resource_name)
+
+
 
     -# this goes just inside %body:
     - if flash[:notice]
