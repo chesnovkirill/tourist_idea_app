@@ -11,6 +11,5 @@ class AddNameToUsers < ActiveRecord::Migration[5.1]
       add_column :users, :work, :string
       add_column :users, :interests, :string
       add_column :users, :capabilities, :string
-      add_column :users, :admin, :boolean 
   end
 end
