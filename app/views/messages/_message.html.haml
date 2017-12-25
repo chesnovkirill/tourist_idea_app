@@ -2,8 +2,9 @@
   .card-block
     .row
       .col-md-1
-        %a.img.ui.avatar.image{:href => user_path(message.user.id)}
-          %img{:src => message.user.avatar_url.to_s}/
+        - if message.user.avatar_url.to_s != ''
+          %a.img.ui.avatar.image{:href => user_path(message.user.id)}
+            %img{:src => message.user.avatar_url.to_s}/
       .col-md-11
         %p.card-text
           %span.text-muted

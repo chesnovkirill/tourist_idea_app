@@ -5,8 +5,9 @@
         %p
         %h2
           #{@user.first_name} #{@user.last_name}'s Profile
-        %p
-          %img.ui.small.avatar.image{:src => @user.avatar_url.to_s}/
+        - if @user.avatar_url.to_s != ''
+          %p
+            %img.ui.small.avatar.image{:src => @user.avatar_url.to_s}/
         %p
           = link_to "Edit Profile", edit_user_registration_path
         - if @user.gender
@@ -52,8 +53,9 @@
               #{@user.first_name}'s Profile
           - else
             Anon's Profile
-        %p
-          %img.ui.small.avatar.image{:src => @user.avatar_url.to_s}/
+        - if @user.avatar_url.to_s != ''
+          %p
+            %img.ui.small.avatar.image{:src => @user.avatar_url.to_s}/
         %p
         -if @user.id == current_user.id
           = link_to "Edit Profile", edit_user_registration_path

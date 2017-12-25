@@ -40,8 +40,10 @@
         #{comment.user.first_name} would like to get #{comment.price} instead
       - else
         Anon would like to get #{comment.price} instead
-    %p
-      %img.ui.big.image{:src => comment.image_urls.to_s}/
+    #{comment.image_urls.to_s}
+    - if comment.image_urls.to_s != '[]'
+      %p
+        %img.ui.big.image{:src => comment.image_urls.to_s}/
     %h4
     Created
     = time_ago_in_words(comment.created_at)

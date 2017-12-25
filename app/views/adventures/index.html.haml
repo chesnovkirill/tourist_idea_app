@@ -175,8 +175,9 @@
                 - else
                   #{link_to "Anon", user_path(ad.user.id)} needs #{ad.action_adventure}
                 %p
-                %a.img.ui.small.circular.image{:href => user_path(ad.user.id)}
-                  %img{:src => ad.user.avatar_url.to_s}/
+                - if ad.user.avatar_url.to_s != ''
+                  %a.img.ui.small.circular.image{:href => user_path(ad.user.id)}
+                    %img{:src => ad.user.avatar_url.to_s}/
                 %p Number of people: #{ad.number_of_people}
                 - if ad.city != ""
                   %p #{ad.city},  #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}
