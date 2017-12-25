@@ -207,7 +207,7 @@
                 - if user_signed_in? && ad.completed != true
                   - if ad.user.id == current_user.id
                     #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
-                    #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :delete}
+                    #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :destroy}
                 %h4
                   Created
                   = time_ago_in_words(ad.created_at)
