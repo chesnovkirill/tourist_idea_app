@@ -203,9 +203,10 @@
                   - else
                     Anon would like to get this #{ad.action_adventure} for free
                 %p
-                - if ad.user.id == current_user.id
-                  #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
-                  #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :delete}
+                - if user_signed_in?
+                  - if ad.user.id == current_user.id
+                    #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
+                    #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :delete}
                 %h4
                   Created
                   = time_ago_in_words(ad.created_at)
@@ -224,36 +225,36 @@
                       .ui.very.padded.segment
                         %p
                           = render c
-
-                - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
-                  Answer:
-                  = form_for([ad,ad.comments.build]) do |f|
-                    %p
-                      #{current_user.first_name}
-                    %p
-                      = f.text_area :body
-                    - if current_user.capabilities
+                - if user_signed_in?
+                  - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
+                    Answer:
+                    = form_for([ad,ad.comments.build]) do |f|
                       %p
-                        Choose which of your capabilities to include:
+                        #{current_user.first_name}
                       %p
-                        #{current_user.capabilities}
+                        = f.text_area :body
+                      - if current_user.capabilities
+                        %p
+                          Choose which of your capabilities to include:
+                        %p
+                          #{current_user.capabilities}
+                        %p
+                          Any other relevant capabilities?
+                      - else
+                        Any relevant capabilities?
+                        %p
+                        = f.text_area :capabilities
                       %p
-                        Any other relevant capabilities?
-                    - else
-                      Any relevant capabilities?
+                        = f.file_field :image, multiple:true
                       %p
-                      = f.text_area :capabilities
-                    %p
-                      = f.file_field :image, multiple:true
-                    %p
-                      .ui.toggle.checkbox.slideHideToggle
-                        %input{:name => "public", :type => "checkbox"}/
-                        %label Agree to #{ad.action_adventure}-seeker's offer
-                    .HideShow
+                        .ui.toggle.checkbox.slideHideToggle
+                          %input{:name => "public", :type => "checkbox"}/
+                          %label Agree to #{ad.action_adventure}-seeker's offer
+                      .HideShow
+                        %p
+                          = f.label :price, 'I would like to get'
+                          = f.number_field :price, value: ad.price
+                          instead
                       %p
-                        = f.label :price, 'I would like to get'
-                        = f.number_field :price, value: ad.price
-                        instead
-                    %p
-                    %p
-                      %button.ui.blue.button Create Comment
+                      %p
+                        %button.ui.blue.button Create Comment
