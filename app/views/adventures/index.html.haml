@@ -398,16 +398,15 @@
         %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places&callback=initAutocomplete"}
 
 
-      .calendar
-        %a.variable
-          %script{:src => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js", :type => "text/javascript"}
-          %script{:src => "https://code.jquery.com/ui/1.12.1/jquery-ui.js"}
-          :javascript
 
-            jQuery(function($){ // wait until the DOM is ready
-                $("#datepicker").datepicker({ dateFormat: 'M dd, yy' });
-            });
-          %input#datepicker{:type => "text", :name => "adventure[adventure_date]", :start_year => Date.today.year, :placeholder => "CHOOSE DATE"}/
+      %script{:src => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js", :type => "text/javascript"}
+      %script{:src => "https://code.jquery.com/ui/1.12.1/jquery-ui.js"}
+      :javascript
+
+        jQuery(function($){ // wait until the DOM is ready
+            $("#datepicker").datepicker({ dateFormat: 'M dd, yy' });
+        });
+      %input#datepicker{:type => "text", :name => "adventure[adventure_date]", :start_year => Date.today.year, :placeholder => "CHOOSE DATE"}/
       .inline
 
       %p
