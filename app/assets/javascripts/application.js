@@ -14,7 +14,7 @@
 //= require rails-ujs
 //= require turbolinks
 //= require jquery
-//= require_tree .
 //= require bootstrap
 //= require cable
 //= require gmaps-auto-complete
+//= require_tree .
