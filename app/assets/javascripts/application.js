@@ -17,6 +17,7 @@
 //= require bootstrap
 //= require_tree .
 //= require cable
+//= require gmaps-auto-complete
 <script language="javascript" type="text/javascript">
     function showHide(elementId) {
         if (document.getElementById) {

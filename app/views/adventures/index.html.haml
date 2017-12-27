@@ -1,15 +1,42 @@
 !!!
 %html
   %head
+    %link{:href => "jquery-ui.min.css", :rel => "stylesheet"}/
+    %script{:src => "external/jquery/jquery.js"}
+    %script{:src => "jquery-ui.min.js"}
+    %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js", :type => "text/javascript"}
+    = javascript_include_tag "application"
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", :type => "text/javascript"}
+    %script{:src => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js", :type => "text/javascript"}
+
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:charset => "utf-8"}/
     %script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css", :rel => "stylesheet", :type => "text/css"}/
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"}
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"}
+    %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places"}
+    %link{:href => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", :rel => "stylesheet"}/
+    %link{:href => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+    %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
+    %script{:src => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
+    %script{:src => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"}
+    %link{:href => "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css", :rel => "stylesheet"}/
+    %link{:href => "/resources/demos/style.css", :rel => "stylesheet"}/
+    %script{:src => "https://code.jquery.com/jquery-1.12.4.js"}
+    %script{:src => "https://code.jquery.com/ui/1.12.1/jquery-ui.js"}
+    %meta{:content => "initial-scale=1.0, user-scalable=no", :name => "viewport"}/
+    %link{:href => "/path/to/your/fonts/folder/fonts.css", :rel => "stylesheet", :type => "text/css"}/
+
 
 
     :javascript
+      $( function() {
+        $( "#datepicker" ).datepicker({ dateFormat: 'M dd, yy' });
+      } );
+      $('#select')
+        .dropdown()
+      ;
       $(document).ready(function() {
           $('.showHiddenBlock').click(function() {
               $(this).parent().children('.initiallyHiddenBlock').slideToggle();
@@ -46,6 +73,21 @@
         lookup: arr
       });
 
+      var app = angular.module('app', ['ui.select']);
+
+      app.controller("myCtrl", function () {
+          vm = this;
+          vm.isLoaded = false;
+          vm.values = [{
+              'key': 22,
+              'value': 'Kevin'
+          }, {
+              'key': 24,
+              'value': 'Fiona'
+          }];
+          vm.selected;
+      });
+
     :css
       .initiallyHiddenBlock {
           display: none;
@@ -67,9 +109,15 @@
         color: #1d4e89;
         clear:left
       }
+      .calendar {
+        position: relative;
+        top: -50px;
+        left: 470px;
+      }
       .inline {
         color: #1d4e89;
         display: inline;
+        margin-right: 6px;
       }
       .ui.centered.grid.my {
         position: relative;
@@ -77,185 +125,397 @@
       }
 
       body {
-        background-color: #f0f8ff;
+        background-color: white;
       }
       .new_adventure {
         position: relative;
-        left: 200px;
-        width: 1000px;
-        background-color: #c8cfd6;
-        border: 10px solid white;
-        padding: 25px;
-        margin: 25px;
+        left: 350px;
+        width: 660px;
+        height: 230px;
+        background-color: white;
+        border: 1px solid black;
+        padding: 10px;
+        margin: 10px;
+      }
+      .singularadventure {
+        position: relative;
+        top: 20px;
+        left: 350px;
+        width: 660px;
+        background-color: white;
+        border: 1px solid black;
+        padding: 10px;
+        margin: 10px;
       }
 
-      .select_box_style {
-        font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        -ms-appearance: none;
-        -o-appearance: none;
-        text-align: center;
-        color: #e7e7e7;
-        border: none;
-        height: 40px;
-        width: 200px;
-        background: #325C74;
+
+%head
+
+  :css
+    /* Always set the map height explicitly to define the size of the div
+    * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+  %link{:href => "https://fonts.googleapis.com/css?family=Roboto:300,400,500", :rel => "stylesheet", :type => "text/css"}/
+  :css
+    #autocomplete {
+      position: relative;
+      padding-top: 0px;
+      padding-left: 10px;
+      top: -30px;
+      left: 260px;
+      height: 30px;
+      width: 120px;
+      color: black;
+    }
+    .label {
+      text-align: right;
+      font-weight: bold;
+      width: 100px;
+      color: #303030;
+    }
+    #inputtext {
+      position: relative;
+      height: 30px;
+      top: -94px;
+      width: 100%;
+      padding: 5px 10px;
+      -webkit-appearance: none;
+      margin: 5px 0;
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 0px;
+      box-sizing: border-box;
+      color: black;
+      resize: none;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 90%;
       }
+    #inputtextDetails {
+      position: relative;
+      height: 90px;
+      top: -108px;
+      width: 100%;
+      padding: 5px 10px;
+      -webkit-appearance: none;
+      margin: 5px 0;
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 0px;
+      box-sizing: border-box;
+      color: black;
+      resize: none;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 90%;
+    }
+    .moneyinput {
+      position: relative;
+      z-index:100;
+      height: 30px;
+      top: -126px;
+      width: 120px;
+      padding: 5px 15px;
+      -webkit-appearance: none;
+      margin: 5px 0;
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 0px;
+      box-sizing: border-box;
+      color: black;
+      resize: none;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 90%;
+    }
+    .dollarsign {
+      width: 10px;
+      position: relative;
+      height: 30px;
+      z-index:100;
+      top: -166px;
+      left: 5px;
+    }
+    #datepicker {
+      position: relative;
+      top: -30px;
+      right: 80px;
+      width: 120px;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 90%;
+      height: 30px;
+      color: black;
+    }
+    .line {
+      position: relative;
+      top: 10px;
+      left: 360px;
+      width: 660px;
+      border:none;
+      border-top:1px dashed black;
+      color:#fff;
+      background-color:#fff;
+      height:1px;
+    }
+
+    input[type=submit], input[type=text], input[type=file], input[type=textArea] {
+      font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+      -webkit-appearance: none;
+      border-radius: 0;
+      border: 1px solid black;
+    }
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: black;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 76%;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+      color: black;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 76%;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+      color: black;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 76%;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+      color: black;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 76%;
+    }
+    .createadventurebutton {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 12px;
+      margin: 4px 2px;
+      cursor: pointer;
+      position: relative;
+      top: -214px;
+      right: -514px;
+      width: 120px;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      height: 30px;
+    }
 
 %body
+  :css
+    .btn-new {
+      -webkit-appearance: none;
+      border-radius: 0;
+      border: 1px solid black;
+      color: black;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      height: 30px;
+      font-size: 76%;
+      outline: none;
+    }
   .new_adventure
     = form_tag adventures_path, :method => :post do
-      %a.variable
-        %select.select_box_style{:name => "adventure[action_adventure]"}
-          %option{:selected => "selected", :value => ""} Choose Action or  Advise
-          %option{:value => "action"} Action
-          %option{:value => "advice"} Advise
-      %a.variable
-        %select.select_box_style{:name => "adventure[number_of_people]"}
-          %option{:selected => "selected", :value => ""} How Many People?
-          %option{:value => "Only me"} Only me
-          %option{:value => "+1"} Me +1
-          %option{:value => "+2"} Me +2
-          %option{:value => "+3"} Me +3
-          %option{:value => "+4"} Me +4
-          %option{:value => "+5"} Me +5
-          %option{:value => "me and more than 5 others"} Me and more than 5 others
+      .inline
+        %select.selectpicker.trial{:name => "adventure[action_adventure]", "data-style" => "btn-new", "data-width" => "120px"}
+          %option{:value => "action"} I NEED ACTION
+          %option{:value => "adventure"} I NEED ADVISE
+      .inline
+        %select.selectpicker.trial{:name => "adventure[number_of_people]", "data-style" => "btn-new", "data-width" => "120px"}
+          %option{:value => "Only me"} ONLY ME
+          %option{:value => "+1"} ME +1
+          %option{:value => "+2"} ME +2
+          %option{:value => "+3"} ME +3
+          %option{:value => "+4"} ME +4
+          %option{:value => "+5"} ME +5
+          %option{:value => "me and more than 5 others"} ME AND 5 OTHERS
+
+      :javascript
+        $(document).ready(function() {
+                       $('.selectpicker').selectpicker();
+                      });
+
+      .inline
+        #locationField
+          %input#autocomplete{:onfocus => "geolocate()", "data-style" => "autocomp", :placeholder => "WHAT CITY", :type => "text"}/
+          %input#locality.field{:name => "adventure[city]", :type =>"hidden", :disabled => "false"}/
+          %input#country.field{:name => "adventure[country]", :type => "hidden", :disabled => "true"}/
+          %input#administrative_area_level_1.field{:type => "hidden", :disabled => "true"}/
 
 
+        :javascript
+          // This example displays an address form, using the autocomplete feature
+          // of the Google Places API to help users fill in the information.
 
-      %a.variable
-        = select :adventure, :country, @countries
-      %p
-      %a.variable
-        = text_field :adventure, :city, :placeholder => 'Destination City'
-        = label :adventure, :adventure_date, 'choose date'
-      %a.variable
-        = date_select :adventure, :adventure_date, :start_year => Date.today.year
-      %p
-        = label :adventure, :description, 'Ask locals anything'
-      .ui.form
-        .field
-          #{text_area :adventure, :description}
-      %p
-        = label :adventure, :description, 'Any details?'
-      .ui.form
-        .field
-          #{text_area :adventure, :details}
-          = hidden_field :adventure, :completed, value: false
-      %p
-      .ui.two.column.grid
-        .column
-          .left.aligned.column
-            %h1
-              = label :adventure, :price, 'I am willing to offer:'
-      .ui.two.column.centered.grid
-        .column
-        .column
-          .ui.form
-            .sixteen.wide.field
-              #{number_field :adventure, :price, value: 0}
-      %p
-      %button.ui.inverted.teal.button Save Changes
+          // This example requires the Places library. Include the libraries=places
+          // parameter when you first load the API. For example:
+          // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-.ui.centered.grid.my
-  .ten.wide.column
-    .ui.centered.items
-      %h2 All Adventures
-      .ui.segments
-        - @adventures.sort {|a,b| b.created_at <=> a.created_at }.each do |ad|
-          #myUL
-          .twenty.wide.item
-            .ui.segment
-              .content
-              .meta
-              .eight.wide.column
-                - if ad.user.first_name
-                  #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} needs #{ad.action_adventure}
-                - else
-                  #{link_to "Anon", user_path(ad.user.id)} needs #{ad.action_adventure}
-                %p
-                - if ad.user.avatar_url.to_s != ''
-                  %a.img.ui.small.circular.image{:href => user_path(ad.user.id)}
-                    %img{:src => ad.user.avatar_url.to_s}/
-                %p Number of people: #{ad.number_of_people}
-                - if ad.city != ""
-                  %p #{ad.city},  #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}
-                - else
-                  %p Any city in #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}
-                %p
-                  #{ad.description}
-                - if ad.details != ""
-                  %button.ui.inverted.blue.button.toggle-btn.showHiddenBlock{:type => "button"} Details
-                  %p
-                  .initiallyHiddenBlock
-                    %h2 Details
-                    %p
-                    #{ad.details}
-                %p
-                - if ad.price != 0
-                  - if ad.user.first_name
-                    #{ad.user.first_name}'s offer: $#{ad.price}
-                  - else
-                    Anon's offer: $#{ad.price}
-                - else
-                  - if ad.user.first_name
-                    #{ad.user.first_name} would like to get this #{ad.action_adventure} for free
-                  - else
-                    Anon would like to get this #{ad.action_adventure} for free
-                %p
-                - if user_signed_in? && ad.completed != true
-                  - if ad.user.id == current_user.id
-                    #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
-                    #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :destroy}
-                %h4
-                  Created
-                  = time_ago_in_words(ad.created_at)
-                  ago, on
-                  = ad.created_at.strftime("%D")
-                %br/
-                = ad.comments.count
-                answer(s)
-                %p
-                - if ad.comments.count > 0
-                  %button.fluid.ui.inverted.blue.button.toggle-btn.showHiddenBlock2{:type => "button"} Comments
-                  %p
-                  .initiallyHiddenBlock2
-                    %p
-                    - ad.comments.each do |c|
-                      .ui.very.padded.segment
-                        %p
-                          = render c
-                - if user_signed_in?
-                  - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
-                    Answer:
-                    = form_for([ad,ad.comments.build]) do |f|
-                      %p
-                        #{current_user.first_name}
-                      %p
-                        = f.text_area :body
-                      - if current_user.capabilities
-                        %p
-                          Choose which of your capabilities to include:
-                        %p
-                          #{current_user.capabilities}
-                        %p
-                          Any other relevant capabilities?
-                      - else
-                        Any relevant capabilities?
-                        %p
-                        = f.text_area :capabilities
-                      %p
-                        = f.file_field :image, multiple:true
-                      %p
-                        .ui.toggle.checkbox.slideHideToggle
-                          %input{:name => "public", :type => "checkbox"}/
-                          %label Agree to #{ad.action_adventure}-seeker's offer
-                      .HideShow
-                        %p
-                          = f.label :price, 'I would like to get'
-                          = f.number_field :price, value: ad.price
-                          instead
-                      %p
-                      %p
-                        %button.ui.blue.button Create Comment
+          var placeSearch, autocomplete;
+          var componentForm = {
+            locality: 'long_name',
+            administrative_area_level_1: 'short_name',
+            country: 'long_name',
+          };
+
+          function initAutocomplete() {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            autocomplete = new google.maps.places.Autocomplete(
+              /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+              {types: ['geocode']});
+
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+          }
+
+          function fillInAddress() {
+            // Get the place details from the autocomplete object.
+            var place = autocomplete.getPlace();
+
+            for (var component in componentForm) {
+              document.getElementById(component).value = '';
+              document.getElementById(component).disabled = false;
+            }
+
+            // Get each component of the address from the place details
+            // and fill the corresponding field on the form.
+            for (var i = 0; i < place.address_components.length; i++) {
+              var addressType = place.address_components[i].types[0];
+              if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+                document.getElementById(addressType).value = val;
+              }
+            }
+          }
+
+          // Bias the autocomplete object to the user's geographical location,
+          // as supplied by the browser's 'navigator.geolocation' object.
+          function geolocate() {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                var geolocation = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                  center: geolocation,
+                  radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+              });
+            }
+          }
+        %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places&callback=initAutocomplete"}
+
+      .inline
+        .calendar
+          %a.variable
+            %input#datepicker{:type => "text", :name => "adventure[adventure_date]", :start_year => Date.today.year, :placeholder => "CHOOSE DATE"}/
+      .inline
+
+      %p
+        = text_area :adventure, :description, :maxlength => "120", :id => "inputtext", :placeholder => "ASK LOCALS ANYTHING YOU WANT TO KNOW OR TO DO (E.G. \"WANT TO PET A TIGER\")                      MAX 120 SYMBOLS"
+      %p
+        = text_area :adventure, :details, :id => "inputtextDetails", :placeholder => "DETAILS. HERE YOU CAN WRITE ANY DETAILS AND REFINEMENTS YOU NEED. THERE IS NO LIMIT OF SYMBOLS HERE. "
+        = hidden_field :adventure, :completed, value: false
+      %p
+        %input.moneyinput{:type => "float", :name => "adventure[price]", :value => "0"}/
+        .dollarsign
+          $
+      %p
+        %button.createadventurebutton SAVE CHANGES
+.line
+
+- @adventures.sort {|a,b| b.created_at <=> a.created_at }.each do |ad|
+  #myUL
+    .singularadventure
+      - if ad.user.first_name
+        #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} needs #{ad.action_adventure}
+      - else
+        #{link_to "Anon", user_path(ad.user.id)} needs #{ad.action_adventure}
+      %p
+      - if ad.user.avatar_url.to_s != ''
+        %a.img.ui.small.circular.image{:href => user_path(ad.user.id)}
+          %img{:src => ad.user.avatar_url.to_s}/
+      %p Number of people: #{ad.number_of_people}
+      - if ad.city != ""
+        %p #{ad.city},  #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}
+      - else
+        %p Any city in #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}
+      %p
+        #{ad.description}
+      - if ad.details != ""
+        %button.ui.inverted.blue.button.toggle-btn.showHiddenBlock{:type => "button"} Details
+        %p
+        .initiallyHiddenBlock
+          %h2 Details
+          %p
+          #{ad.details}
+      %p
+      - if ad.price != 0
+        - if ad.user.first_name
+          #{ad.user.first_name}'s offer: $#{ad.price}
+        - else
+          Anon's offer: $#{ad.price}
+      - else
+        - if ad.user.first_name
+          #{ad.user.first_name} would like to get this #{ad.action_adventure} for free
+        - else
+          Anon would like to get this #{ad.action_adventure} for free
+      %p
+      - if user_signed_in? && ad.completed != true
+        - if ad.user.id == current_user.id
+          #{link_to '<i class="big olive write icon"></i>'.html_safe, edit_adventure_path(ad)}
+          #{link_to '<i class="big olive trash outline icon"></i>'.html_safe, adventure_path(ad), :method => :destroy}
+      %h4
+        Created
+        = time_ago_in_words(ad.created_at)
+        ago, on
+        = ad.created_at.strftime("%D")
+      %br/
+      = ad.comments.count
+      answer(s)
+      %p
+      - if ad.comments.count > 0
+        %button.fluid.ui.inverted.blue.button.toggle-btn.showHiddenBlock2{:type => "button"} Comments
+        %p
+        .initiallyHiddenBlock2
+          %p
+          - ad.comments.each do |c|
+            .ui.very.padded.segment
+              %p
+                = render c
+      - if user_signed_in?
+        - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
+          Answer:
+          = form_for([ad,ad.comments.build]) do |f|
+            %p
+              #{current_user.first_name}
+            %p
+              = f.text_area :body
+            - if current_user.capabilities
+              %p
+                Choose which of your capabilities to include:
+              %p
+                #{current_user.capabilities}
+              %p
+                Any other relevant capabilities?
+            - else
+              Any relevant capabilities?
+              %p
+              = f.text_area :capabilities
+            %p
+              = f.file_field :image, multiple:true
+            %p
+              .ui.toggle.checkbox.slideHideToggle
+                %input{:name => "public", :type => "checkbox"}/
+                %label Agree to #{ad.action_adventure}-seeker's offer
+            .HideShow
+              %p
+                = f.label :price, 'I would like to get'
+                = f.number_field :price, value: ad.price
+                instead
+            %p
+            %p
+              %button.ui.blue.button Create Comment

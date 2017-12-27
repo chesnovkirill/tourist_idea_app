@@ -47,6 +47,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'slim'
 gem 'rails_12factor', group: :production
 gem 'jquery-rails'
+gem 'gmaps-autocomplete-rails'
 gem 'geokit-rails'
 gem 'ransack'
 gem 'omniauth-facebook' # Facebook authentication

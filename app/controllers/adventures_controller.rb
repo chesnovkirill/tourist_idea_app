@@ -20,7 +20,9 @@ class AdventuresController < ApplicationController
     end
     def create
         params.require(:adventure).permit(:number_of_people,:action_adventure,:country, :city, :description, :details, :adventure_date,:price, :completed)
-        date = Date.new params[:adventure]["adventure_date(1i)"].to_i, params[:adventure]["adventure_date(2i)"].to_i, params[:adventure]["adventure_date(3i)"].to_i
+        format_str = "%m/%d/" + (params[:adventure]["adventure_date"] =~ /\d{4}/ ? "%Y" : "%y")
+        date = Date.parse(params[:adventure]["adventure_date"]) rescue Date.strptime(date_str, format_str)
+        
         temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"], "completed"=>params[:adventure]["completed"]}
         if !params[:adventure]["city"]
             temp.store("city", "Any City")
