@@ -322,17 +322,14 @@
           %option{:value => "+4"} ME +4
           %option{:value => "+5"} ME +5
           %option{:value => "me and more than 5 others"} ME AND 5 OTHERS
-      .inline
-        .calendar
-          %a.variable
-            %script{:src => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js", :type => "text/javascript"}
-            %script{:src => "https://code.jquery.com/ui/1.12.1/jquery-ui.js"}
-            :javascript
 
-              jQuery(function($){ // wait until the DOM is ready
-                  $("#datepicker").datepicker({ dateFormat: 'M dd, yy' });
-              });
-            %input#datepicker{:type => "text", :name => "adventure[adventure_date]", :start_year => Date.today.year, :placeholder => "CHOOSE DATE"}/
+      %script{:src => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js", :type => "text/javascript"}
+      %script{:src => "https://code.jquery.com/ui/1.12.1/jquery-ui.js"}
+      :javascript
+        jQuery(function($){ // wait until the DOM is ready
+            $("#datepicker").datepicker({ dateFormat: 'M dd, yy' });
+        });
+      %input#datepicker{:type => "text", :name => "adventure[adventure_date]", :start_year => Date.today.year, :placeholder => "CHOOSE DATE"}/
 
       .inline
         #locationField
