@@ -1,8 +1,6 @@
 !!!
 %html
   %head
-    %link{:href => "jquery-ui.min.css", :rel => "stylesheet"}/
-    %script{:src => "external/jquery/jquery.js"}
     %script{:src => "jquery-ui.min.js"}
     %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js", :type => "text/javascript"}
     = javascript_include_tag "application"
@@ -17,16 +15,14 @@
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"}
     %script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places"}
     %link{:href => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", :rel => "stylesheet"}/
-    %link{:href => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
     %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
     %script{:src => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
-    %script{:src => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"}
     %link{:href => "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css", :rel => "stylesheet"}/
     %link{:href => "/resources/demos/style.css", :rel => "stylesheet"}/
     %script{:src => "https://code.jquery.com/jquery-1.12.4.js"}
     %script{:src => "https://code.jquery.com/ui/1.12.1/jquery-ui.js"}
     %meta{:content => "initial-scale=1.0, user-scalable=no", :name => "viewport"}/
-    %link{:href => "/path/to/your/fonts/folder/fonts.css", :rel => "stylesheet", :type => "text/css"}/
+
 
 
 
@@ -315,7 +311,8 @@
     }
   .new_adventure
     = form_tag adventures_path, :method => :post do
-      %script{:src => "/js/Bootstrap/Select/bootstrap-select.js"}
+      %script{:src => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"}
+      %link{:href => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
       :javascript
         $(document).ready(function() {
                        $('.selectpicker').selectpicker();
