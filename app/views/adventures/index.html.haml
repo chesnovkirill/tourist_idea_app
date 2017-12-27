@@ -19,11 +19,8 @@
     %link{:href => "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css", :rel => "stylesheet"}/
     %script{:src => "https://code.jquery.com/jquery-1.12.4.js"}
     %meta{:content => "initial-scale=1.0, user-scalable=no", :name => "viewport"}/
-
+    %link{:href => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
     :javascript
-      $(function() {
-          $( "#datepicker" ).datepicker();
-      });
 
       $('#select')
         .dropdown()
@@ -307,7 +304,7 @@
   .new_adventure
     = form_tag adventures_path, :method => :post do
       %script{:src => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"}
-      %link{:href => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+
       :javascript
         $(document).ready(function() {
                        $('.selectpicker').selectpicker();
@@ -407,6 +404,7 @@
             :javascript
               $( function() {
                 $( "#datepicker" ).datepicker({ dateFormat: 'M dd, yy' });
+                $('#ui-datepicker-div').css('clip', 'auto');
               } );
             %input#datepicker{:type => "text", :name => "adventure[adventure_date]", :start_year => Date.today.year, :placeholder => "CHOOSE DATE"}/
       .inline
