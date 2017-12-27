@@ -20,10 +20,10 @@
     %script{:src => "https://code.jquery.com/jquery-1.12.4.js"}
     %meta{:content => "initial-scale=1.0, user-scalable=no", :name => "viewport"}/
 
-
-
-
     :javascript
+      $(function() {
+          $( "#datepicker" ).datepicker();
+      });
 
       $('#select')
         .dropdown()
