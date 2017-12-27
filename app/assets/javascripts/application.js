@@ -14,7 +14,14 @@
 //= require rails-ujs
 //= require turbolinks
 //= require jquery
-//= require bootstrap
 //= require_tree .
+//= require bootstrap
 //= require cable
 //= require gmaps-auto-complete
+
+$(document).ready(
+  function()
+  {
+    $("#picker").datepicker({ dateFormat: 'M dd, yy' });
+  }
+);
