@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :chat_rooms, only: [:new, :create, :show, :index] do
         post "/create_message", :to => "chat_rooms#create_msg", :as => "create_msg"
     end
-    root :to => redirect('/adventures')
+    root :to => redirect('/adventures.1')
     resources :friendships
     resources :users
     mount ActionCable.server => '/cable'

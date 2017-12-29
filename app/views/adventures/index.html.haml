@@ -145,7 +145,7 @@
       }
       .descriptionpart {
         position: relative;
-        top: -154px;
+        top: -127px;
         border: 1px solid black;
         height: 30px;
         width: 100%;
@@ -167,32 +167,32 @@
 
       .detailslineone {
         position: relative;
-        top: -172px;
-        width: 312px;
+        top: -136px;
+        width: 315px;
         border:none;
         border-top:1px black;
         color: black;
         background-color: black;
-        height:2px;
+        height:1px;
         z-index:99;
       }
 
       .detailslinetwo {
         position: relative;
-        top: -174px;
-        right: -325px;
-        width: 312px;
+        top: -137px;
+        right: -322px;
+        width: 316px;
         border:none;
         border-top:1px black;
         color: black;
         background-color: black;
-        height:2px;
+        height:1px;
         z-index:99;
       }
 
       .initiallyHiddenBlock {
         position: relative;
-        top: -144px;
+        top: -117px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
         font-size: 115%;
         width: 100%;
@@ -205,8 +205,9 @@
 
       .showHiddenBlock {
         position: relative;
-        top: -154px;
-        right: -302px;
+        cursor: pointer;
+        top: -124px;
+        right: -310px;
         z-index:99;
       }
       .editdeletecover {
@@ -241,7 +242,7 @@
 
       .showHiddenBlock2 {
         position: relative;
-        top: -165px;
+        top: -157px;
         left: 130px;
         text-align: center;
         cursor: pointer;
@@ -258,7 +259,7 @@
       }
       .noanswers {
         position: relative;
-        top: -139px;
+        top: -136px;
         left: 130px;
         text-align: center;
         cursor: pointer;
@@ -277,7 +278,8 @@
       .showHiddenBlock3 {
         text-align: center;
         position: relative;
-        top: -62px;
+        cursor: pointer;
+        top: -132px;
         right: -611px;
         width: 0px;
         z-index:99;
@@ -285,8 +287,9 @@
 
       .showHiddenBlock4 {
         position: relative;
-        top: -205px;
+        top: -197px;
         text-align: center;
+        cursor: pointer;
         height: 30px;
         width: 120px;
         border: 1px solid black;
@@ -298,6 +301,7 @@
         top: -178px;
         text-align: center;
         height: 30px;
+        cursor: pointer;
         width: 120px;
         border: 1px solid black;
         padding: 5px 10px;
@@ -305,6 +309,10 @@
       }
 
       .showHiddenBlock4:hover {
+        background-color: #7FCCF7;
+      }
+
+      .nodetails:hover {
         background-color: #7FCCF7;
       }
 
@@ -322,6 +330,58 @@
         margin-bottom: 10px;
         z-index:100;
         text-align: center;
+      }
+
+      .answerline {
+        position: relative;
+        top: -178px;
+        width: 640px;
+        border:none;
+        border-top:1px black;
+        color: black;
+        background-color: black;
+        height:1px;
+        z-index:99;
+      }
+      .answeravatar {
+        position: relative;
+        top: -133px;
+      }
+      #advisetext {
+        position: relative;
+        height: 30px;
+        top: -202px;
+        left: 38px;
+        width: 94.5%;
+        padding: 5px 10px;
+        -webkit-appearance: none;
+        margin: 5px 0;
+        display: inline-block;
+        border: 1px solid black;
+        border-radius: 0px;
+        box-sizing: border-box;
+        color: black;
+        resize: none;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        font-size: 90%;
+      }
+      .createcomment {
+        position: relative;
+        top: -197px;
+        text-align: center;
+        cursor: pointer;
+        height: 30px;
+        width: 120px;
+        border: 1px solid black;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+      }
+      .createcomment:hover {
+        background-color: #7FCCF7;
+      }
+      .iftherearedetails {
+        position: relative;
+        top: -20px;
       }
 
 
@@ -628,45 +688,40 @@
   $(document).ready(function() {
       $('.showHiddenBlock').click(function() {
         detailsvar = !detailsvar;
-        $(this).parent().children('.initiallyHiddenBlock').slideToggle();
+        $(this).parent().children('.initiallyHiddenBlock').slideToggle(1000);
       });
   });
 
   $(document).ready(function() {
       $('.showHiddenBlock2').click(function() {
           answers = !answers;
-          $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
+          $(this).parent().children('.initiallyHiddenBlock2').slideToggle(1000);
       });
   });
     $(document).ready(function() {
       $('.noanswers').click(function() {
           answers = !answers;
-          $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
+          $(this).parent().children('.initiallyHiddenBlock2').slideToggle(1000);
       });
   });
 
   $(document).ready(function() {
       $('.showHiddenBlock4').click(function() {
           advise = !advise;
-          $(this).parent().children('.initiallyHiddenBlock4').slideToggle();
+          $(this).parent().children('.initiallyHiddenBlock4').slideToggle(1000);
       });
   });
     $(document).ready(function() {
       $('.nodetails').click(function() {
           advise = !advise;
-          $(this).parent().children('.initiallyHiddenBlock4').slideToggle();
+          $(this).parent().children('.initiallyHiddenBlock4').slideToggle(1000);
       });
   });
 
   $(document).ready(function() {
       $('.slideHideToggle').click(function() {
-        $(this).parent().children('.HideShow').slideToggle();
+        $(this).parent().children('.HideShow').slideToggle(1000);
         });
-  });
-  $(document).ready(function(){
-      $(".mymodalg").click(function(){
-      $('.ui.modal').modal('show');
-      });
   });
   $( function() {
     $( ".showHiddenBlock" ).on( "click", function() {
@@ -739,18 +794,17 @@
             #{link_to "EDIT", edit_adventure_path(ad)}
             #{link_to "DELETE", adventure_path(ad), :method => :delete}
 
-      .showHiddenBlock3
-        %i.big.ellipsis.horizontal.icon
-
       .descriptionpart
         #{ad.description}
       - if ad.details != ""
         .initiallyHiddenBlock
           #{ad.details}
         .showHiddenBlock
-          %i.big.angle.down.icon
+          %i.angle.down.icon
         .detailslineone
         .detailslinetwo
+      .showHiddenBlock3
+        = image_tag "logos/dots.png", width: '30px'
       - if ad.details != ""
         .showHiddenBlock2
           Other Answers(#{ad.comments.count})
@@ -769,35 +823,78 @@
             .nodetails
               Give Advise
           .initiallyHiddenBlock4
-            Advise:
-            = form_for([ad,ad.comments.build]) do |f|
-              %p
-                #{current_user.first_name}
-              %p
-                = f.text_area :body
-                /- if current_user.capabilities
-                / %p
-                /   Choose which of your capabilities to include:
-                / %p
-                /   #{current_user.capabilities}
-                / %p
-                /   Any other relevant capabilities?
-                /- else
+            - if ad.details != ""
+              .iftherearedetails
+                .answerline
+                .answeravatar
+                  - if current_user.avatar_url.to_s != ''
+                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                      %img{:src => current_user.avatar_url.to_s}/
+                  - else
+                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                      = image_tag "logos/user.png"
+                = form_for([ad,ad.comments.build]) do |f|
+                  %p
+                    = text_area :comment, :body, :id => "advisetext"
+                    /- if current_user.capabilities
+                    / %p
+                    /   Choose which of your capabilities to include:
+                    / %p
+                    /   #{current_user.capabilities}
+                    / %p
+                    /   Any other relevant capabilities?
+                    /- else
+                    /%p
+                    /  Any relevant capabilities?
+                    /%p
+                    /  = f.text_area :capabilities
+                    /%p
+                    /  = f.file_field :image, multiple:true
+                    /%p
+                    /.ui.toggle.checkbox.slideHideToggle
+                    /  %input{:name => "public", :type => "checkbox"}/
+                    /  %label Agree to #{ad.action_adventure}-seeker's offer
+                    /.HideShow
+                    /%p
+                    /  = f.label :price, 'I would like to get'
+                    /  = f.number_field :price, value: ad.price
+                    /  instead
+                    %button.createcomment
+                      POST
+            - else
+              .answerline
+              .answeravatar
+                - if current_user.avatar_url.to_s != ''
+                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                    %img{:src => current_user.avatar_url.to_s}/
+                - else
+                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                    = image_tag "logos/user.png"
+              = form_for([ad,ad.comments.build]) do |f|
                 %p
-                  Any relevant capabilities?
-                %p
-                  = f.text_area :capabilities
-                /%p
-                /  = f.file_field :image, multiple:true
-              %p
-                .ui.toggle.checkbox.slideHideToggle
-                  %input{:name => "public", :type => "checkbox"}/
-                  %label Agree to #{ad.action_adventure}-seeker's offer
-              .HideShow
-                %p
-                  = f.label :price, 'I would like to get'
-                  = f.number_field :price, value: ad.price
-                  instead
-              %p
-              %p
-                %button.ui.blue.button Create Comment
+                  = text_area :comment, :body, :id => "advisetext"
+                  /- if current_user.capabilities
+                  / %p
+                  /   Choose which of your capabilities to include:
+                  / %p
+                  /   #{current_user.capabilities}
+                  / %p
+                  /   Any other relevant capabilities?
+                  /- else
+                  /%p
+                  /  Any relevant capabilities?
+                  /%p
+                  /  = f.text_area :capabilities
+                  /%p
+                  /  = f.file_field :image, multiple:true
+                  /%p
+                  /.ui.toggle.checkbox.slideHideToggle
+                  /  %input{:name => "public", :type => "checkbox"}/
+                  /  %label Agree to #{ad.action_adventure}-seeker's offer
+                  /.HideShow
+                  /%p
+                  /  = f.label :price, 'I would like to get'
+                  /  = f.number_field :price, value: ad.price
+                  /  instead
+                  %button.createcomment
+                    POST

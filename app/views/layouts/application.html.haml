@@ -132,7 +132,7 @@
     %body
       %ul
         %li
-          = link_to root_path do
+          = link_to adventures_path(1) do
             .logostyle
               = image_tag "logos/t.png", width: '90px'
         - if user_signed_in?
