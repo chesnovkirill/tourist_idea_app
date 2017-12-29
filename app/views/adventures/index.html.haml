@@ -352,7 +352,7 @@
         height: 30px;
         top: -202px;
         left: 38px;
-        width: 94.5%;
+        width: 94.25%;
         padding: 5px 10px;
         -webkit-appearance: none;
         margin: 5px 0;
@@ -367,12 +367,14 @@
       }
       .createcomment {
         position: relative;
-        top: -197px;
+        top: -202px;
+        left: 518px;
         text-align: center;
         cursor: pointer;
         height: 30px;
         width: 120px;
         border: 1px solid black;
+        background-color: #bee5fb;
         padding: 5px 10px;
         margin-bottom: 10px;
       }
@@ -818,10 +820,10 @@
         - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
           - if ad.details != ""
             .showHiddenBlock4
-              Give Advise
+              ANSWER
           - else
             .nodetails
-              Give Advise
+              ANSWER
           .initiallyHiddenBlock4
             - if ad.details != ""
               .iftherearedetails
