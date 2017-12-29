@@ -111,7 +111,19 @@
         left: 350px;
         width: 660px;
         height: auto;
-        background-color: #7FCCF7;
+        background-color: #bee5fb;
+        border: 1px solid black;
+        padding: 10px;
+        margin: 10px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+      }
+      .singularadventureontoggle {
+        position: relative;
+        top: 20px;
+        left: 350px;
+        width: 660px;
+        height: 140px;
+        background-color: #bee5fb;
         border: 1px solid black;
         padding: 10px;
         margin: 10px;
@@ -121,19 +133,19 @@
 
       .avatar {
         position: relative;
-        top: 0px;
+        top: -35px;
       }
 
       .descriptionsecondary {
         position: relative;
         left: 38px;
-        top: -32px;
+        top: -68px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
         font-size: 90%;
       }
       .descriptionpart {
         position: relative;
-        top: -54px;
+        top: -154px;
         border: 1px solid black;
         height: 30px;
         width: 100%;
@@ -142,20 +154,20 @@
       }
       .adventureprice {
         position: relative;
-        top: -62px;
+        top: -99px;
         right: -518px;
         border: 1px solid black;
         height: 30px;
         width: 120px;
         text-align: center;
-        padding: 3px 10px;
+        padding: 6px 10px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
         font-size: 115%;
       }
 
       .detailslineone {
         position: relative;
-        top: -72px;
+        top: -172px;
         width: 312px;
         border:none;
         border-top:1px black;
@@ -167,7 +179,7 @@
 
       .detailslinetwo {
         position: relative;
-        top: -74px;
+        top: -174px;
         right: -325px;
         width: 312px;
         border:none;
@@ -180,7 +192,7 @@
 
       .initiallyHiddenBlock {
         position: relative;
-        top: -44px;
+        top: -144px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
         font-size: 115%;
         width: 100%;
@@ -193,19 +205,107 @@
 
       .showHiddenBlock {
         position: relative;
-        top: -54px;
+        top: -154px;
         right: -302px;
         z-index:99;
       }
+      .editdeletecover {
+        position: relative;
+        right: -702px;
+        top: 89px;
+        background-color: white;
+        position: relative;
+        height: 35px;
+        width: 70px;
+        z-index:99;
+      }
+
+      .editdeletecoverremoved {
+        position: relative;
+        right: -655px;
+        top: 89px;
+        background-color: white;
+        z-index:101;
+        height: 35px;
+        width: 70px;
+      }
+      .editdelete {
+        position: relative;
+        top: -40px;
+        right: -650px;
+        height: 35px;
+        width: 70px;
+        z-index:100;
+        text-align: center;
+      }
 
       .showHiddenBlock2 {
+        position: relative;
+        top: -165px;
+        left: 130px;
+        text-align: center;
         cursor: pointer;
+        height: 30px;
+        width: 120px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        font-size: 90%;
+        z-index:99;
+      }
+      .showHiddenBlock2:hover {
+        background-color: #7FCCF7;
+      }
+      .noanswers {
+        position: relative;
+        top: -139px;
+        left: 130px;
+        text-align: center;
+        cursor: pointer;
+        height: 30px;
+        width: 220px;
+        width: 120px;
+        padding: 5px 10px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        font-size: 90%;
+        margin-bottom: 10px;
+        z-index:99;
+      }
+      .noanswers:hover {
+        background-color: #7FCCF7;
       }
       .showHiddenBlock3 {
+        text-align: center;
         position: relative;
-        top: -52px;
+        top: -62px;
         right: -611px;
+        width: 0px;
         z-index:99;
+      }
+
+      .showHiddenBlock4 {
+        position: relative;
+        top: -205px;
+        text-align: center;
+        height: 30px;
+        width: 120px;
+        border: 1px solid black;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+      }
+      .nodetails {
+        position: relative;
+        top: -178px;
+        text-align: center;
+        height: 30px;
+        width: 120px;
+        border: 1px solid black;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+      }
+
+      .showHiddenBlock4:hover {
+        background-color: #7FCCF7;
       }
 
       .initiallyHiddenBlock3 {
@@ -214,7 +314,8 @@
         right: -800px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
         font-size: 115%;
-        width: 15%;
+        width: 120px;
+        height: 30px;
         background-color: white;
         border: 1px solid black;
         padding: 5px 10px;
@@ -518,30 +619,41 @@
 %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css", :rel => "stylesheet", :type => "text/css"}/
 %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"}
 %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"}
+%script{:src => "https://code.jquery.com/jquery-1.12.4.js"}
+%script{:src => "https://code.jquery.com/ui/1.12.1/jquery-ui.js"}
 :javascript
+  var detailsvar = false;
+  var answers = false;
+  var advise = false;
   $(document).ready(function() {
       $('.showHiddenBlock').click(function() {
-      //  if($(this).parent().parent().hasClass('.hide')) {
-      //    $(this).parent().parent().animate({height:140}).removeClass('.hide');
-      //} else {
-      //  $(this).parent().parent().animate({height:200}).addClass('.hide');
-      //}
+        detailsvar = !detailsvar;
         $(this).parent().children('.initiallyHiddenBlock').slideToggle();
       });
   });
+
   $(document).ready(function() {
       $('.showHiddenBlock2').click(function() {
+          answers = !answers;
           $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
       });
   });
-  $(document).ready(function() {
-      $('.showHiddenBlock3').click(function() {
-          $(this).parent().children('.initiallyHiddenBlock3').animate({width: 'toggle'});;
+    $(document).ready(function() {
+      $('.noanswers').click(function() {
+          answers = !answers;
+          $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
       });
   });
 
   $(document).ready(function() {
       $('.showHiddenBlock4').click(function() {
+          advise = !advise;
+          $(this).parent().children('.initiallyHiddenBlock4').slideToggle();
+      });
+  });
+    $(document).ready(function() {
+      $('.nodetails').click(function() {
+          advise = !advise;
           $(this).parent().children('.initiallyHiddenBlock4').slideToggle();
       });
   });
@@ -556,13 +668,63 @@
       $('.ui.modal').modal('show');
       });
   });
+  $( function() {
+    $( ".showHiddenBlock" ).on( "click", function() {
+      if (answers == false && advise == false) {
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+      }
+    });
+  } );
+
+  $( function() {
+    $( ".showHiddenBlock2" ).on( "click", function() {
+      if (detailsvar == false && advise == false) {
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+      }
+    });
+  } );
+  $( function() {
+    $( ".noanswers" ).on( "click", function() {
+      if (detailsvar == false && advise == false) {
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+      }
+    });
+  } );
+
+  $( function() {
+    $( ".showHiddenBlock4" ).on( "click", function() {
+      if (answers == false && detailsvar == false) {
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+      }
+    });
+  } );
+    $( function() {
+    $( ".nodetails" ).on( "click", function() {
+      if (answers == false && detailsvar == false) {
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+      }
+    });
+  } );
+
+  $( function() {
+    $( ".showHiddenBlock3" ).on( "click", function() {
+      $(this).parent().children( ".editdeletecover" ).toggleClass( "editdeletecoverremoved", 100 );
+    });
+  } );
+
+
 - @adventures.sort {|a,b| b.created_at <=> a.created_at }.each do |ad|
   #myUL
-    .singularadventure
+
+    .singularadventure.singularadventureontoggle
+      .editdeletecoverremoved.editdeletecover
       .avatar
       - if ad.user.avatar_url.to_s != ''
         %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
           %img{:src => ad.user.avatar_url.to_s}/
+      - else
+        %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
+          = image_tag "logos/user.png"
       .descriptionsecondary
         #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} from #{ad.user.city_of_residence} posted #{time_ago_in_words(ad.created_at)} ago
         %p needs #{ad.action_adventure} in #{ad.city},  #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}:
@@ -571,6 +733,15 @@
           $#{ad.price}
         - else
           FREE
+      .editdelete
+        - if user_signed_in? && ad.completed != true
+          - if ad.user.id == current_user.id
+            #{link_to "EDIT", edit_adventure_path(ad)}
+            #{link_to "DELETE", adventure_path(ad), :method => :delete}
+
+      .showHiddenBlock3
+        %i.big.ellipsis.horizontal.icon
+
       .descriptionpart
         #{ad.description}
       - if ad.details != ""
@@ -580,42 +751,44 @@
           %i.big.angle.down.icon
         .detailslineone
         .detailslinetwo
-      .showHiddenBlock3
-        %i.big.ellipsis.horizontal.icon
-      .initiallyHiddenBlock3
-        - if user_signed_in? && ad.completed != true
-          - if ad.user.id == current_user.id
-            #{link_to "EDIT", edit_adventure_path(ad)}
-            #{link_to "DELETE", adventure_path(ad), :method => :delete}
-      .showHiddenBlock2
-        Other Answers(#{ad.comments.count})
+      - if ad.details != ""
+        .showHiddenBlock2
+          Other Answers(#{ad.comments.count})
+      - else
+        .noanswers
+          Other Answers(#{ad.comments.count})
       .initiallyHiddenBlock2
         - ad.comments.each do |c|
           = render c
       - if user_signed_in?
         - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
-          .showHiddenBlock4
-            %button.ui.blue.button Create Comment
+          - if ad.details != ""
+            .showHiddenBlock4
+              Give Advise
+          - else
+            .nodetails
+              Give Advise
           .initiallyHiddenBlock4
-            Answer:
+            Advise:
             = form_for([ad,ad.comments.build]) do |f|
               %p
                 #{current_user.first_name}
               %p
                 = f.text_area :body
-              - if current_user.capabilities
+                /- if current_user.capabilities
+                / %p
+                /   Choose which of your capabilities to include:
+                / %p
+                /   #{current_user.capabilities}
+                / %p
+                /   Any other relevant capabilities?
+                /- else
                 %p
-                  Choose which of your capabilities to include:
+                  Any relevant capabilities?
                 %p
-                  #{current_user.capabilities}
-                %p
-                  Any other relevant capabilities?
-              - else
-                Any relevant capabilities?
-                %p
-                = f.text_area :capabilities
-              %p
-                = f.file_field :image, multiple:true
+                  = f.text_area :capabilities
+                /%p
+                /  = f.file_field :image, multiple:true
               %p
                 .ui.toggle.checkbox.slideHideToggle
                   %input{:name => "public", :type => "checkbox"}/
