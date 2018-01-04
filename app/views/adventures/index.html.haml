@@ -215,7 +215,6 @@
         right: -702px;
         top: 89px;
         background-color: white;
-        position: relative;
         height: 35px;
         width: 70px;
         z-index:99;
@@ -264,7 +263,6 @@
         text-align: center;
         cursor: pointer;
         height: 30px;
-        width: 220px;
         width: 120px;
         padding: 5px 10px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
@@ -620,11 +618,11 @@
                        $('.selectpicker').selectpicker();
                       });
       .selectbuttonone
-        %select.selectpicker.trial{:name => "adventure[action_adventure]", "data-style" => "btn-new", "data-width" => "120px"}
+        %select.selectpicker{:name => "adventure[action_adventure]", "data-style" => "btn-new", "data-width" => "120px"}
           %option{:value => "action"} I NEED ACTION
           %option{:value => "adventure"} I NEED ADVISE
       .selectbuttontwo
-        %select.selectpicker.trial{:name => "adventure[number_of_people]", "data-style" => "btn-new", "data-width" => "120px"}
+        %select.selectpicker{:name => "adventure[number_of_people]", "data-style" => "btn-new", "data-width" => "120px"}
           %option{:value => "Only me"} ONLY ME
           %option{:value => "+1"} ME +1
           %option{:value => "+2"} ME +2

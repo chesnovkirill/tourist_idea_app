@@ -31,6 +31,21 @@ class AdventuresController < ApplicationController
             temp["price" => 0]
         end
         @adventure = current_user.adventures.build(temp)
+        if current_user.asked_actions
+            variable1 = {"asked_actions" => current_user.asked_actions + 1}
+        else
+            variable1 = {"asked_actions" => 1}
+        end
+        if current_user.asked_advices
+            variable2 = {"asked_advices" => current_user.asked_advices + 1}
+        else
+            variable2 = {"asked_advices" => 1}
+        end
+        if params[:adventure]["action_adventure"] == 'action'
+            current_user.update_attributes!(variable1)
+        else
+            current_user.update_attributes!(variable2)
+        end
         if current_user.save
             graph = Koala::Facebook::API.new("EAAdFTd7zE9ABACdBQuuNdfVhoBsF5cYdA6PQSvW9OlRmPRhyGRz0EUZA5BpfXZAJRAaZBp9ZCu31FHpjVZCZAnm4WvmqTvP5FxkdYLZAbJU37qxxyQ0Huqu1bqaQGnytgcYzPGAbl1PjMSBj1ZAa4ZBt4kQUVURF2ThJYVG9WJYvxBwZDZD")
             graph.put_object(553202955027429, "feed", {

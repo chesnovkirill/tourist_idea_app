@@ -24,4 +24,8 @@
     %br/
     = f.text_field :city_of_residence
     = f.hidden_field :admin, value: false
+    = f.hidden_field :asked_advices, value: 0
+    = f.hidden_field :asked_actions, value: 0
+    = f.hidden_field :gave_advices, value: 0
+    = f.hidden_field :gave_actions, value: 0
   %div= f.submit "Update"

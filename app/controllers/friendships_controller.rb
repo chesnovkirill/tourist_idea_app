@@ -10,6 +10,14 @@ class FriendshipsController < ApplicationController
         end
         @adventure = Adventure.find(params[:chat_room][:adventure_id])
         temp = {"completed"=>true}
+        variable1 = {"gave_actions" => current_user.gave_actions + 1}
+        variable2 = {"gave_advices" => current_user.gave_advices + 1}
+        if @adventure.action_adventure == 'action'
+            t.update_attributes!(variable1)
+            else
+            t.update_attributes!(variable2)
+        end
+        t.save
         @adventure.update_attributes!(temp)
         @chat_room = current_user.chat_rooms.build(user_id: current_user.id, host_id: t.id)
         @chat_room.save
