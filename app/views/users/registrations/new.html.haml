@@ -1,31 +1,218 @@
-%h2
-  Register #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+:css
+  .square {
+    width: 240px;
+    height: 297px;
+    position: relative;
+    left: 718px;
+    top: -10px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+
+  }
+  #fn {
+    position: relative;
+    top: -5px;
+    height: 30px;
+    width: 220px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 14px;
+    z-index: 100;
+  }
+
+  #cor {
+    position: relative;
+    top: -5px;
+    height: 30px;
+    width: 220px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 14px;
+    z-index: 100;
+  }
+
+  #cp {
+    position: relative;
+    top: -5px;
+    height: 30px;
+    width: 220px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 14px;
+    z-index: 100;
+  }
+
+  #email {
+    position: relative;
+    top: -5px;
+    height: 30px;
+    width: 220px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 14px;
+    z-index: 100;
+  }
+
+  #pass {
+    position: relative;
+    top: -5px;
+    height: 30px;
+    width: 220px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 14px;
+    z-index: 100;
+  }
+  button.save {
+    position: relative;
+    height: 30px;
+    top: -5px;
+    width: 220px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 14px;
+    background-color: #bee5fb;
+    z-index: 100;
+  }
+
+  button.save:hover {
+    background-color: #7FCCF7;
+    z-index: 100;
+  }
+.square
+  = form_tag registration_path(resource_name) do
+    = text_field :user, :first_name, :id => "firstname", autofocus: true, :placeholder => "First Name", :id => "fn"
+    #locationField
+      %input#autocomplete{:onfocus => "geolocate()", "data-style" => "autocomp", :placeholder => "City of Residence", :type => "text"}/
+      %input#locality.field{:name => "user[city_of_residence]", :type =>"hidden", :disabled => "false"}/
+      %input#country.field{:name => "user[country_of_residence]", :type => "hidden", :disabled => "true"}/
+      %input#administrative_area_level_1.field{:type => "hidden", :disabled => "true"}/
+
+
+      :javascript
+          // This example displays an address form, using the autocomplete feature
+          // of the Google Places API to help users fill in the information.
+
+          // This example requires the Places library. Include the libraries=places
+          // parameter when you first load the API. For example:
+          // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+          var placeSearch, autocomplete;
+          var componentForm = {
+            locality: 'long_name',
+            administrative_area_level_1: 'short_name',
+            country: 'long_name',
+          };
+
+          function initAutocomplete() {
+            // Create the autocomplete object, restricting the search to geographical
+            // location types.
+            autocomplete = new google.maps.places.Autocomplete(
+              /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+              {types: ['geocode']});
+
+            // When the user selects an address from the dropdown, populate the address
+            // fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+          }
+
+          function fillInAddress() {
+            // Get the place details from the autocomplete object.
+            var place = autocomplete.getPlace();
+
+            for (var component in componentForm) {
+              document.getElementById(component).value = '';
+              document.getElementById(component).disabled = false;
+            }
+
+            // Get each component of the address from the place details
+            // and fill the corresponding field on the form.
+            for (var i = 0; i < place.address_components.length; i++) {
+              var addressType = place.address_components[i].types[0];
+              if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+                document.getElementById(addressType).value = val;
+              }
+            }
+          }
+
+          // Bias the autocomplete object to the user's geographical location,
+          // as supplied by the browser's 'navigator.geolocation' object.
+          function geolocate() {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                var geolocation = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                  center: geolocation,
+                  radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+              });
+            }
+          }
+      %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places&callback=initAutocomplete"}
+
+    = text_field :user, :contact_phone, :id => "cov", :placeholder => "Mobile Number", :id => "cp"
+    = text_field :user, :email, :id => "email", :placeholder => "Email", :id => "email"
+    = password_field :user, :password, autocomplete: "off", :placeholder => "Password", :id => "pass"
+    = hidden_field :admin, value: false
+    = hidden_field :asked_advices, value: 0
+    = hidden_field :asked_actions, value: 0
+    = hidden_field :gave_advices, value: 0
+    = hidden_field :gave_actions, value: 0
+    %button.save SIGN UP
   = devise_error_messages!
 
-  %div
-    = f.label :first_name
-    %br/
-    = f.text_field :first_name, autofocus: true
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  %div
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  %div
-    = f.label :city_of_residence
-    %br/
-    = f.text_field :city_of_residence
-    = f.hidden_field :admin, value: false
-    = f.hidden_field :asked_advices, value: 0
-    = f.hidden_field :asked_actions, value: 0
-    = f.hidden_field :gave_advices, value: 0
-    = f.hidden_field :gave_actions, value: 0
-  %div= f.submit "Update"

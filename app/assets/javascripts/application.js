@@ -17,4 +17,5 @@
 //= require bootstrap
 //= require cable
 //= require gmaps-auto-complete
+//= require jquery.turbolinks
 //= require_tree .
