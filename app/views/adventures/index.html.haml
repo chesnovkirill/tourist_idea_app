@@ -96,10 +96,12 @@
         background-color: white;
       }
       .new_adventure {
-        position: relative;
+        position: absolute;
+        top: 100px;
         left: 350px;
         width: 660px;
         height: 230px;
+        z-index: 200;
         background-color: white;
         border: 1px solid black;
         padding: 10px;
@@ -107,7 +109,7 @@
       }
       .singularadventure {
         position: relative;
-        top: 20px;
+        top: 308px;
         left: 350px;
         width: 660px;
         height: auto;
@@ -119,7 +121,7 @@
       }
       .singularadventureontoggle {
         position: relative;
-        top: 20px;
+        top: 308px;
         left: 350px;
         width: 660px;
         height: 140px;
@@ -215,7 +217,6 @@
         right: -702px;
         top: 89px;
         background-color: white;
-        position: relative;
         height: 35px;
         width: 70px;
         z-index:99;
@@ -398,11 +399,11 @@
   %link{:href => "https://fonts.googleapis.com/css?family=Roboto:300,400,500", :rel => "stylesheet", :type => "text/css"}/
   :css
     #autocomplete {
-      position: relative;
+      position: absolute;
+      left: 269px;
+      top:9px;
       padding-top: 0px;
       padding-left: 10px;
-      top: -110px;
-      left: 260px;
       height: 30px;
       width: 120px;
       color: black;
@@ -414,10 +415,11 @@
       color: #303030;
     }
     #inputtext {
-      position: relative;
+      position: absolute;
       height: 30px;
-      top: -126px;
-      width: 100%;
+      top: 44px;
+      left: 10px;
+      width: 638px;
       padding: 5px 10px;
       -webkit-appearance: none;
       margin: 5px 0;
@@ -429,15 +431,15 @@
       resize: none;
       font-family: 'pproxima_nova_ltthin', sans-serif;
       font-size: 90%;
-      }
+     }
     #inputtextDetails {
-      position: relative;
+      position: absolute;
       height: 90px;
-      top: -141px;
-      width: 100%;
+      top: 89px;
+      left: 10px;
+      width: 638px;
       padding: 5px 10px;
       -webkit-appearance: none;
-      margin: 5px 0;
       display: inline-block;
       border: 1px solid black;
       border-radius: 0px;
@@ -448,10 +450,11 @@
       font-size: 90%;
     }
     .moneyinput {
-      position: relative;
+      position: absolute;
       z-index:100;
       height: 30px;
-      top: -160px;
+      top: 184px;
+      left: 10px;
       width: 120px;
       padding: 5px 15px;
       -webkit-appearance: none;
@@ -467,16 +470,18 @@
     }
     .dollarsign {
       width: 10px;
-      position: relative;
+      position: absolute;
+      left: 15px;
+      top: 194px;
       height: 30px;
       z-index:100;
-      top: -206px;
-      left: 5px;
+
     }
     #datepicker {
-      position: relative;
-      top: -10px;
-      z-index: 100px;
+      position: absolute;
+      top: -11px;
+      left: -1px;
+      z-index: 100;
       right: 80px;
       width: 120px;
       font-family: 'pproxima_nova_ltthin', sans-serif;
@@ -486,7 +491,7 @@
     }
     .line {
       position: relative;
-      top: 10px;
+      top: 260px;
       left: 360px;
       width: 660px;
       border:none;
@@ -532,18 +537,19 @@
       font-size: 12px;
       margin: 4px 2px;
       cursor: pointer;
-      position: relative;
-      top: -259px;
-      right: -514px;
+      position: absolute;
+      top: 184px;
+      left: 526px;
       width: 120px;
       font-family: 'pproxima_nova_ltthin', sans-serif;
       height: 30px;
     }
 
     .button4 {
-      position: relative; !important;
-      top: 15px; !important;
-      right: -400px; !important;
+      position: absolute; !important;
+      top: 364px; !important;
+      left: 500px;
+      z-index: 201;
       font-family: 'pproxima_nova_ltthin', sans-serif;
       color: #303030;!important;
       border: none; !important;
@@ -558,9 +564,9 @@
     }
 
     .container-1 .styled{
-      position: relative;
+      position: absolute;
       left: 360px;
-      top: 20px;
+      top: 364px;
       z-index:100;
       height: 30px;
       width: 120px;
@@ -582,6 +588,10 @@
       background-color: #e7e7e7; !important;
     }
 
+    .adventurelist {
+      position: absolute;
+    }
+
 %body
   :css
     .btn-new {
@@ -591,17 +601,21 @@
       color: black;
       font-family: 'pproxima_nova_ltthin', sans-serif;
       height: 30px;
+      z-index: 200;
       font-size: 76%;
       outline: none;
     }
     .selectbuttonone {
-      position: relative;
-      top: -30px;
+      position: absolute;
+      top: 9px;
+      left: 10px;
+      z-index: 200;
     }
     .selectbuttontwo {
-      position: relative;
-      top: -60px;
-      left: 130px;
+      position: absolute;
+      top: 9px;
+      left: 140px;
+      z-index: 200;
     }
   .new_adventure
     = form_tag adventures_path, :method => :post do
@@ -705,7 +719,6 @@
             }
           }
         %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places&callback=initAutocomplete"}
-      .inline
 
       %p
         = text_area :adventure, :description, :maxlength => "120", :id => "inputtext", :placeholder => "ASK LOCALS ANYTHING YOU WANT TO KNOW OR TO DO (E.G. \"WANT TO PET A TIGER\")                      MAX 120 SYMBOLS"
@@ -737,45 +750,45 @@
   $(document).ready(function() {
       $('.showHiddenBlock').click(function() {
         detailsvar = !detailsvar;
-        $(this).parent().children('.initiallyHiddenBlock').slideToggle(1000);
+        $(this).parent().children('.initiallyHiddenBlock').slideToggle();
       });
   });
 
   $(document).ready(function() {
       $('.showHiddenBlock2').click(function() {
           answers = !answers;
-          $(this).parent().children('.initiallyHiddenBlock2').slideToggle(1000);
+          $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
       });
   });
     $(document).ready(function() {
       $('.noanswers').click(function() {
           answers = !answers;
-          $(this).parent().children('.initiallyHiddenBlock2').slideToggle(1000);
+          $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
       });
   });
 
   $(document).ready(function() {
       $('.showHiddenBlock4').click(function() {
           advise = !advise;
-          $(this).parent().children('.initiallyHiddenBlock4').slideToggle(1000);
+          $(this).parent().children('.initiallyHiddenBlock4').slideToggle();
       });
   });
     $(document).ready(function() {
       $('.nodetails').click(function() {
           advise = !advise;
-          $(this).parent().children('.initiallyHiddenBlock4').slideToggle(1000);
+          $(this).parent().children('.initiallyHiddenBlock4').slideToggle();
       });
   });
 
   $(document).ready(function() {
       $('.slideHideToggle').click(function() {
-        $(this).parent().children('.HideShow').slideToggle(1000);
+        $(this).parent().children('.HideShow').slideToggle();
         });
   });
   $( function() {
     $( ".showHiddenBlock" ).on( "click", function() {
       if (answers == false && advise == false) {
-        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle",);
       }
     });
   } );
@@ -783,14 +796,14 @@
   $( function() {
     $( ".showHiddenBlock2" ).on( "click", function() {
       if (detailsvar == false && advise == false) {
-        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle");
       }
     });
   } );
   $( function() {
     $( ".noanswers" ).on( "click", function() {
       if (detailsvar == false && advise == false) {
-        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle");
       }
     });
   } );
@@ -798,82 +811,119 @@
   $( function() {
     $( ".showHiddenBlock4" ).on( "click", function() {
       if (answers == false && detailsvar == false) {
-        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle");
       }
     });
   } );
     $( function() {
     $( ".nodetails" ).on( "click", function() {
       if (answers == false && detailsvar == false) {
-        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle");
       }
     });
   } );
 
   $( function() {
     $( ".showHiddenBlock3" ).on( "click", function() {
-      $(this).parent().children( ".editdeletecover" ).toggleClass( "editdeletecoverremoved", 100 );
+      $(this).parent().children( ".editdeletecover" ).toggleClass( "editdeletecoverremoved");
     });
   } );
 
+.adventurelist
+  - @adventures.sort {|a,b| b.created_at <=> a.created_at }.each do |ad|
+    #myUL
 
-- @adventures.sort {|a,b| b.created_at <=> a.created_at }.each do |ad|
-  #myUL
-
-    .singularadventure.singularadventureontoggle
-      .editdeletecoverremoved.editdeletecover
-      .avatar
-      - if ad.user.avatar_url.to_s != ''
-        %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
-          %img{:src => ad.user.avatar_url.to_s}/
-      - else
-        %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
-          = image_tag "logos/user.png"
-      .descriptionsecondary
-        #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} from #{ad.user.city_of_residence} posted #{time_ago_in_words(ad.created_at)} ago
-        %p needs #{ad.action_adventure} in #{ad.city},  #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}:
-      .adventureprice
-        - if ad.price != 0
-          $#{ad.price}
+      .singularadventure.singularadventureontoggle
+        .editdeletecoverremoved.editdeletecover
+        .avatar
+        - if ad.user.avatar_url.to_s != ''
+          %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
+            %img{:src => ad.user.avatar_url.to_s}/
         - else
-          FREE
-      .editdelete
-        - if user_signed_in? && ad.completed != true
-          - if ad.user.id == current_user.id
-            #{link_to "EDIT", edit_adventure_path(ad)}
-            #{link_to "DELETE", adventure_path(ad), :method => :delete}
-
-      .descriptionpart
-        #{ad.description}
-      - if ad.details != ""
-        .initiallyHiddenBlock
-          #{ad.details}
-        .showHiddenBlock
-          %i.angle.down.icon
-        .detailslineone
-        .detailslinetwo
-      .showHiddenBlock3
-        = image_tag "logos/dots.png", width: '30px'
-      - if ad.details != ""
-        .showHiddenBlock2
-          Other Answers(#{ad.comments.count})
-      - else
-        .noanswers
-          Other Answers(#{ad.comments.count})
-      .initiallyHiddenBlock2
-        - ad.comments.each do |c|
-          = render c
-      - if user_signed_in?
-        - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
-          - if ad.details != ""
-            .showHiddenBlock4
-              ANSWER
+          %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
+            = image_tag "logos/user.png"
+        .descriptionsecondary
+          #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} from #{ad.user.city_of_residence} posted #{time_ago_in_words(ad.created_at)} ago
+          %p needs #{ad.action_adventure} in #{ad.city},  #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}:
+        .adventureprice
+          - if ad.price != 0
+            $#{ad.price}
           - else
-            .nodetails
-              ANSWER
-          .initiallyHiddenBlock4
+            FREE
+        .editdelete
+          - if user_signed_in? && ad.completed != true
+            - if ad.user.id == current_user.id
+              #{link_to "EDIT", edit_adventure_path(ad)}
+              #{link_to "DELETE", adventure_path(ad), :method => :delete}
+
+        .descriptionpart
+          #{ad.description}
+        - if ad.details != ""
+          .initiallyHiddenBlock
+            #{ad.details}
+          .showHiddenBlock
+            %i.angle.down.icon
+          .detailslineone
+          .detailslinetwo
+        .showHiddenBlock3
+          = image_tag "logos/dots.png", width: '30px'
+        - if ad.details != ""
+          .showHiddenBlock2
+            Other Answers(#{ad.comments.count})
+        - else
+          .noanswers
+            Other Answers(#{ad.comments.count})
+        .initiallyHiddenBlock2
+          - ad.comments.each do |c|
+            = render c
+        - if user_signed_in?
+          - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
             - if ad.details != ""
-              .iftherearedetails
+              .showHiddenBlock4
+                ANSWER
+            - else
+              .nodetails
+                ANSWER
+            .initiallyHiddenBlock4
+              - if ad.details != ""
+                .iftherearedetails
+                  .answerline
+                  .answeravatar
+                    - if current_user.avatar_url.to_s != ''
+                      %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                        %img{:src => current_user.avatar_url.to_s}/
+                    - else
+                      %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                        = image_tag "logos/user.png"
+                  = form_for([ad,ad.comments.build]) do |f|
+                    %p
+                      = text_area :comment, :body, :id => "advisetext"
+                      /- if current_user.capabilities
+                      / %p
+                      /   Choose which of your capabilities to include:
+                      / %p
+                      /   #{current_user.capabilities}
+                      / %p
+                      /   Any other relevant capabilities?
+                      /- else
+                      /%p
+                      /  Any relevant capabilities?
+                      /%p
+                      /  = f.text_area :capabilities
+                      /%p
+                      /  = f.file_field :image, multiple:true
+                      /%p
+                      /.ui.toggle.checkbox.slideHideToggle
+                      /  %input{:name => "public", :type => "checkbox"}/
+                      /  %label Agree to #{ad.action_adventure}-seeker's offer
+                      /.HideShow
+                      /%p
+                      /  = f.label :price, 'I would like to get'
+                      /  = f.number_field :price, value: ad.price
+                      /  instead
+                      %button.createcomment
+                        POST
+              - else
                 .answerline
                 .answeravatar
                   - if current_user.avatar_url.to_s != ''
@@ -910,40 +960,4 @@
                     /  instead
                     %button.createcomment
                       POST
-            - else
-              .answerline
-              .answeravatar
-                - if current_user.avatar_url.to_s != ''
-                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
-                    %img{:src => current_user.avatar_url.to_s}/
-                - else
-                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
-                    = image_tag "logos/user.png"
-              = form_for([ad,ad.comments.build]) do |f|
-                %p
-                  = text_area :comment, :body, :id => "advisetext"
-                  /- if current_user.capabilities
-                  / %p
-                  /   Choose which of your capabilities to include:
-                  / %p
-                  /   #{current_user.capabilities}
-                  / %p
-                  /   Any other relevant capabilities?
-                  /- else
-                  /%p
-                  /  Any relevant capabilities?
-                  /%p
-                  /  = f.text_area :capabilities
-                  /%p
-                  /  = f.file_field :image, multiple:true
-                  /%p
-                  /.ui.toggle.checkbox.slideHideToggle
-                  /  %input{:name => "public", :type => "checkbox"}/
-                  /  %label Agree to #{ad.action_adventure}-seeker's offer
-                  /.HideShow
-                  /%p
-                  /  = f.label :price, 'I would like to get'
-                  /  = f.number_field :price, value: ad.price
-                  /  instead
-                  %button.createcomment
-                    POST
+        = link_to "Details", adventure_path(ad)

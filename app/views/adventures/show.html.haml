@@ -1,49 +1,737 @@
-%h2 Details about Adventure
 %script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
-%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.css", :rel => "stylesheet"}/
-%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.min.js"}
+%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css", :rel => "stylesheet", :type => "text/css"}/
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"}
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"}
+%script{:src => "https://code.jquery.com/jquery-1.12.4.js"}
+%script{:src => "https://code.jquery.com/ui/1.12.1/jquery-ui.js"}
 %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-%meta{:charset => "UTF-8"}/
+%meta{:charset => "utf-8"}/
+%script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
+%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css", :rel => "stylesheet", :type => "text/css"}/
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"}
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"}
+%script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places"}
+%link{:href => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", :rel => "stylesheet"}/
+%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
+%script{:src => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
+%link{:href => "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css", :rel => "stylesheet"}/
+%script{:src => "https://code.jquery.com/jquery-1.12.4.js"}
+%meta{:content => "initial-scale=1.0, user-scalable=no", :name => "viewport"}/
+%link{:href => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+
 :css
-  /* visited link */
-  a:visited {
-    color: #C7EA46;
+  .initiallyHiddenBlock {
+      display: none;
   }
-  a:hover {
+  .initiallyHiddenBlock2 {
+      display: none;
+  }
+  .initiallyHiddenBlock3 {
+      display: none;
+  }
+  .initiallyHiddenBlock4 {
+      display: none;
+  }
+
+  .a.variable {
+    color: #1d4e89;
+    clear:left
+  }
+  .calendar {
+    position: relative;
+    top: 10px;
+    left: 470px;
+    z-index:100;
+  }
+  .inline {
+    color: #1d4e89;
+    display: inline;
+    margin-right: 6px;
+  }
+
+  body {
+    background-color: white;
+  }
+  .new_adventure {
+    position: absolute;
+    top: 100px;
+    left: 350px;
+    width: 660px;
+    height: 230px;
+    z-index: 200;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+  }
+  .singularadventure {
+    position: relative;
+    top: 308px;
+    left: 350px;
+    width: 660px;
+    height: auto;
+    background-color: #bee5fb;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+  }
+  .singularadventureontoggle {
+    position: relative;
+    top: 308px;
+    left: 350px;
+    width: 660px;
+    height: 140px;
+    background-color: #bee5fb;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+  }
+
+
+  .avatar {
+    position: relative;
+    top: -35px;
+  }
+
+  .descriptionsecondary {
+    position: relative;
+    left: 38px;
+    top: -68px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 90%;
+  }
+  .descriptionpart {
+    position: relative;
+    top: -127px;
+    border: 1px solid black;
+    height: 30px;
+    width: 100%;
+    background-color: white;
+    padding: 5px 10px;
+  }
+  .adventureprice {
+    position: relative;
+    top: -99px;
+    right: -518px;
+    border: 1px solid black;
+    height: 30px;
+    width: 120px;
+    text-align: center;
+    padding: 6px 10px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 115%;
+  }
+
+  .detailslineone {
+    position: relative;
+    top: -136px;
+    width: 315px;
+    border:none;
+    border-top:1px black;
+    color: black;
+    background-color: black;
+    height:1px;
+    z-index:99;
+  }
+
+  .detailslinetwo {
+    position: relative;
+    top: -137px;
+    right: -322px;
+    width: 316px;
+    border:none;
+    border-top:1px black;
+    color: black;
+    background-color: black;
+    height:1px;
+    z-index:99;
+  }
+
+  .initiallyHiddenBlock {
+    position: relative;
+    top: -117px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 115%;
+    width: 100%;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    z-index:100;
+  }
+
+  .showHiddenBlock {
+    position: relative;
+    cursor: pointer;
+    top: -124px;
+    right: -310px;
+    z-index:99;
+  }
+  .editdeletecover {
+    position: relative;
+    right: -702px;
+    top: 89px;
+    background-color: white;
+    height: 35px;
+    width: 70px;
+    z-index:99;
+  }
+
+  .editdeletecoverremoved {
+    position: relative;
+    right: -655px;
+    top: 89px;
+    background-color: white;
+    z-index:101;
+    height: 35px;
+    width: 70px;
+  }
+  .editdelete {
+    position: relative;
+    top: -40px;
+    right: -650px;
+    height: 35px;
+    width: 70px;
+    z-index:100;
+    text-align: center;
+  }
+
+  .showHiddenBlock2 {
+    position: relative;
+    top: -157px;
+    left: 130px;
+    text-align: center;
+    cursor: pointer;
+    height: 30px;
+    width: 120px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 90%;
+    z-index:99;
+  }
+  .showHiddenBlock2:hover {
+    background-color: #7FCCF7;
+  }
+  .noanswers {
+    position: relative;
+    top: -136px;
+    left: 130px;
+    text-align: center;
+    cursor: pointer;
+    height: 30px;
+    width: 120px;
+    padding: 5px 10px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 90%;
+    margin-bottom: 10px;
+    z-index:99;
+  }
+  .noanswers:hover {
+    background-color: #7FCCF7;
+  }
+  .showHiddenBlock3 {
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    top: -132px;
+    right: -611px;
+    width: 0px;
+    z-index:99;
+  }
+
+  .showHiddenBlock4 {
+    position: relative;
+    top: -197px;
+    text-align: center;
+    cursor: pointer;
+    height: 30px;
+    width: 120px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+  }
+  .nodetails {
+    position: relative;
+    top: -178px;
+    text-align: center;
+    height: 30px;
+    cursor: pointer;
+    width: 120px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+  }
+
+  .showHiddenBlock4:hover {
+    background-color: #7FCCF7;
+  }
+
+  .nodetails:hover {
+    background-color: #7FCCF7;
+  }
+
+  .initiallyHiddenBlock3 {
+    position: relative;
+    top: -44px;
+    right: -800px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 115%;
+    width: 120px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    z-index:100;
+    text-align: center;
+  }
+
+  .answerline {
+    position: relative;
+    top: -178px;
+    width: 640px;
+    border:none;
+    border-top:1px black;
+    color: black;
+    background-color: black;
+    height:1px;
+    z-index:99;
+  }
+  .answeravatar {
+    position: relative;
+    top: -133px;
+  }
+  #advisetext {
+    position: relative;
+    height: 30px;
+    top: -202px;
+    left: 38px;
+    width: 94.25%;
+    padding: 5px 10px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 90%;
+  }
+  .createcomment {
+    position: relative;
+    top: -202px;
+    left: 518px;
+    text-align: center;
+    cursor: pointer;
+    height: 30px;
+    width: 120px;
+    border: 1px solid black;
+    background-color: #bee5fb;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+  }
+  .createcomment:hover {
+    background-color: #7FCCF7;
+  }
+  .iftherearedetails {
+    position: relative;
+    top: -20px;
+  }
+
+  #autocomplete {
+    position: absolute;
+    left: 269px;
+    top:9px;
+    padding-top: 0px;
+    padding-left: 10px;
+    height: 30px;
+    width: 120px;
+    color: black;
+  }
+  .label {
+    text-align: right;
+    font-weight: bold;
+    width: 100px;
+    color: #303030;
+  }
+  #inputtext {
+    position: absolute;
+    height: 30px;
+    top: 44px;
+    left: 10px;
+    width: 638px;
+    padding: 5px 10px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 90%;
+   }
+  #inputtextDetails {
+    position: absolute;
+    height: 90px;
+    top: 89px;
+    left: 10px;
+    width: 638px;
+    padding: 5px 10px;
+    -webkit-appearance: none;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 90%;
+  }
+  .moneyinput {
+    position: absolute;
+    z-index:100;
+    height: 30px;
+    top: 184px;
+    left: 10px;
+    width: 120px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 90%;
+  }
+  .dollarsign {
+    width: 10px;
+    position: absolute;
+    left: 15px;
+    top: 194px;
+    height: 30px;
+    z-index:100;
+
+  }
+  #datepicker {
+    position: absolute;
+    top: -11px;
+    left: -1px;
+    z-index: 100;
+    right: 80px;
+    width: 120px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 90%;
+    height: 30px;
+    color: black;
+  }
+  .line {
+    position: relative;
+    top: 260px;
+    left: 360px;
+    width: 660px;
+    border:none;
+    border-top:1px dashed black;
+    color:#fff;
+    background-color:#fff;
+    height:1px;
+  }
+
+  input[type=submit], input[type=text], input[type=file], input[type=textArea] {
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    -webkit-appearance: none;
+    border-radius: 0;
+    border: 1px solid black;
+  }
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: black;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 76%;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: black;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 76%;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: black;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 76%;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: black;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 76%;
+  }
+  .createadventurebutton {
+    background-color: #4CAF50;
+    border: none;
     color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    position: absolute;
+    top: 184px;
+    left: 526px;
+    width: 120px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    height: 30px;
   }
-%ul@adventure.details
-  %li
-    Number of people:
-    = @adventure.number_of_people
-  %li
-    Action or Adventure:
-    = @adventure.action_adventure
-  %li
-    Country:
-    = @adventure.country
-  %li
-    City:
-    = @adventure.city
-  %li
-    Description:
-    = @adventure.description
-  %li
-    Offer:
-    = number_to_currency(@adventure.price)
-  %li
-    Scheduled for:
-    = @adventure.adventure_date.strftime("%B %d, %Y")
-%br/
-%h5
-  = @adventure.comments.count
-  Comments
-%h4
-  = render @adventure.comments
-%h3 Add a Comment:
-= render 'comments/form'
 
-= link_to '<i class="big write icon"></i>'.html_safe, edit_adventure_path(@adventure)
-= link_to '<i class="big reply icon"></i>'.html_safe, adventures_path
-= link_to '<i class="big trash outline icon"></i>'.html_safe, adventure_path(@adventure), :method => :delete
+  .button4 {
+    position: absolute; !important;
+    top: 364px; !important;
+    left: 500px;
+    z-index: 201;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    color: #303030;!important;
+    border: none; !important;
+    border-top-right-radius: 5px; !important;
+    border-bottom-right-radius: 5px; !important;
+    height: 40px; !important;
+    width: 70px; !important;
+  }
 
+  .button4:hover {
+      background-color: #e7e7e7; !important;
+  }
+
+  .container-1 .styled{
+    position: absolute;
+    left: 360px;
+    top: 364px;
+    z-index:100;
+    height: 30px;
+    width: 120px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 90%;
+  }
+
+  .container-1 .styled:hover, .container-1 .styled:focus, .container-1 .styled:active{
+    outline:none; !important;
+    background-color: #e7e7e7; !important;
+  }
+
+  .adventurelist {
+    position: absolute;
+  }
+  .btn-new {
+    -webkit-appearance: none;
+    border-radius: 0;
+    border: 1px solid black;
+    color: black;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    height: 30px;
+    z-index: 200;
+    font-size: 76%;
+    outline: none;
+  }
+  .selectbuttonone {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    z-index: 200;
+  }
+  .selectbuttontwo {
+    position: absolute;
+    top: 9px;
+    left: 140px;
+    z-index: 200;
+  }
+
+
+
+
+
+
+
+
+:javascript
+  var detailsvar = false;
+  var answers = false;
+  var advise = false;
+  $(document).ready(function() {
+      $('.showHiddenBlock').click(function() {
+        detailsvar = !detailsvar;
+        $(this).parent().children('.initiallyHiddenBlock').slideToggle(1000);
+      });
+  });
+
+  $(document).ready(function() {
+      $('.showHiddenBlock2').click(function() {
+          answers = !answers;
+          $(this).parent().children('.initiallyHiddenBlock2').slideToggle(1000);
+      });
+  });
+    $(document).ready(function() {
+      $('.noanswers').click(function() {
+          answers = !answers;
+          $(this).parent().children('.initiallyHiddenBlock2').slideToggle(1000);
+      });
+  });
+
+  $(document).ready(function() {
+      $('.showHiddenBlock4').click(function() {
+          advise = !advise;
+          $(this).parent().children('.initiallyHiddenBlock4').slideToggle(1000);
+      });
+  });
+    $(document).ready(function() {
+      $('.nodetails').click(function() {
+          advise = !advise;
+          $(this).parent().children('.initiallyHiddenBlock4').slideToggle(1000);
+      });
+  });
+
+  $(document).ready(function() {
+      $('.slideHideToggle').click(function() {
+        $(this).parent().children('.HideShow').slideToggle(1000);
+        });
+  });
+  $( function() {
+    $( ".showHiddenBlock" ).on( "click", function() {
+      if (answers == false && advise == false) {
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+      }
+    });
+  } );
+
+  $( function() {
+    $( ".showHiddenBlock2" ).on( "click", function() {
+      if (detailsvar == false && advise == false) {
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+      }
+    });
+  } );
+  $( function() {
+    $( ".noanswers" ).on( "click", function() {
+      if (detailsvar == false && advise == false) {
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+      }
+    });
+  } );
+
+  $( function() {
+    $( ".showHiddenBlock4" ).on( "click", function() {
+      if (answers == false && detailsvar == false) {
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+      }
+    });
+  } );
+    $( function() {
+    $( ".nodetails" ).on( "click", function() {
+      if (answers == false && detailsvar == false) {
+        $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle", 1000 );
+      }
+    });
+  } );
+
+  $( function() {
+    $( ".showHiddenBlock3" ).on( "click", function() {
+      $(this).parent().children( ".editdeletecover" ).toggleClass( "editdeletecoverremoved", 100 );
+    });
+  } );
+
+.adventurelist
+  .singularadventure.singularadventureontoggle
+    .editdeletecoverremoved.editdeletecover
+    .avatar
+    - if @adventure.user.avatar_url.to_s != ''
+      %a.img.ui.circular.avatar.image{:href => user_path(@adventure.user.id)}
+        %img{:src => @adventure.user.avatar_url.to_s}/
+    - else
+      %a.img.ui.circular.avatar.image{:href => user_path(@adventure.user.id)}
+        = image_tag "logos/user.png"
+    .descriptionsecondary
+      #{link_to "#{@adventure.user.first_name}", user_path(@adventure.user.id)} from #{@adventure.user.city_of_residence} posted #{time_ago_in_words(@adventure.created_at)} ago
+      %p needs #{@adventure.action_adventure} in #{@adventure.city},  #{@adventure.country} on #{@adventure.adventure_date.strftime("%B %d, %Y")}:
+    .adventureprice
+      - if @adventure.price != 0
+        $#{@adventure.price}
+      - else
+        FREE
+    .editdelete
+      - if user_signed_in? && @adventure.completed != true
+        - if @adventure.user.id == current_user.id
+          #{link_to "EDIT", edit_adventure_path(@adventure)}
+          #{link_to "DELETE", adventure_path(@adventure), :method => :delete}
+
+    .descriptionpart
+      #{@adventure.description}
+    - if @adventure.details != ""
+      .initiallyHiddenBlock
+        #{@adventure.details}
+      .showHiddenBlock
+        %i.angle.down.icon
+      .detailslineone
+      .detailslinetwo
+    .showHiddenBlock3
+      = image_tag "logos/dots.png", width: '30px'
+    - if @adventure.details != ""
+      .showHiddenBlock2
+        Other Answers(#{@adventure.comments.count})
+    - else
+      .noanswers
+        Other Answers(#{@adventure.comments.count})
+    .initiallyHiddenBlock2
+      - @adventure.comments.each do |c|
+        = render c
+    - if user_signed_in?
+      - if @adventure.user.id != current_user.id && @adventure.comments.find_by(:user_id =>current_user.id) == nil && @adventure.completed != true
+        - if @adventure.details != ""
+          .showHiddenBlock4
+            ANSWER
+        - else
+          .nodetails
+            ANSWER
+        .initiallyHiddenBlock4
+          - if @adventure.details != ""
+            .iftherearedetails
+              .answerline
+              .answeravatar
+                - if current_user.avatar_url.to_s != ''
+                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                    %img{:src => current_user.avatar_url.to_s}/
+                - else
+                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                    = image_tag "logos/user.png"
+              = form_for([@adventure,@adventure.comments.build]) do |f|
+                %p
+                  = text_area :comment, :body, :id => "advisetext"
+                  %button.createcomment
+                    POST
+          - else
+            .answerline
+            .answeravatar
+              - if current_user.avatar_url.to_s != ''
+                %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                  %img{:src => current_user.avatar_url.to_s}/
+              - else
+                %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                  = image_tag "logos/user.png"
+            = form_for([@adventure,@adventure.comments.build]) do |f|
+              %p
+                = text_area :comment, :body, :id => "advisetext"
+                %button.createcomment
+                  POST
