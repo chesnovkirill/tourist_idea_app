@@ -21,3 +21,8 @@
 /yarn-error.log
 
 .byebug_history
+.env
+Procfile
+
+# Ignore application configuration
+/config/application.yml

@@ -14,8 +14,10 @@ class ChatRoomsController < ApplicationController
     end
     
     def create_msg
+        @user = User.find(ChatRoom.find(params[:chat_room_id]).host_id)
         msg = ChatRoom.find(params[:chat_room_id]).messages.build(body: params[:message][:body], user: current_user)
         msg.save
+        UserMailer.welcome_email(@user).deliver
         redirect_to chat_room_path(params[:chat_room_id])
     end
     

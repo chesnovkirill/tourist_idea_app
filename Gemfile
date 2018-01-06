@@ -53,6 +53,8 @@ gem 'geokit-rails'
 gem 'ransack'
 gem 'omniauth-facebook' # Facebook authentication
 gem 'koala'
+gem 'mail'
+gem 'figaro'
 
 
 group :development, :test do

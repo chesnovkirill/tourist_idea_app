@@ -480,8 +480,8 @@
     #datepicker {
       position: absolute;
       top: -11px;
-      left: -1px;
-      z-index: 100;
+      left: -81px;
+      z-index: 200;
       right: 80px;
       width: 120px;
       font-family: 'pproxima_nova_ltthin', sans-serif;
@@ -590,6 +590,12 @@
 
     .adventurelist {
       position: absolute;
+    }
+    .showup {
+      position: absolute;
+      top: 0px;
+      left: 400px;
+      z-index: 300;
     }
 
 %body
@@ -747,6 +753,8 @@
   var detailsvar = false;
   var answers = false;
   var advise = false;
+  var url = window.location.href.split(".");
+  var res = url[url.length-1]
   $(document).ready(function() {
       $('.showHiddenBlock').click(function() {
         detailsvar = !detailsvar;
@@ -829,11 +837,18 @@
     });
   } );
 
+  $( document ).ready(function() {
+    $( "input[value=res]").scrollIntoView();
+  });
+
+
+
+
 .adventurelist
   - @adventures.sort {|a,b| b.created_at <=> a.created_at }.each do |ad|
     #myUL
 
-      .singularadventure.singularadventureontoggle
+      #fff.singularadventure.singularadventureontoggle
         .editdeletecoverremoved.editdeletecover
         .avatar
         - if ad.user.avatar_url.to_s != ''
@@ -932,9 +947,19 @@
                   - else
                     %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
                       = image_tag "logos/user.png"
-                = form_for([ad,ad.comments.build]) do |f|
+                    #thankyouModal.modal.fade{:role => "dialog", :tabindex => "-1"}
+                      .modal-dialog
+                        .modal-content
+                          .modal-header
+                            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+                            %h4#myModalLabel.modal-title Thank you for pre-registering!
+                          .modal-body
+                            %p Thanks for getting in touch!
+
+                = form_tag [ad,ad.comments.build] do
                   %p
                     = text_area :comment, :body, :id => "advisetext"
+
                     /- if current_user.capabilities
                     / %p
                     /   Choose which of your capabilities to include:
@@ -958,6 +983,9 @@
                     /  = f.label :price, 'I would like to get'
                     /  = f.number_field :price, value: ad.price
                     /  instead
-                    %button.createcomment
-                      POST
-        = link_to "Details", adventure_path(ad)
+                    .mymodalgo
+                      %button.createcomment
+                        POST
+        .showup
+          = link_to "Details", adventure_path(ad)
+        %input{:name => "adventure[name]", :type => "hidden", :value => "#{ad.id}"}/

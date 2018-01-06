@@ -654,6 +654,7 @@
   } );
 
 .adventurelist
+  = link_to 'Back to adventure list', adventures_path(@adventure.id)
   .singularadventure.singularadventureontoggle
     .editdeletecoverremoved.editdeletecover
     .avatar
