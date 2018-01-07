@@ -20,31 +20,38 @@
       }
 
       .logostyle {
-        position: relative;
-        top: 66px;
-        left: 361px;
-        border: 1px solid white;
         color: white;
+        background-color: #414141;
         width: 140px;
-        height: 30px;
+        text-align: center;
+        padding-top: 7.5px;
+        padding-bottom: 7.5px;
         z-index: 110;
-        padding-left: 31px;
-        padding-right: 31px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        font-size: 15px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
       }
       .new_message {
         font-size: 33px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
         text-transform: uppercase;
+        position: relative;
+        top: 14px;
+
+      }
+
+      .make_contact {
+        font-size: 33px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        text-transform: uppercase;
+        position: relative;
+        top: 30px;
       }
 
       .container {
         position: relative;
-        left: -10px;
-        top: -10px;
+        left: 50px;
+        top: 100px;
         width: 518px;
-        z-index: 200;
         background-color: white;
         padding: 10px;
         margin: 10px;
@@ -54,8 +61,10 @@
 
       .name {
         position: absolute;
-        top: 5px;
-        left: 40px;
+        top: -50px;
+        font-size: 33px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        text-transform: uppercase;
       }
       .timeposted {
         position: absolute;
@@ -74,7 +83,8 @@
         float:none;
         display:block;
         position: relative;
-        left: 30px;
+        top: 105px;
+        left: 2px;
         width: 520px;
         border:none;
         border-top:1px black;
@@ -86,8 +96,11 @@
 
       a.singularchat {
         position: relative;
+        top: 70px;
         height: 30px;
-        width: 320px;
+        width: 520px;
+        text-align: center;
+        left: -4px;
         padding: 5px 15px;
         -webkit-appearance: none;
         margin: 5px 0;
@@ -103,12 +116,28 @@
         z-index: 100;
       }
 
+       .info {
+        position: relative;
+        top: 10px;
+        width: 518px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        font-size: 12px;
+        color: grey;
+       }
+
   %body
     .logostyle T W I G S
+    .dividingline
     .new_message
-      NEW MESSAGE FROM #{@user2.first_name}
+      GOOD NEWS! #{@user2.first_name} ACCEPTED YOUR OFFER
+    .make_contact
+      CONTACT #{@user2.first_name}
     .container
       .name
-        = @user1.first_name
-      .dividingline
-      %a.singularchat{:href => 'https://staging-twigs.herokuapp.com'} ANSWER
+        = @user2.first_name
+      from #{@user2.city_of_residence}
+      .info
+        Mobile: #{@user2.contact_phone}
+        %br
+        Email: #{@user2.email}
+    %a.singularchat{:href => 'https://staging-twigs.herokuapp.com'} SEND MESSAGE

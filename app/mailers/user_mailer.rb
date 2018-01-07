@@ -18,6 +18,6 @@ class UserMailer < ApplicationMailer
         @user1 = user1
         @user2 = user2
         @url = 'http://www.google.com'
-        mail(to:@user1.email, subject: 'Your Answer Was Chosen on TWIGS')
+        mail(to:@user2.email, subject: 'Your Answer Was Chosen on TWIGS')
     end
 end

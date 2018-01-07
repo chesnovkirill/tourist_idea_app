@@ -20,31 +20,30 @@
       }
 
       .logostyle {
-        position: relative;
-        top: 66px;
-        left: 361px;
-        border: 1px solid white;
         color: white;
+        background-color: #414141;
         width: 140px;
-        height: 30px;
+        text-align: center;
+        padding-top: 7.5px;
+        padding-bottom: 7.5px;
         z-index: 110;
-        padding-left: 31px;
-        padding-right: 31px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        font-size: 15px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
       }
       .new_message {
         font-size: 33px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
         text-transform: uppercase;
+        position: relative;
+        top: 14px;
+
       }
 
       .container {
         position: relative;
         left: -10px;
-        top: -10px;
+        top: 10px;
         width: 518px;
-        z-index: 200;
         background-color: white;
         padding: 10px;
         margin: 10px;
@@ -74,7 +73,8 @@
         float:none;
         display:block;
         position: relative;
-        left: 30px;
+        top: 55px;
+        left: 2px;
         width: 520px;
         border:none;
         border-top:1px black;
@@ -87,7 +87,9 @@
       a.singularchat {
         position: relative;
         height: 30px;
-        width: 320px;
+        width: 520px;
+        text-align: center;
+        left: -4px;
         padding: 5px 15px;
         -webkit-appearance: none;
         margin: 5px 0;
@@ -105,8 +107,9 @@
 
   %body
     .logostyle T W I G S
+    .dividingline
     .new_message
-      NEW ANSWE FROM #{@user2.first_name}
+      NEW ANSWER FROM #{@user2.first_name}
     .container
       .name
         = @message.user.first_name
@@ -115,5 +118,4 @@
         #{@message.created_at}
       .textpart
         = @message.body
-      .dividingline
       %a.singularchat{:href => 'https://staging-twigs.herokuapp.com'} ANSWER

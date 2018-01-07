@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class UserMailerTest < ActionMailer::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+    def chatroom_email
+        UserMailer.chatroom_email(User.first, User.first)
+    end
 end
+
+
