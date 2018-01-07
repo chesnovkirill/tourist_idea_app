@@ -5,6 +5,9 @@ class CommentsController < ApplicationController
         @comment.user_id = current_user.id
         @name = @comment.user.first_name
         @comment.save
+        @user1 = @adventure.user
+        @user2 = current_user
+        UserMailer.comment_email(@user1, @user2, @comment).deliver
         redirect_to adventures_path
     end
     def destroy

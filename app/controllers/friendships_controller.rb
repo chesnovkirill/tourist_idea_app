@@ -27,10 +27,13 @@ class FriendshipsController < ApplicationController
         end
         current_user.save
         @adventure.update_attributes!(temp)
-        @chat_room = current_user.chat_rooms.build(user_id: current_user.id, host_id: User.find(params[:chat_room][:friend_id]).id)
+        @chat_room = current_user.chat_rooms.build(user_id: current_user.id, host_id: User.find(params[:chat_room][:friend_id]).id, adventure: params[:chat_room][:adventure_id])
         @chat_room.save
-        params.delete :friend_user_id
+        @user1 = Adventure.find(@chat_room.adventure).user
+        @user2 = current_user
+        UserMailer.chatroom_email(@user1, @user2).deliver
         params.delete :adventure_id
+        params.delete :friend_user_id
         redirect_to chat_room_path(@chat_room.id)
     end
     
