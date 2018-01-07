@@ -18,4 +18,5 @@
 //= require cable
 //= require gmaps-auto-complete
 //= require jquery.turbolinks
+//= require local-time
 //= require_tree .

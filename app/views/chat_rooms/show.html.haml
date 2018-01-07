@@ -1,10 +1,100 @@
-= render @chat_room.messages
-= form_for @message, url: chat_room_create_msg_path(@chat_room.id) do |f|
-  .form-group
-    = f.label :body
-    = f.text_area :body, class: 'form-control'
-    %small.text-muted From 2 to 1000 characters
-  = f.submit "Post", class: 'btn btn-primary btn-lg'
+:css
+  .messagebox {
+    position: absolute;
+    left: 501px;
+    top: 165px;
+    width: 520px;
+    height: 350px;
+    z-index: 200;
+    background-color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .newmessage {
+    position: absolute;
+    top: 400px;
+  }
+  .messagestitle {
+    text-transform: uppercase;
+    font-size: 33px;
+    position: absolute;
+    left: 498px;
+    top: 122px;
+  }
+
+  .titleline {
+    clear: both;
+    float:none;
+    display:block;
+    position: relative;
+    top: 54px;
+    left: 501px;
+    width: 520px;
+    border:none;
+    border-top:1px black;
+    color: black;
+    background-color: black;
+    height:1px;
+    z-index:99;
+  }
+
+  .formcontrol {
+    position: fixed;
+    z-index: 200;
+    height: 68px;
+    top: 515px;
+    left: 541px;
+    width: 480px;
+    padding: 5px 10px;
+    -webkit-appearance: none;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 90%;
+  }
+  .submitterbutton {
+    position: fixed;
+    left: 901px;
+    top: 588px;
+    height: 30px;
+    width: 120px;
+    padding: 5px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 13px;
+    background-color: #bee5fb;
+    z-index: 200;
+  }
+
+  .submitterbutton:hover {
+    background-color: #7FCCF7;
+    z-index: 200;
+  }
+
+.messagestitle
+  - if current_user.id == @user1
+    MESSAGES WITH #{@user2.first_name}
+  -else
+    MESSAGES WITH #{@user1.first_name}
+.titleline
+.messagebox
+  = render @chat_room.messages
+.newmessage
+  = form_for @message, url: chat_room_create_msg_path(@chat_room.id) do |f|
+    .form-group
+      = f.text_area :body, class: 'formcontrol'
+    = f.submit "SEND MESSAGE", class: 'submitterbutton'
 
 
 

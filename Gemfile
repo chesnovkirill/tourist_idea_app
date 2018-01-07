@@ -55,6 +55,7 @@ gem 'omniauth-facebook' # Facebook authentication
 gem 'koala'
 gem 'mail'
 gem 'figaro'
+gem 'local_time'
 
 
 group :development, :test do

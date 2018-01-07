@@ -5,7 +5,8 @@ Rails.application.routes.draw do
     devise_scope :user do
         get '/sign-in' => "devise/sessions#new", :as => :login
     end
-    resources :users, only: [:index, :show]
+    get '/users/:id', :to => 'users#show', :as => :user
+    resources :users, only: [:index]
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     resources :adventures do
       resources :comments

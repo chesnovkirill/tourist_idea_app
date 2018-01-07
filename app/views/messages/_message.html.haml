@@ -1,15 +1,63 @@
-.card
-  .card-block
-    .row
-      .col-md-1
-        - if message.user.avatar_url.to_s != ''
-          %a.img.ui.avatar.image{:href => user_path(message.user.id)}
-            %img{:src => message.user.avatar_url.to_s}/
-      .col-md-11
-        %p.card-text
-          %span.text-muted
-            = message.user.first_name
-            at #{message.timestamp} says
-          %br/
-          = message.body
+:css
+  .container {
+    position: relative;
+    left: -10px;
+    top: -10px;
+    width: 518px;
+    z-index: 200;
+    background-color: white;
+
+    padding: 10px;
+    margin: 10px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 12px;
+  }
+  .avatar {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+  }
+
+  .name {
+    position: absolute;
+    top: 5px;
+    left: 40px;
+  }
+  .timeposted {
+    position: absolute;
+    top: 5px;
+    left: 40px;
+  }
+  .textpart  {
+    position: relative;
+    width: 300px;
+    left: 142px;
+    top: -14px;
+    margin: 10px;
+  }
+  .dividingline {
+    clear: both;
+    float:none;
+    display:block;
+    position: relative;
+    left: 30px;
+    width: 520px;
+    border:none;
+    border-top:1px black;
+    color: black;
+    background-color: black;
+    height:1px;
+    z-index:99;
+  }
+.container
+  .avatar
+    %img{:href => user_path(message.user.id), :src => "/assets/logos/user.png", :width => "30"}
+  .name
+    = message.user.first_name
+  .timeposted
+    %br
+    #{local_time(message.timestamp, format: '%b %e, %Y %H:%M:%S')}
+  .textpart
+    = message.body
+  .dividingline
 
