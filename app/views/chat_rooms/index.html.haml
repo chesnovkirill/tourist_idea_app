@@ -1,13 +1,140 @@
-%h1 My Chats With Adventure Seekers
+:css
+  .messagestitle {
+    text-transform: uppercase;
+    font-size: 33px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    position: absolute;
+    left: 498px;
+    top: 122px;
+  }
 
-- ChatRoom.where(host_id: current_user.id).each do |c|
-  .ui.very.padded.segment
-    %p
-      = link_to "#{User.find(c.user_id).first_name}", chat_room_path(c.id)
+   .titleline {
+    clear: both;
+    float:none;
+    display:block;
+    position: relative;
+    top: 54px;
+    left: 501px;
+    width: 520px;
+    border:none;
+    border-top:1px black;
+    color: black;
+    background-color: black;
+    height:1px;
+    z-index:99;
+  }
+  .container {
+    position: absolute;
+    left: 501px;
+    top: 165px;
+    width: 520px;
+    height: 350px;
+    z-index: 200;
+    background-color: white;
+    overflow-y: scroll;
+  }
 
-%h1 My Chats With Hosts
+  .singularchat {
+    position: relative;
+    left: -5px;
+    top: 10px;
+    width: 518px;
+    height: 30px;
+    z-index: 200;
+    margin: -10px;
+    padding:0px;
+    float:left;
+  }
 
-- ChatRoom.where(user_id: current_user.id).each do |c|
-  .ui.very.padded.segment
-    %p
-      = link_to "#{User.find(c.host_id).first_name}", chat_room_path(c.id)
+  .name {
+    position: relative;
+    left: -7px;
+    top: -14px;
+    color: black;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 12px;
+    z-index: 300;
+    margin: 0px;
+    padding:0px;
+    float:left;
+  }
+
+  .avatar {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    top: -11px;
+    left: -15px;
+    z-index: 300;
+    margin: 0px;
+    padding: 0px;
+    float:left;
+
+  }
+
+  .last_message_at {
+    z-index: 100;
+    position: relative;
+    left: -30px;
+    top: 6px;
+    margin: 0px;
+    padding: 0px;
+    float:left;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 12px;
+  }
+
+  .last_message_text {
+    z-index: 100;
+    margin: 0px;
+    margin-top: -14px;
+    float:left;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 12px;
+    position: relative;
+    left: 30px;
+  }
+
+  .dividingline {
+    clear: both;
+    float:none;
+    display:block;
+    position: relative;
+    top: -6px;
+    left: 25px;
+    width: 520px;
+    border:none;
+    border-top:1px black;
+    color: black;
+    background-color: black;
+    height:1px;
+    z-index:99;
+  }
+.messagestitle
+  Messages
+.titleline
+.container
+  - @my_chat_rooms.sort {|a,b| b.created_at <=> a.created_at }.each do |c|
+    -if c.user_id == current_user.id
+      %a.singularchat{:href => chat_room_path(c.id)}
+      .avatar
+        %img{:href => user_path(c.host_id), :src => "/assets/logos/user.png", :width => "30"}
+      .name
+        #{User.find(c.host_id).first_name}
+      .last_message_at
+        #{local_time(c.messages.order("created_at").last.timestamp, format: '%b %e, %Y')}
+      .last_message_text
+        #{c.messages.order("created_at").last.body}
+      .dividingline
+    -else
+      %a.singularchat{:href => chat_room_path(c.id)}
+      .avatar
+        %img{:href => user_path(c.user_id), :src => "/assets/logos/user.png", :width => "30"}
+      .name
+        #{User.find(c.user_id).first_name}
+      .last_message_at
+        #{local_time(c.messages.order("created_at").last.timestamp, format: '%b %e, %Y')}
+      .last_message_text
+        #{c.messages.order("created_at").last.body}
+      .dividingline
+

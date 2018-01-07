@@ -1,6 +1,7 @@
 class ChatRoomsController < ApplicationController
     def index
         @chat_rooms = ChatRoom.all
+        @my_chat_rooms = ChatRoom.where(host_id: current_user.id).or(ChatRoom.where(user_id: current_user.id))
     end
     
     def create
@@ -19,9 +20,9 @@ class ChatRoomsController < ApplicationController
         msg = ChatRoom.find(params[:chat_room_id]).messages.build(body: params[:message][:body], user: current_user)
         msg.save
         if current_user.id == @user2.id
-            UserMailer.welcome_email(@user1).deliver
+            UserMailer.welcome_email(@user1, @user2, msg).deliver
             else
-            UserMailer.welcome_email(@user2).deliver
+            UserMailer.welcome_email(@user2, @user1, msg).deliver
         end
         redirect_to chat_room_path(params[:chat_room_id])
     end
