@@ -4,6 +4,88 @@
 %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css", :rel => "stylesheet", :type => "text/css"}/
 %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"}
 %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"}
+:css
+  .mybox {
+    position: relative;
+    top: -158px;
+    left: 0px;
+    width: 640px;
+    z-index: 200;
+    float: left;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 12px;
+  }
+  .upperline {
+    width: 640px;
+    position: relative;
+    left: 0px;
+    top: -168px;
+    border:none;
+    border-top:1px black;
+    margin-top: 32px;
+    color: black;
+    background-color: black;
+    height:1px;
+    z-index:99;
+    float: left;
+  }
+  .username {
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 12px;
+    float: left;
+  }
+  .avatarka {
+    width: 32px;
+    height: 32px;
+    top: -10px;
+    z-index: 300;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+  }
+  .commentbodymessage {
+    position: relative;
+    top: 8px;
+    left: -1px;
+    width: 640px;
+    z-index: 200;
+    background-color: white;
+    padding: 10px;
+    margin: px;
+    float: left;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 12px;
+    border: 1px solid black;
+  }
+
+  button.choosethisguide {
+    position: relative;
+    left: 519px;
+    top: 13px;
+    height: 30px;
+    width: 120px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 14px;
+    background-color: #bee5fb;
+    z-index: 400;
+    float: left;
+  }
+
+  button.choosethisguide:hover {
+    background-color: #7FCCF7;
+  }
+
+
 :javascript
   $(document).ready(function(){
     $(".mymodalg").click(function(){
@@ -12,67 +94,46 @@
   });
 
 %body
-  %h2
-    - if comment.user.first_name
-      #{link_to "#{comment.user.first_name}", user_path(comment.user.id)}
-    - else
-      #{link_to "Anon", user_path(comment.user.id)}
-  %p
-    = comment.body
-  - if comment.user.capabilities != nil || comment.capabilities != ""
-    %p
-      - if comment.user.capabilities != ""
-        - if comment.user.first_name
-          #{comment.user.first_name}'s capabilities:
-        - else
-          Anon's capabilities:
-        #{comment.user.capabilities}
-        = comment.capabilities
-  - if comment.price == comment.adventure.price
-    -if comment.user.first_name
-      #{comment.user.first_name} agrees with #{comment.adventure.action_adventure}-seeker's offer
-    - else
-      Anon agrees with #{comment.adventure.action_adventure}-seeker's offer
-  - else
-    -if comment.user.first_name
-      #{comment.user.first_name} would like to get #{comment.price} instead
-    - else
-      Anon would like to get #{comment.price} instead
-  - if comment.image_urls.to_s != '[]'
-    %p
-      %img.ui.big.image{:src => comment.image_urls.to_s}/
-  %h4
-  Created
-  = time_ago_in_words(comment.created_at)
-  ago, on
-  = comment.created_at.strftime("%D")
-  - if user_signed_in?
-    - if comment.user.id != current_user.id && comment.user.id != comment.adventure.user.id && current_user.id == comment.adventure.user.id && comment.adventure.completed != true
-      .mymodalg
-        %button.ui.button Choose This Guide
-      .ui.container
-        .ui.modal
-          %i.close.icon
-          .header
-            Choose Payment Method:
-          .content
-            %p
-            %h2
-              We apologise, but online payment is currently under construction. Please give the money to your guide in person.
-            = form_for :chat_room, method: :post, url: friendships_path, class: 'btn btn-primary'  do |f|
-              = f.hidden_field :host_name, value: comment.user.first_name
-              = f.hidden_field :friend_id, value: comment.user.id
-              = f.hidden_field :adventure_id, value: comment.adventure.id
-              %b
-              .two.ui.buttons
-                %button.massive.ui.left.attached.button
-                  %i.money.icon
-                  Pay in Person
-                %button.massive.ui.disabled.right.attached.button
-                  %i.credit.card.alternative.icon
-                  Pay Online
-  - if user_signed_in?
-    - if comment.adventure.user_id == current_user.id || comment.user_id == current_user.id
-      %p
-        = link_to 'Delete', [comment.adventure,comment], method: :delete, data: { confirm: 'Are you sure?' }
+  .upperline
+  .mybox
+    .avatarka
+      %img{:href => user_path(comment.user.id), :src => "/assets/logos/user.png", :width => "30"}
+    .username
+      #{link_to "#{comment.user.first_name}", user_path(comment.user.id)} from #{comment.user.city_of_residence} answered #{time_ago_in_words(local_time(comment.created_at))} ago:
+    .commentbodymessage
+      = comment.body
+    - if user_signed_in?
+      - if comment.user.id != current_user.id && comment.user.id != comment.adventure.user.id && current_user.id == comment.adventure.user.id && comment.adventure.completed != true
+        .mymodalg
+          %button.choosethisguide CHOOSE & PAY
+        .ui.container
+          .ui.modal
+            %i.close.icon
+            .header
+              Choose Payment Method:
+            .content
+              %p
+              %h2
+                We apologise, but online payment is currently under construction. Please give the money to your guide in person.
+              = form_for :chat_room, method: :post, url: friendships_path, class: 'btn btn-primary'  do |f|
+                = f.hidden_field :host_name, value: comment.user.first_name
+                = f.hidden_field :friend_id, value: comment.user.id
+                = f.hidden_field :adventure_id, value: comment.adventure.id
+                %b
+                .two.ui.buttons
+                  %button.massive.ui.left.attached.button
+                    %i.money.icon
+                    Pay in Person
+                  %button.massive.ui.disabled.right.attached.button
+                    %i.credit.card.alternative.icon
+                    Pay Online
+    - if user_signed_in?
+      - if comment.adventure.user_id == current_user.id || comment.user_id == current_user.id
+        %p
+          .dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: -160px; top: 105px; cursor: pointer; z-index: 500;"}
+              %img{:src => "/assets/logos/dots.png", :width => "30",}/
+            .dropdown-menu.ooooo{"aria-labelledby" => "dropdownMenuButton", :style => "-webkit-appearance: none; position: absolute; left: 160px;, width: 90px; padding: 0; margin: 0;"}
+              = link_to 'DELETE COMMENT', [comment.adventure,comment], method: :delete, :style=>'-webkit-appearance: none; color:black; margin: 10px; text-align: center; float: left;',data: { confirm: 'Are you sure?' }
+
 

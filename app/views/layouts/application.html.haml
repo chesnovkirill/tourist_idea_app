@@ -57,7 +57,7 @@
       position: relative; !important;
       left: 600px;
     }
-    a.dropdown-item {
+    .dropdown-item.some {
       position: relative; !important;
       left: 1100px;
       top: 30px;
@@ -204,11 +204,11 @@
             %button#menu1.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", :type => "button"}
               %img{:src => "/assets/logos/user.png", :width => "30",}/
             #drpdwn.dropdown-menu.ooo{"aria-labelledby" => "dropdownMenuButton"}
-              %a.dropdown-item{:href => user_path(current_user.id)} My Profile
-              %a.dropdown-item{:href => edit_user_registration_path} Edit Profile
+              %a.dropdown-item.some{:href => user_path(current_user.id)} My Profile
+              %a.dropdown-item.some{:href => edit_user_registration_path} Edit Profile
               - if current_user.admin
-                %a.dropdown-item{:href => users_path} User List
-              %a.dropdown-item{:href => destroy_user_session_path, :method => :get} Log Out
+                %a.dropdown-item.some{:href => users_path} User List
+              %a.dropdown-item.some{:href => destroy_user_session_path, :method => :get} Log Out
         - else
           %a.sup{:href => new_registration_path(resource_name)} Sign up
           .dropdown

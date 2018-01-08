@@ -68,6 +68,8 @@
       }
       .initiallyHiddenBlock2 {
           display: none;
+          position: relative;
+          top: 131px;
       }
       .initiallyHiddenBlock3 {
           display: none;
@@ -112,12 +114,12 @@
         top: 308px;
         left: 350px;
         width: 660px;
-        height: auto;
         background-color: #bee5fb;
         border: 1px solid black;
         padding: 10px;
         margin: 10px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
+        float: left;
       }
       .singularadventureontoggle {
         position: relative;
@@ -130,34 +132,37 @@
         padding: 10px;
         margin: 10px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
+        float: left;
       }
 
 
       .avatar {
         position: relative;
-        top: -35px;
+        z-index: 200;
       }
 
       .descriptionsecondary {
-        position: relative;
-        left: 38px;
-        top: -68px;
+        position: absolute;
+        left: 48px;
+        top: 5px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
         font-size: 90%;
       }
       .descriptionpart {
-        position: relative;
-        top: -127px;
+        position: absolute;
+        top: 48px;
+        left: 10px;
+        float: left;
         border: 1px solid black;
         height: 30px;
-        width: 100%;
+        width: 638px;
         background-color: white;
         padding: 5px 10px;
       }
       .adventureprice {
         position: relative;
-        top: -99px;
-        right: -518px;
+        top: -28px;
+        left: 518px;
         border: 1px solid black;
         height: 30px;
         width: 120px;
@@ -169,8 +174,9 @@
 
       .detailslineone {
         position: relative;
-        top: -136px;
-        width: 315px;
+        top: 0px;
+        left: 1;
+        width: 315.5px;
         border:none;
         border-top:1px black;
         color: black;
@@ -181,9 +187,9 @@
 
       .detailslinetwo {
         position: relative;
-        top: -137px;
-        right: -322px;
-        width: 316px;
+        top: -1px;
+        left: 322.5px;
+        width: 315.5px;
         border:none;
         border-top:1px black;
         color: black;
@@ -194,7 +200,7 @@
 
       .initiallyHiddenBlock {
         position: relative;
-        top: -117px;
+        top: 20px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
         font-size: 115%;
         width: 100%;
@@ -208,51 +214,24 @@
       .showHiddenBlock {
         position: relative;
         cursor: pointer;
-        top: -124px;
-        right: -310px;
+        top: 12px;
+        left: 311px;
         z-index:99;
-      }
-      .editdeletecover {
-        position: relative;
-        right: -702px;
-        top: 89px;
-        background-color: white;
-        height: 35px;
-        width: 70px;
-        z-index:99;
-      }
-
-      .editdeletecoverremoved {
-        position: relative;
-        right: -655px;
-        top: 89px;
-        background-color: white;
-        z-index:101;
-        height: 35px;
-        width: 70px;
-      }
-      .editdelete {
-        position: relative;
-        top: -40px;
-        right: -650px;
-        height: 35px;
-        width: 70px;
-        z-index:100;
-        text-align: center;
       }
 
       .showHiddenBlock2 {
         position: relative;
-        top: -157px;
+        top: -20px;
         left: 130px;
         text-align: center;
         cursor: pointer;
         height: 30px;
         width: 120px;
-        padding: 5px 10px;
+        padding: 5px;
         margin-bottom: 10px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
-        font-size: 90%;
+        font-size: 10px;
+        border: 1px solid black;
         z-index:99;
       }
       .showHiddenBlock2:hover {
@@ -260,16 +239,17 @@
       }
       .noanswers {
         position: relative;
-        top: -136px;
+        top: -5px;
         left: 130px;
         text-align: center;
         cursor: pointer;
         height: 30px;
         width: 120px;
-        padding: 5px 10px;
+        padding: 5px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
-        font-size: 90%;
+        font-size: 10px;
         margin-bottom: 10px;
+        border: 1px solid black;
         z-index:99;
       }
       .noanswers:hover {
@@ -287,7 +267,7 @@
 
       .showHiddenBlock4 {
         position: relative;
-        top: -197px;
+        top: -60px;
         text-align: center;
         cursor: pointer;
         height: 30px;
@@ -298,7 +278,7 @@
       }
       .nodetails {
         position: relative;
-        top: -178px;
+        top: -45px;
         text-align: center;
         height: 30px;
         cursor: pointer;
@@ -317,7 +297,7 @@
       }
 
       .initiallyHiddenBlock3 {
-        position: relative;
+        position: absolute;
         top: -44px;
         right: -800px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
@@ -383,7 +363,7 @@
       }
       .iftherearedetails {
         position: relative;
-        top: -20px;
+        top: 118px;
       }
 
 
@@ -623,6 +603,11 @@
       left: 140px;
       z-index: 200;
     }
+
+    .dropdown-menu.ooohoo {
+      position: absolute;
+      left: 320px;
+    }
   .new_adventure
     = form_tag adventures_path, :method => :post do
       %script{:src => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"}
@@ -831,11 +816,7 @@
     });
   } );
 
-  $( function() {
-    $( ".showHiddenBlock3" ).on( "click", function() {
-      $(this).parent().children( ".editdeletecover" ).toggleClass( "editdeletecoverremoved");
-    });
-  } );
+
 
   $( document ).ready(function() {
     $( "input[value=res]").scrollIntoView();
@@ -849,7 +830,6 @@
     #myUL
 
       #fff.singularadventure.singularadventureontoggle
-        .editdeletecoverremoved.editdeletecover
         .avatar
         - if ad.user.avatar_url.to_s != ''
           %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
@@ -865,12 +845,6 @@
             $#{ad.price}
           - else
             FREE
-        .editdelete
-          - if user_signed_in? && ad.completed != true
-            - if ad.user.id == current_user.id
-              #{link_to "EDIT", edit_adventure_path(ad)}
-              #{link_to "DELETE", adventure_path(ad), :method => :delete}
-
         .descriptionpart
           #{ad.description}
         - if ad.details != ""
@@ -880,14 +854,48 @@
             %i.angle.down.icon
           .detailslineone
           .detailslinetwo
-        .showHiddenBlock3
-          = image_tag "logos/dots.png", width: '30px'
         - if ad.details != ""
-          .showHiddenBlock2
-            Other Answers(#{ad.comments.count})
+          .editdelete
+            - if user_signed_in? && ad.completed != true
+              .dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 480px; top: 10px; cursor: pointer;"}
+                  %img{:src => "/assets/logos/dots.png", :width => "30",}/
+                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton"}
+                  - if ad.user.id == current_user.id
+                    = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+                    = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;',data: { confirm: 'Are you sure?' }
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+                  -else
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+                    = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+        -else
+          .editdelete
+            - if user_signed_in? && ad.completed != true
+              .dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 480px; top: 30px; cursor: pointer;"}
+                  %img{:src => "/assets/logos/dots.png", :width => "30",}/
+                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton"}
+                  - if ad.user.id == current_user.id
+                    = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+                    = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;',data: { confirm: 'Are you sure?' }
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+                  -else
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+                    = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+        - if ad.details != ""
+          -if user_signed_in? && ad.user.id == current_user.id
+            .showHiddenBlock2
+              ANSWERS(#{ad.comments.count})
+          -else
+            .showHiddenBlock2
+              OTHER ANSWERS(#{ad.comments.count})
         - else
-          .noanswers
-            Other Answers(#{ad.comments.count})
+          -if user_signed_in? && ad.user.id == current_user.id
+            .noanswers
+              ANSWERS(#{ad.comments.count})
+          -else
+            .noanswers
+              OTHER ANSWERS(#{ad.comments.count})
         .initiallyHiddenBlock2
           - ad.comments.each do |c|
             = render c
@@ -986,6 +994,4 @@
                     .mymodalgo
                       %button.createcomment
                         POST
-        .showup
-          = link_to "Details", adventure_path(ad)
         %input{:name => "adventure[name]", :type => "hidden", :value => "#{ad.id}"}/
