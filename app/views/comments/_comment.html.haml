@@ -102,7 +102,7 @@
     .commentbodymessage
       = comment.body
     - if user_signed_in?
-      - if comment.adventure.user_id == current_user.id || comment.user_id == current_user.id
+      - if (comment.adventure.user_id == current_user.id || comment.user_id == current_user.id) && comment.adventure.completed != true
         %p
           .dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "padding: 20px; cursor: pointer; z-index: 500; position: relative; float: left; left: 460px;"}
