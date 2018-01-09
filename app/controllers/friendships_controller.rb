@@ -1,6 +1,7 @@
 class FriendshipsController < ApplicationController
     def create
-        if !current_user.friendships.find_by(:friend_user_id => params[:chat_room][:friend_id])
+        if !current_user.friendships.find_by(:friend_user_id => params[:chat_room][:friend_id]) &&
+            !current_user.friendships.find_by(:user_id => params[:chat_room][:friend_id])
             @friendship1 = current_user.friendships.build(:friend_user_id => User.find(params[:chat_room][:friend_id]))
             t = User.find(params[:chat_room][:friend_id])
             @friendship2 = t.friendships.build(:friend_user_id => current_user.id)
