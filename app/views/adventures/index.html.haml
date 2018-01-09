@@ -369,6 +369,10 @@
         top: -15px;
       }
 
+      .fillvoid {
+        margin: 30px;
+      }
+
 
 
 %head
@@ -871,6 +875,8 @@
                   -else
                     = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
                     = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+            -else
+              .fillvoid
         -else
           .editdelete
             - if user_signed_in? && ad.completed != true
@@ -885,6 +891,8 @@
                   -else
                     = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
                     = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+            -else
+              .fillvoid
         - if ad.details != ""
           -if user_signed_in? && ad.user.id == current_user.id
             .showHiddenBlock2
