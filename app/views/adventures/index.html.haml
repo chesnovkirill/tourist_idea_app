@@ -70,12 +70,15 @@
           display: none;
           position: relative;
           top: 131px;
+
       }
       .initiallyHiddenBlock3 {
           display: none;
       }
       .initiallyHiddenBlock4 {
           display: none;
+          position: relative;
+          top: 173px;
       }
 
       .a.variable {
@@ -274,7 +277,7 @@
         width: 120px;
         border: 1px solid black;
         padding: 5px 10px;
-        margin-bottom: 10px;
+        float: left;
       }
       .nodetails {
         position: relative;
@@ -285,7 +288,7 @@
         width: 120px;
         border: 1px solid black;
         padding: 5px 10px;
-        margin-bottom: 10px;
+        float: left;
       }
 
       .showHiddenBlock4:hover {
@@ -363,7 +366,7 @@
       }
       .iftherearedetails {
         position: relative;
-        top: 118px;
+        top: -15px;
       }
 
 
@@ -860,28 +863,28 @@
               .dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 480px; top: 10px; cursor: pointer;"}
                   %img{:src => "/assets/logos/dots.png", :width => "30",}/
-                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton"}
+                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 35px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;   width: 60px; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
                   - if ad.user.id == current_user.id
-                    = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
-                    = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;',data: { confirm: 'Are you sure?' }
-                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+                    = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                    = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;',data: { confirm: 'Are you sure?' }
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
                   -else
-                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
-                    = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                    = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
         -else
           .editdelete
             - if user_signed_in? && ad.completed != true
               .dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 480px; top: 30px; cursor: pointer;"}
                   %img{:src => "/assets/logos/dots.png", :width => "30",}/
-                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton"}
+                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 55px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;  width: 60px;  color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
                   - if ad.user.id == current_user.id
-                    = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
-                    = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;',data: { confirm: 'Are you sure?' }
-                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+                    = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                    = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; width: 60px; text-align: center; float: left;',data: { confirm: 'Are you sure?' }
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
                   -else
-                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
-                    = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin: 10px; text-align: center; float: left;'
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                    = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
         - if ad.details != ""
           -if user_signed_in? && ad.user.id == current_user.id
             .showHiddenBlock2
@@ -913,10 +916,10 @@
                   .answerline
                   .answeravatar
                     - if current_user.avatar_url.to_s != ''
-                      %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                      %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -23px; left: -120px;"}
                         %img{:src => current_user.avatar_url.to_s}/
                     - else
-                      %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                      %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -23px; left: -10px;"}
                         = image_tag "logos/user.png"
                   = form_for([ad,ad.comments.build]) do |f|
                     %p
@@ -950,10 +953,10 @@
                 .answerline
                 .answeravatar
                   - if current_user.avatar_url.to_s != ''
-                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -23px; left: -120px;"}
                       %img{:src => current_user.avatar_url.to_s}/
                   - else
-                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id)}
+                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -23px; left: -120px;"}
                       = image_tag "logos/user.png"
                     #thankyouModal.modal.fade{:role => "dialog", :tabindex => "-1"}
                       .modal-dialog
