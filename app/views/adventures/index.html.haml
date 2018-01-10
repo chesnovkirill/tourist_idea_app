@@ -637,7 +637,7 @@
           %option{:value => "advice"} I NEED ADVICE
       .selectbuttontwo
         %select.selectpicker{:name => "adventure[number_of_people]", "data-style" => "btn-new", "data-width" => "120px"}
-          %option{:value => ""} ONLY ME
+          %option{:value => "only me"} ONLY ME
           %option{:value => "+1"} ME +1
           %option{:value => "+2"} ME +2
           %option{:value => "+3"} ME +3
@@ -856,7 +856,10 @@
           %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
             = image_tag "logos/user.png"
         .descriptionsecondary
-          #{link_to "#{ad.user.first_name}", user_path(ad.user.id)} #{ad.number_of_people} from #{ad.user.city_of_residence} posted #{time_ago_in_words(ad.created_at)} ago
+          #{link_to "#{ad.user.first_name}", user_path(ad.user.id)}
+          -if ad.number_of_people != "only me"
+            #{ad.number_of_people}
+          from #{ad.user.city_of_residence} posted #{time_ago_in_words(ad.created_at)} ago
           %p needs #{ad.action_adventure} in #{ad.city},  #{ad.country} on #{ad.adventure_date.strftime("%B %d, %Y")}:
         .adventureprice
           - if ad.price != 0
