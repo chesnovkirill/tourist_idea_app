@@ -5,31 +5,28 @@
 %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
 %meta{:charset => "UTF-8"}/
 
-= form_tag adventure_path(@adventure), :method => :put do
 
-  = label :adventure, :number_of_people, 'I'
-  = select :adventure, :number_of_people, ['Only me','+1','+2','+3','+4', '+5', 'me and more than 5 others']
-
-  = label :adventure, :action_adventure, 'need'
-  = select :adventure, :action_adventure, ['action','advice']
-
-  = label :adventure, :country, 'in (What country are you going to?)'
-  = select :adventure, :country, @countries
-
-  = label :adventure, :city, 'What city are you going to?'
-  = text_field :adventure, :city
-
-  = label :adventure, :description, 'Ask locals anything'
-  = text_area :adventure, :description
- 
-  = label :adventure, :details, 'Details'
-  = text_area :adventure, :details
-
-  = label :adventure, :adventure_date, 'choose date'
-  = date_select :adventure, :adventure_date
-
-  = label :adventure, :price, 'I am willing to offer'
-  = number_field :adventure, :price
-
+= form_tag adventure_path(twig), :method => :put do
+  -if current_user.admin
+    %select{:name => "adventure[paid]"}
+      %option{:value => "paid"} Paid
+      %option{:value => "not paid"} Not Paid
+  -else
+    = hidden_field :adventure, :paid, value: @adventure.paid
+  -if  @adventure.rating
+    = hidden_field :adventure, :rating, value: @adventure.rating
+  -else
+    -if current_user.id == @adventure.user.id
+      %select{:name => "adventure[rating]"}
+        %option{:value => "5"} 5
+        %option{:value => "4"} 4
+        %option{:value => "3"} 3
+        %option{:value => "2"} 2
+        %option{:value => "1"} 1
+  -if @adventure.inviter
+    = hidden_field :adventure, :inviter, value: @adventure.inviter
+  -else
+    -if current_user.id != @adventure.user.id
+      = number_field :adventure, :inviter
   = submit_tag 'Save Changes'
 = link_to 'Back to adventure list', adventures_path(@adventure)

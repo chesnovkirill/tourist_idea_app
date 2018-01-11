@@ -1,7 +1,7 @@
 class FriendshipsController < ApplicationController
     def create
         if !current_user.friendships.find_by(:friend_user_id => params[:chat_room][:friend_id]) &&
-            !current_user.friendships.find_by(:user_id => params[:chat_room][:friend_id])
+            !current_user.friendships.find_by(:user_id => params[:chat_room][:friend_id]) && !User.find(params[:chat_room][:friend_id]).friendships.find_by(:friend_user_id => current_user.id) && !User.find(params[:chat_room][:friend_id]).friendships.find_by(:user_id => current_user.id)
             @friendship1 = current_user.friendships.build(:friend_user_id => User.find(params[:chat_room][:friend_id]))
             t = User.find(params[:chat_room][:friend_id])
             @friendship2 = t.friendships.build(:friend_user_id => current_user.id)
@@ -10,7 +10,8 @@ class FriendshipsController < ApplicationController
         end
         
         @adventure = Adventure.find(params[:chat_room][:adventure_id])
-        temp = {"completed"=>true}
+        earned = number_to_rounded((0.8 * @adventure.price), precision: 2)
+        temp = {"completed"=>true, "conducted_by" => params[:chat_room][:friend_id], "earned" => earned}
         if current_user.gave_actions
             variable1 = {"gave_actions" => current_user.gave_actions + 1}
             else

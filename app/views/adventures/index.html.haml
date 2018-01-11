@@ -826,22 +826,6 @@
 
 
 
-  $( document ).ready(function() {
-    $( "input[value=res]").scrollIntoView();
-  });
-
-  $('#submitBtn').click(function() {
-     $('#lname').text($('#lastname').val());
-     $('#fname').text($('#firstname').val());
-  });
-
-  $('#submit').click(function(){
-    alert('submitting');
-    $('#formfield').submit();
-  });
-
-
-
 
 .adventurelist
   - @adventures.sort {|a,b| b.created_at <=> a.created_at }.each do |ad|
@@ -948,29 +932,6 @@
                   = form_for([ad,ad.comments.build]) do |f|
                     %p
                       = text_area :comment, :body, :id => "advisetext"
-                      /- if current_user.capabilities
-                      / %p
-                      /   Choose which of your capabilities to include:
-                      / %p
-                      /   #{current_user.capabilities}
-                      / %p
-                      /   Any other relevant capabilities?
-                      /- else
-                      /%p
-                      /  Any relevant capabilities?
-                      /%p
-                      /  = f.text_area :capabilities
-                      /%p
-                      /  = f.file_field :image, multiple:true
-                      /%p
-                      /.ui.toggle.checkbox.slideHideToggle
-                      /  %input{:name => "public", :type => "checkbox"}/
-                      /  %label Agree to #{ad.action_adventure}-seeker's offer
-                      /.HideShow
-                      /%p
-                      /  = f.label :price, 'I would like to get'
-                      /  = f.number_field :price, value: ad.price
-                      /  instead
                       %button.createcomment
                         POST
               - else
@@ -993,30 +954,6 @@
                 = form_tag [ad,ad.comments.build] do
                   %p
                     = text_area :comment, :body, :id => "advisetext"
-                    /- if current_user.capabilities
-                    / %p
-                    /   Choose which of your capabilities to include:
-                    / %p
-                    /   #{current_user.capabilities}
-                    / %p
-                    /   Any other relevant capabilities?
-                    /- else
-                    /%p
-                    /  Any relevant capabilities?
-                    /%p
-                    /  = f.text_area :capabilities
-                    /%p
-                    /  = f.file_field :image, multiple:true
-                    /%p
-                    /.ui.toggle.checkbox.slideHideToggle
-                    /  %input{:name => "public", :type => "checkbox"}/
-                    /  %label Agree to #{ad.action_adventure}-seeker's offer
-                    /.HideShow
-                    /%p
-                    /  = f.label :price, 'I would like to get'
-                    /  = f.number_field :price, value: ad.price
-                    /  instead
                     .mymodalgo
                       %button.createcomment
                         POST
-              %input{:name => "adventure[name]", :type => "hidden", :value => "#{ad.id}"}/

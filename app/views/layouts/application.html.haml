@@ -208,6 +208,7 @@
               %a.dropdown-item.some{:href => edit_user_registration_path} Edit Profile
               - if current_user.admin
                 %a.dropdown-item.some{:href => users_path} User List
+              %a.dropdown-item.some{:href => mytwigs_adventures_path} My Twigs
               %a.dropdown-item.some{:href => destroy_user_session_path, :method => :get} Log Out
         - else
           %a.sup{:href => new_registration_path(resource_name)} Sign up

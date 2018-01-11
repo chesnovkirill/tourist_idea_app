@@ -1,5 +1,5 @@
 class AdventuresController < ApplicationController
-    before_action :correct_user, only: [:edit, :update, :destroy]
+    before_action :correct_user, only: [:destroy]
     before_action :authenticate_user!, only: [:edit, :update, :destroy, :create, :new]
     
     def index
@@ -24,7 +24,7 @@ class AdventuresController < ApplicationController
         format_str = "%m/%d/" + (params[:adventure]["adventure_date"] =~ /\d{4}/ ? "%Y" : "%y")
         date = Date.parse(params[:adventure]["adventure_date"]) rescue Date.strptime(date_str, format_str)
         
-        temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"], "completed"=>params[:adventure]["completed"]}
+        temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"], "completed"=>params[:adventure]["completed"], "paid" => false}
         if !params[:adventure]["city"]
             temp.store("city", "Any City")
         end
@@ -64,13 +64,22 @@ class AdventuresController < ApplicationController
     def edit
         @countries = ISO3166::Country.all
     end
+    
+    def mytwigs
+        @adventures = current_user.adventures + Adventure.where(conducted_by: current_user.id)
+    end
 
     def update
-        date = Date.new params[:adventure]["adventure_date(1i)"].to_i, params[:adventure]["adventure_date(2i)"].to_i, params[:adventure]["adventure_date(3i)"].to_i
-        temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"], "completed"=>params[:adventure]["completed"]}
+        earned = @adventure.earned
+        inviter = @adventure.inviter
+        if params[:adventure]["inviter"] != 0
+            inviter = params[:adventure]["inviter"]
+            
+            earned = number_with_precision(@adventure.price * 0.56, precision: 2)
+        end
+        temp={"paid" => params[:adventure][:paid], "earned" => earned, "rating" => params[:adventure][:rating], "inviter" => inviter}
         @adventure.update_attributes!(temp)
-        flash[:notice] = "Adventure was successfully updated."
-        redirect_to adventures_path
+        redirect_to mytwigs_adventures_path
     end
     def destroy
         @adventure.destroy
