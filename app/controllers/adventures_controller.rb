@@ -1,4 +1,5 @@
 class AdventuresController < ApplicationController
+    include ActionView::Helpers::NumberHelper
     before_action :correct_user, only: [:destroy]
     before_action :authenticate_user!, only: [:edit, :update, :destroy, :create, :new]
     
@@ -62,6 +63,7 @@ class AdventuresController < ApplicationController
     end
 
     def edit
+        @adventure = Adventure.find(params[:id])
         @countries = ISO3166::Country.all
     end
     
@@ -70,12 +72,13 @@ class AdventuresController < ApplicationController
     end
 
     def update
+        @adventure = Adventure.find(params[:id])
         earned = @adventure.earned
         inviter = @adventure.inviter
         if params[:adventure]["inviter"] != 0
             inviter = params[:adventure]["inviter"]
             
-            earned = number_with_precision(@adventure.price * 0.56, precision: 2)
+            earned = number_with_precision(@adventure.price * 0.56, :precision => 2)
         end
         temp={"paid" => params[:adventure][:paid], "earned" => earned, "rating" => params[:adventure][:rating], "inviter" => inviter}
         @adventure.update_attributes!(temp)

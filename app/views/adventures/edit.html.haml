@@ -6,7 +6,7 @@
 %meta{:charset => "UTF-8"}/
 
 
-= form_tag adventure_path(twig), :method => :put do
+= form_tag adventure_path(@adventure), :method => :put do
   -if current_user.admin
     %select{:name => "adventure[paid]"}
       %option{:value => "paid"} Paid
