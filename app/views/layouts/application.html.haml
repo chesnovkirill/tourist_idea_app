@@ -157,6 +157,7 @@
       position: relative; !important;
       top: 44px;
       width: 240px;
+      height: 173px;
       left: 781px;
       background-color: white;
       padding: 5px 15px;
@@ -170,11 +171,13 @@
       font-size: 14px;
     }
     #useremail {
+      position: relative;
+      left: -6px;
+      top: 4px;
       height: 30px;
       width: 220px;
       padding: 5px 15px;
       -webkit-appearance: none;
-      margin: 5px 0;
       display: inline-block;
       border: 1px solid black;
       border-radius: 0px;
@@ -184,6 +187,104 @@
       font-family: 'pproxima_nova_ltthin', sans-serif;
       font-size: 14px;
       z-index: 100;
+    }
+
+    #userpassword {
+      position: relative;
+      left: -6px;
+      top: 13px;
+      height: 30px;
+      width: 220px;
+      padding: 5px 15px;
+      -webkit-appearance: none;
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 0px;
+      box-sizing: border-box;
+      color: black;
+      resize: none;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
+      z-index: 100;
+    }
+
+    #checkbox {
+      position: relative;
+      left: -6px;
+      top: 4px;
+    }
+
+    .rememberme {
+      position: relative;
+      left: 10px;
+      top: -14px;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
+    }
+
+    button.loginbutton {
+    position: relative;
+    height: 30px;
+    top: -28px;
+    left: -6px;
+    width: 220px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 14px;
+    background-color: #d9f0fd;
+    z-index: 100;
+    }
+
+    button.loginbutton:hover {
+      background-color: #bee5fb;
+      z-index: 100;
+    }
+
+    .forgotyour {
+      position: relative;
+      left: 30px;
+      top: -27px;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
+      color: #999997;
+    }
+
+
+
+    input[type=submit], input[type=text], input[type=file], input[type=textArea] {
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      color: #999997;
+      -webkit-appearance: none;
+      border-radius: 0;
+      border: 1px solid black;
+    }
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: #999997;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
+    }
+    ::-moz-placeholder { /* Firefox 19+ */
+      color: #999997;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
+    }
+    :-ms-input-placeholder { /* IE 10+ */
+      color: #999997;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
+    }
+    :-moz-placeholder { /* Firefox 18- */
+      color: #999997;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
     }
 
 
@@ -217,14 +318,16 @@
             .dropdown-menu.aaa{"aria-labelledby" => "dropdownMenuButton"}
               .dropdown-item.one
                 = form_tag session_path(:user) do
-                  = text_field :user, :email, :id => "useremail"
-                  = password_field :user, :password
+                  = text_field :user, :email, :id => "useremail", :placeholder => "Email"
+                  = password_field :user, :password, :id => "userpassword", :placeholder => "Password"
                   %p
-                  = check_box :user, :remember_me
-                  = label_tag 'user[remember_me]', 'Remember me'
+                  = check_box :user, :remember_me, :id => "checkbox"
+                  .rememberme
+                    Remember Me
                   %p
-                  %button Sign in
-                  = link_to "Forgot your password?", new_password_path(:user)
+                  %button.loginbutton LOG IN
+                  .forgotyour
+                    = link_to "Forgot your password?", new_password_path(:user), :style => "color: black;"
 
 
 
