@@ -88,7 +88,7 @@
 :javascript
   $(document).ready(function(){
     $(".mymodalg").click(function(){
-    $('.ui.modal').modal('show');
+    $(this).parent().children('.ui.container').children('.ui.modal').modal('show');
     });
   });
 

@@ -11,8 +11,8 @@ class FriendshipsController < ApplicationController
         end
         
         guide = User.find(params[:chat_room][:friend_id])
-        @adventure = Adventure.find(params[:chat_room][:adventure_id])
-        earned = number_with_precision(0.8 * @adventure.price, :precision => 2)
+        adventure = Adventure.find(params[:chat_room][:adventure_id])
+        earned = number_with_precision(0.8 * adventure.price, :precision => 2)
         temp = {"completed"=>true, "conducted_by" => params[:chat_room][:friend_id], "earned" => earned}
         if guide.gave_actions
             variable1 = {"gave_actions" => guide.gave_actions + 1}
@@ -24,12 +24,12 @@ class FriendshipsController < ApplicationController
             else
             variable2 = {"gave_advices" => 1}
         end
-        if @adventure.action_adventure == 'action'
+        if adventure.action_adventure == 'action'
             guide.update_attributes!(variable1)
             else
             guide.update_attributes!(variable2)
         end
-        @adventure.update_attributes!(temp)
+        adventure.update_attributes!(temp)
         @chat_room = current_user.chat_rooms.build(user_id: current_user.id, host_id: User.find(params[:chat_room][:friend_id]).id, adventure: params[:chat_room][:adventure_id])
         @chat_room.save
         @user1 = Adventure.find(@chat_room.adventure).user
