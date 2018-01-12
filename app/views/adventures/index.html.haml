@@ -117,7 +117,7 @@
         top: 308px;
         left: 350px;
         width: 660px;
-        background-color: #bee5fb;
+        background-color: #d9f0fd;
         border: 1px solid black;
         padding: 10px;
         margin: 10px;
@@ -130,7 +130,7 @@
         left: 350px;
         width: 660px;
         height: 140px;
-        background-color: #bee5fb;
+        background-color: #d9f0fd;
         border: 1px solid black;
         padding: 10px;
         margin: 10px;
@@ -238,7 +238,7 @@
         z-index:99;
       }
       .showHiddenBlock2:hover {
-        background-color: #7FCCF7;
+        background-color: #bee5fb;
       }
       .noanswers {
         position: relative;
@@ -256,7 +256,7 @@
         z-index:99;
       }
       .noanswers:hover {
-        background-color: #7FCCF7;
+        background-color: #bee5fb;
       }
       .showHiddenBlock3 {
         text-align: center;
@@ -292,11 +292,11 @@
       }
 
       .showHiddenBlock4:hover {
-        background-color: #7FCCF7;
+        background-color: #bee5fb;
       }
 
       .nodetails:hover {
-        background-color: #7FCCF7;
+        background-color: #bee5fb;
       }
 
       .initiallyHiddenBlock3 {
@@ -362,7 +362,7 @@
         margin-bottom: 10px;
       }
       .createcomment:hover {
-        background-color: #7FCCF7;
+        background-color: #bee5fb;
       }
       .iftherearedetails {
         position: relative;
@@ -548,7 +548,7 @@
     }
 
     .button4:hover {
-        background-color: #e7e7e7; !important;
+        background-color: #bee5fb; !important;
     }
 
     .container-1 .styled{
@@ -573,7 +573,7 @@
 
     .container-1 .styled:hover, .container-1 .styled:focus, .container-1 .styled:active{
       outline:none; !important;
-      background-color: #e7e7e7; !important;
+      background-color: #bee5fb; !important;
     }
 
     .adventurelist {
@@ -731,11 +731,7 @@
       %p
         %button.createadventurebutton SAVE CHANGES
 .line
-= search_form_for @search do |f|
-  .box
-    .container-1
-      = f.text_field :city_cont, :placeholder => 'Anywhere', class: 'styled'
-      %button.button.button4 Search
+
 %script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
 %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css", :rel => "stylesheet", :type => "text/css"}/
 %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"}
