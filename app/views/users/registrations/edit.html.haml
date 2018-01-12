@@ -73,7 +73,7 @@
     height: 30px;
     width: 390px;
     top: 130px;
-    left: -154px;
+    left: 631px;
     padding: 5px 15px;
     -webkit-appearance: none;
     margin: 5px 0;
@@ -224,11 +224,31 @@
     z-index: 100;
   }
 
+   #em {
+    position: relative;
+    height: 30px;
+    width: 390px;
+    top: 130px;
+    left: -154px;
+    padding: 5px 15px;
+    -webkit-appearance: none;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 14px;
+    z-index: 100;
+  }
+
   button.save {
     position: relative;
     height: 30px;
     width: 120px;
-    top: 235px;
+    top: 169px;
     left: 508px;
     padding: 5px 15px;
     -webkit-appearance: none;
@@ -252,7 +272,7 @@
 
   .fn {
     position: relative;
-    top: -150px;
+    top: -20px;
     left: 553px;
     font-family: 'pproxima_nova_ltthin', sans-serif;
     font-size: 14px;
@@ -260,15 +280,24 @@
   }
   .cor {
     position: relative;
-    top: -128px;
+    top: 0px;
     left: 512px;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 14px;
+    color: grey;
+  }
+
+  .em {
+    position: relative;
+    top: 23px;
+    left: 587px;
     font-family: 'pproxima_nova_ltthin', sans-serif;
     font-size: 14px;
     color: grey;
   }
   .mob {
     position: relative;
-    top: -107px;
+    top: 43px;
     left: 580px;
     font-family: 'pproxima_nova_ltthin', sans-serif;
     font-size: 14px;
@@ -333,33 +362,20 @@
 
     = text_field :user, :first_name, :id => "firstname"
     = text_field :user, :city_of_residence, :id => "cov"
+    = text_field :user, :email, :id => "em"
     = text_field :user, :contact_phone, :id => "cp"
-    .second_title
-      ADDITIONAL INFO
-    .linetwo
-    = text_field :user, :last_name, :id => "ln"
-    .selectbuttonone
-      %select.selectpicker{:name => "user[gender]", "data-style" => "btn-new", "data-width" => "120px"}
-        %option{:value => "male"} Male
-        %option{:value => "female"} Female
-    .calendar
-      %input#datepicker{:type => "text", :name => "adventure[adventure_date]", :placeholder => "CHOOSE DATE", :start_year => 1900}/
-    = text_field :user, :interests, :id => "in"
+
     %button.save SAVE
 .fn
   First Name
 .cor
   City of Residence
+.em
+  Email
 .mob
   Mobile
-.lasn
-  Last Name
-.gen
-  Gender
-.bird
-  Birth Date
-.hobb
-  Interests (Hobbies)
+
+
 /%div
 /  = f.label :email
 /  %br/
