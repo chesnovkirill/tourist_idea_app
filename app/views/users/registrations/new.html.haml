@@ -1,9 +1,27 @@
+%script{:src => "https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", :type => "text/javascript"}
+
+
+%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+%meta{:charset => "utf-8"}/
+%script{:src => "https://code.jquery.com/jquery-3.1.1.min.js"}
+%link{:href => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css", :rel => "stylesheet", :type => "text/css"}/
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"}
+%script{:src => "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.js"}
+%script{:src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places"}
+%link{:href => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", :rel => "stylesheet"}/
+%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
+%script{:src => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"}
+%link{:href => "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css", :rel => "stylesheet"}/
+%script{:src => "https://code.jquery.com/jquery-1.12.4.js"}
+%meta{:content => "initial-scale=1.0, user-scalable=no", :name => "viewport"}/
+%link{:href => "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/css/bootstrap-select.min.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}/
+
 :css
   .square {
     width: 240px;
-    height: 297px;
+    height: 252px;
     position: relative;
-    left: 718px;
+    left: 647px;
     top: -10px;
     background-color: white;
     border: 1px solid black;
@@ -121,19 +139,60 @@
     resize: none;
     font-family: 'pproxima_nova_ltthin', sans-serif;
     font-size: 14px;
-    background-color: #bee5fb;
+    background-color: #d9f0fd;
     z-index: 100;
   }
 
   button.save:hover {
-    background-color: #7FCCF7;
+    background-color: #bee5fb;
     z-index: 100;
   }
+
+  #autocomplete {
+      left: 269px;
+      width: 220px;
+      top:9px;
+      padding-top: 0px;
+      padding-left: 10px;
+      margin-bottom: 10px;
+      height: 30px;
+      color: black;
+    }
+
+  input[type=submit], input[type=text], input[type=file], input[type=textArea] {
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    color: #999997;
+    -webkit-appearance: none;
+    border-radius: 0;
+    border: 1px solid black;
+  }
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #999997;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 76%;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #999997;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 76%;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #999997;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 76%;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #999997;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 76%;
+  }
+
+
 .square
   = form_tag registration_path(resource_name) do
     = text_field :user, :first_name, :id => "firstname", autofocus: true, :placeholder => "First Name", :id => "fn"
     #locationField
-      %input#autocomplete{:onfocus => "geolocate()", "data-style" => "autocomp", :placeholder => "City of Residence", :type => "text"}/
+      %input#autocomplete{:onfocus => "geolocate()", "data-style" => "autocomplete", :placeholder => "City of Residence", :type => "text"}/
       %input#locality.field{:name => "user[city_of_residence]", :type =>"hidden", :disabled => "false"}/
       %input#country.field{:name => "user[country_of_residence]", :type => "hidden", :disabled => "true"}/
       %input#administrative_area_level_1.field{:type => "hidden", :disabled => "true"}/
@@ -205,6 +264,7 @@
           }
       %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places&callback=initAutocomplete"}
 
+    /%input.form-control.bfh-phone{:name => "user[contact_phone]", "data-format" => "+1 (ddd) ddd-dddd", :type => "text", :placeholder => "Mobile Number", :id => "cp"}/
     = text_field :user, :contact_phone, :id => "cov", :placeholder => "Mobile Number", :id => "cp"
     = text_field :user, :email, :id => "email", :placeholder => "Email", :id => "email"
     = password_field :user, :password, autocomplete: "off", :placeholder => "Password", :id => "pass"

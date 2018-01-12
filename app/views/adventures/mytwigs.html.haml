@@ -66,7 +66,6 @@
     font-family: 'pproxima_nova_ltthin', sans-serif;
     width: 82.5px;
     height: 30px;
-    border: 1px solid black;
     float: left;
     padding-left: 10px;
     padding-top: 5px;
@@ -118,7 +117,7 @@
         = twig.price
       .little_box
         - if !twig.completed
-          still pending
+          Still Pending
         - else
           -if !twig.inviter
             -if current_user.id == twig.user.id
@@ -146,14 +145,17 @@
             = twig.rating
           -else
             -if twig.user.id == current_user.id
-              %td= link_to("Rate", edit_adventure_path(twig))
+              = link_to("Rate", edit_adventure_path(twig))
             -else
-              %td Awaiting for rating
+              %td Still Pending
       .little_box
         -if twig.paid
           Paid
         -else
-          Not Paid
+          -if current_user.admin
+            = link_to("Mark As Paid", edit_adventure_path(twig), :style => "font-size: 10px;")
+          -else
+            Not Paid
       .little_box
         = link_to('View', adventure_path(twig))
 

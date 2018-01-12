@@ -197,7 +197,7 @@
 
     %body
       .background
-        %a.logostyle{:href => adventures_path(1)} T W I G S
+        %a.logostyle{:href => adventures_path} T W I G S
         - if user_signed_in?
           %a.messages{:href => chat_rooms_path} Messages
           .dropdown
