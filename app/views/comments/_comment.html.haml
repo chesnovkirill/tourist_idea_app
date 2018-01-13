@@ -108,7 +108,7 @@
   .upperline
   .mybox
     .avatarka
-      %img{:href => user_path(comment.user.id), :src => "/assets/logos/user.png", :width => "30"}
+      %img{:src => "/assets/logos/user.png", :width => "30"}
     .username
       #{link_to "#{comment.user.first_name}", user_path(comment.user.id)} from #{comment.user.city_of_residence} answered #{time_ago_in_words(local_time(comment.created_at))} ago:
     .commentbodymessage

@@ -340,7 +340,7 @@
 
       .answerline {
         position: relative;
-        top: -178px;
+        top: -207px;
         width: 640px;
         border:none;
         border-top:1px black;
@@ -348,6 +348,7 @@
         background-color: black;
         height:1px;
         z-index:99;
+        float: left;
       }
       .answeravatar {
         position: relative;
@@ -1037,11 +1038,6 @@
             -else
               .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
                 Other answers (#{ad.comments.count})
-        .initiallyHiddenBlock2
-          -if ad.completed
-            .paddingclass
-          - ad.comments.each do |c|
-            = render c
         - if user_signed_in?
           - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
             - if ad.details != ""
@@ -1050,26 +1046,35 @@
             - else
               .nodetails
                 ANSWER
-            .initiallyHiddenBlock4
-              - if ad.details != ""
-                .iftherearedetails
-                  .answerline
-                  .answeravatar
-                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -35px; left: -240px;"}
-                      = image_tag "logos/user.png"
-                  = form_for([ad,ad.comments.build]) do |f|
-                    %p
-                      = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig.", :style => "position: relative; top: -203px; left: 38px; float: left;"
-                      %button.createcomment{:style => "position: relative; float: left; left: 519px; top: -199px; margin-bottom: 14px;"}
-                        POST
-              - else
+        -if ad.details != ""
+          .initiallyHiddenBlock2{:style => "top: 135px;"}
+            - ad.comments.each do |c|
+              = render c
+        -else
+          .initiallyHiddenBlock2
+            - ad.comments.each do |c|
+              = render c
+        - if user_signed_in?
+          .initiallyHiddenBlock4
+            - if ad.details != ""
+              .iftherearedetails
                 .answerline
                 .answeravatar
-                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -33px; left: -240px;"}
+                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -63px; left: 0px; float: left;"}
                     = image_tag "logos/user.png"
-                = form_tag([ad,ad.comments.build]) do
+                = form_for([ad,ad.comments.build]) do |f|
                   %p
-                    = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig.", :style => "position: relative; top: -215px; left: 38px; float: left;"
-                    .mymodalgo
-                      %button.createcomment{:style => "position: relative; float: left; top: -211px; margin-bottom: 14px;"}
-                        POST
+                    = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig.", :style => "position: relative; top: -203px; left: 6px; float: left;"
+                    %button.createcomment{:style => "position: relative; float: left; left: 519px; top: -199px; margin-bottom: 14px;"}
+                      POST
+            - else
+              .answerline{:style => "top: -218px;"}
+              .answeravatar
+                %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -76px; left: 0px; float: left;"}
+                  = image_tag "logos/user.png"
+              = form_tag([ad,ad.comments.build]) do
+                %p
+                  = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig.", :style => "position: relative; top: -215px; left: 6px; float: left;"
+                  .mymodalgo
+                    %button.createcomment{:style => "position: relative; float: left; top: -211px; margin-bottom: 14px;"}
+                      POST
