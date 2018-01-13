@@ -162,7 +162,6 @@
 
     .dropdown-item:hover {
       color: #999997;
-      border: 1px solid white;
       z-index: 200;
     }
 
@@ -263,7 +262,7 @@
       font-family: 'pproxima_nova_ltthin', sans-serif;
       font-size: 14px;
     }
-    #useremail {
+    .useremail {
       position: relative;
       left: -6px;
       top: 4px;
@@ -380,6 +379,20 @@
       font-size: 14px;
     }
 
+    #userpassword::-webkit-input-placeholder {
+      color: #999997;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
+    }
+
+    .useremail::-webkit-input-placeholder {
+      color: #999997;
+      padding-left: 10px;
+      padding-bottom: 0px;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
+    }
+
 
 
 
@@ -411,7 +424,7 @@
             .dropdown-menu.aaa{"aria-labelledby" => "dropdownMenuButton"}
               .dropdown-item.one
                 = form_tag session_path(:user) do
-                  = text_field :user, :email, :id => "useremail", :placeholder => "Email"
+                  = text_field :user, :email, :class => "useremail", :placeholder => "Email"
                   = password_field :user, :password, :id => "userpassword", :placeholder => "Password"
                   %p
                   = check_box :user, :remember_me, :id => "checkbox"
