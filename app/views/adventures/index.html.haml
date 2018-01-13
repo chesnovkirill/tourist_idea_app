@@ -70,7 +70,7 @@
       .initiallyHiddenBlock2 {
           display: none;
           position: relative;
-          top: 131px;
+          top: 145px;
 
       }
       .initiallyHiddenBlock3 {
@@ -79,7 +79,7 @@
       .initiallyHiddenBlock4 {
           display: none;
           position: relative;
-          top: 183px;
+          top: 227px;
       }
 
       .a.variable {
@@ -150,7 +150,7 @@
         left: 48px;
         top: 5px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
-        font-size: 90%;
+        font-size: 12px;
         float: left;
       }
       .descriptionpart {
@@ -159,6 +159,8 @@
         left: 10px;
         float: left;
         border: 1px solid black;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        font-size: 12px;
         height: 30px;
         width: 638px;
         background-color: white;
@@ -220,7 +222,7 @@
         position: relative;
         top: 20px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
-        font-size: 115%;
+        font-size: 12px;
         width: 100%;
         background-color: white;
         border: 1px solid black;
@@ -285,7 +287,8 @@
 
       .showHiddenBlock4 {
         position: relative;
-        top: -50px;
+        top: -10px;
+        left: -120px;
         text-align: center;
         cursor: pointer;
         height: 30px;
@@ -298,7 +301,8 @@
       }
       .nodetails {
         position: relative;
-        top: -30px;
+        top: 10px;
+        left: -120px;
         text-align: center;
         height: 30px;
         cursor: pointer;
@@ -323,7 +327,7 @@
         top: -44px;
         right: -800px;
         font-family: 'pproxima_nova_ltthin', sans-serif;
-        font-size: 115%;
+        font-size: 12px;
         width: 120px;
         height: 30px;
         background-color: white;
@@ -957,9 +961,9 @@
           .editdelete
             - if user_signed_in? && ad.completed != true
               .dropdown
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 596px; top: 14px; cursor: pointer;"}
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 623px; top: 14px; cursor: pointer;"}
                   %img{:src => "/assets/logos/dots.png", :height => "15",}/
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 602px; top: 15px; cursor: pointer;"}
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 15px; cursor: pointer;"}
                   %img{:src => "/assets/logos/chev.png", :height => "15",}/
                 .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 35px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;   width: 60px; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
                   - if ad.user.id == current_user.id
@@ -976,9 +980,9 @@
           .editdelete
             - if user_signed_in? && ad.completed != true
               .dropdown
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 596px; top: 35px; cursor: pointer;"}
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 623px; top: 35px; cursor: pointer;"}
                   %img{:src => "/assets/logos/dots.png", :height => "15",}/
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 602px; top: 35px; cursor: pointer;"}
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 35px; cursor: pointer;"}
                   %img{:src => "/assets/logos/chev.png", :height => "15",}/
                 .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 55px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;  width: 60px;  color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
                   - if ad.user.id == current_user.id
@@ -993,35 +997,49 @@
               .fillvoid
         -if !ad.completed
           - if ad.details != ""
-            -if user_signed_in? && ad.user.id == current_user.id
-              .showHiddenBlock2
-                Answers (#{ad.comments.count})
+            -if user_signed_in?
+              -if ad.user.id == current_user.id
+                .showHiddenBlock2{:style => " margin-bottom: -10px;"}
+                  Answers (#{ad.comments.count})
+              -else
+                .showHiddenBlock2{:style => "margin-bottom: -10px; float: left"}
+                  Other answers (#{ad.comments.count})
             -else
-              .showHiddenBlock2
+              .showHiddenBlock2{:style => "position: relative; float: left; top: -20px; margin-bottom: -10px;"}
                 Other answers (#{ad.comments.count})
           - else
-            -if user_signed_in? && ad.user.id == current_user.id
-              .noanswers
-                Answers (#{ad.comments.count})
+            -if user_signed_in?
+              -if ad.user.id == current_user.id
+                .noanswers{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px;"}
+                  Answers (#{ad.comments.count})
+              -else
+                .noanswers{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px;"}
+                  Other answers (#{ad.comments.count})
             -else
-              .noanswers
+              .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
                 Other answers (#{ad.comments.count})
         -else
           - if ad.details != ""
-            -if user_signed_in? && ad.user.id == current_user.id
-              .showHiddenBlock2{:style => "position: absolute, float: left; top: -1px;"}
-                Answers (#{ad.comments.count})
+            -if user_signed_in?
+              -if ad.user.id == current_user.id
+                .showHiddenBlock2{:style => "margin-bottom: -20px; top: -20px; float: left; "}
+                  Answers (#{ad.comments.count})
+              -else
+                .showHiddenBlock2{:style => "margin-bottom: -10px; float: left; "}
+                  Other answers (#{ad.comments.count})
             -else
-              .showHiddenBlock2{:style => "position: absolute, float: left; top: -1px;"}
+              .showHiddenBlock2{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
                 Other answers (#{ad.comments.count})
           - else
             -if user_signed_in? && ad.user.id == current_user.id
-              .noanswers{:style => "position: absolute, float: left; top: -1px;"}
+              .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
                 Answers (#{ad.comments.count})
             -else
-              .noanswers{:style => "position: absolute, float: left; top: -1px;"}
+              .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
                 Other answers (#{ad.comments.count})
         .initiallyHiddenBlock2
+          -if ad.completed
+            .paddingclass
           - ad.comments.each do |c|
             = render c
         - if user_signed_in?
@@ -1037,12 +1055,8 @@
                 .iftherearedetails
                   .answerline
                   .answeravatar
-                    - if current_user.avatar_url.to_s != ''
-                      %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -23px; left: 0px;"}
-                        %img{:src => current_user.avatar_url.to_s}/
-                    - else
-                      %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -33px; left: -120px;"}
-                        = image_tag "logos/user.png"
+                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -33px; left: -120px;"}
+                      = image_tag "logos/user.png"
                   = form_for([ad,ad.comments.build]) do |f|
                     %p
                       = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig."
@@ -1051,23 +1065,11 @@
               - else
                 .answerline
                 .answeravatar
-                  - if current_user.avatar_url.to_s != ''
-                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -23px; left: -120px;"}
-                      %img{:src => current_user.avatar_url.to_s}/
-                  - else
-                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -33px; left: -120px;"}
-                      = image_tag "logos/user.png"
-                    #thankyouModal.modal.fade{:role => "dialog", :tabindex => "-1"}
-                      .modal-dialog
-                        .modal-content
-                          .modal-header
-                            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-                            %h4#myModalLabel.modal-title Thank you for pre-registering!
-                          .modal-body
-                            %p Thanks for getting in touch!
-                = form_tag [ad,ad.comments.build] do
+                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -33px; left: -240px;"}
+                    = image_tag "logos/user.png"
+                = form_tag([ad,ad.comments.build]) do
                   %p
-                    = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig."
+                    = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig.", :style => "position: relative; top: -215px; left: 38px; float: left;"
                     .mymodalgo
-                      %button.createcomment
+                      %button.createcomment{:style => "position: relative; float: left; top: -211px; margin-bottom: 14px;"}
                         POST
