@@ -999,7 +999,7 @@
           - if ad.details != ""
             -if user_signed_in?
               -if ad.user.id == current_user.id
-                .showHiddenBlock2{:style => " margin-bottom: -10px;"}
+                .showHiddenBlock2{:style => "position: relative; margin-bottom: -10px; left: -200px;"}
                   Answers (#{ad.comments.count})
               -else
                 .showHiddenBlock2{:style => "margin-bottom: -10px; float: left"}
@@ -1010,8 +1010,8 @@
           - else
             -if user_signed_in?
               -if ad.user.id == current_user.id
-                .noanswers{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px;"}
-                  Answers (#{ad.comments.count})
+                .noanswers{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px; left: 0px; border: 1px solid black;"}
+                  ANSWERS (#{ad.comments.count})
               -else
                 .noanswers{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px;"}
                   Other answers (#{ad.comments.count})
@@ -1022,18 +1022,18 @@
           - if ad.details != ""
             -if user_signed_in?
               -if ad.user.id == current_user.id
-                .showHiddenBlock2{:style => "margin-bottom: -20px; top: -20px; float: left; "}
+                .showHiddenBlock2{:style => "margin-bottom: -20px; top: -20px; float: left; left: 0px; border: 1px solid black;"}
                   Answers (#{ad.comments.count})
               -else
                 .showHiddenBlock2{:style => "margin-bottom: -10px; float: left; top: -20px;"}
                   Other answers (#{ad.comments.count})
             -else
-              .showHiddenBlock2{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
+              .showHiddenBlock2{:style => "position: relative; float: left; top: -20px; margin-bottom: 0px;"}
                 Other answers (#{ad.comments.count})
           - else
             -if user_signed_in? && ad.user.id == current_user.id
-              .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
-                Answers (#{ad.comments.count})
+              .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px; left: 0px; border: 1px solid black;"}
+                ANSWERS (#{ad.comments.count})
             -else
               .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
                 Other answers (#{ad.comments.count})
