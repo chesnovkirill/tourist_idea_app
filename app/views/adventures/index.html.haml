@@ -389,7 +389,7 @@
       position: absolute;
       left: 269px;
       top:9px;
-      padding-top: 0px;
+      padding-top: 5px;
       padding-left: 10px;
       height: 30px;
       width: 120px;
@@ -401,7 +401,7 @@
       width: 100px;
       color: #303030;
     }
-    #inputtext {
+    .inputtext {
       position: absolute;
       height: 30px;
       top: 44px;
@@ -420,7 +420,7 @@
       font-size: 90%;
       overflow: hidden;
      }
-    #inputtextDetails {
+    .inputtextDetails {
       position: absolute;
       height: 90px;
       top: 89px;
@@ -465,15 +465,15 @@
       z-index:100;
 
     }
-    #datepicker {
+    .datepicker {
       position: absolute;
       top: -11px;
-      left: -81px;
+      left: -83px;
       z-index: 200;
       right: 80px;
       width: 120px;
       font-family: 'pproxima_nova_ltthin', sans-serif;
-      font-size: 90%;
+      font-size: 12px;
       height: 30px;
       color: black;
     }
@@ -494,26 +494,47 @@
       -webkit-appearance: none;
       border-radius: 0;
       border: 1px solid black;
+      font-size: 12px;
+      color: black;
     }
-    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+
+    .inputtext::-webkit-input-placeholder {
+      color: #999997;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
+    }
+    .inputtextDetails::-webkit-input-placeholder {
+      color: #999997;
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      font-size: 14px;
+    }
+
+    .datepicker::-webkit-input-placeholder {
+      font-family: 'pproxima_nova_ltthin', sans-serif;
+      color: black;
+      font-size: 12px;
+      padding-left: 5px;
+    }
+
+    ::-webkit-input-placeholder  { /* Chrome/Opera/Safari */
       color: black;
       font-family: 'pproxima_nova_ltthin', sans-serif;
-      font-size: 76%;
+      font-size: 11px;
     }
     ::-moz-placeholder { /* Firefox 19+ */
       color: black;
       font-family: 'pproxima_nova_ltthin', sans-serif;
-      font-size: 76%;
+      font-size: 11px;
     }
     :-ms-input-placeholder { /* IE 10+ */
       color: black;
       font-family: 'pproxima_nova_ltthin', sans-serif;
-      font-size: 76%;
+      font-size: 11px;
     }
     :-moz-placeholder { /* Firefox 18- */
       color: black;
       font-family: 'pproxima_nova_ltthin', sans-serif;
-      font-size: 76%;
+      font-size: 11px;
     }
     .createadventurebutton {
       background-color: #4CAF50;
@@ -574,6 +595,7 @@
     .container-1 .styled:hover, .container-1 .styled:focus, .container-1 .styled:active{
       outline:none; !important;
       background-color: #bee5fb; !important;
+
     }
 
     .adventurelist {
@@ -596,7 +618,7 @@
       font-family: 'pproxima_nova_ltthin', sans-serif;
       height: 30px;
       z-index: 200;
-      font-size: 76%;
+      font-size: 11px;
       outline: none;
     }
     .selectbuttonone {
@@ -623,10 +645,10 @@
       %script{:src => "https://code.jquery.com/ui/1.12.1/jquery-ui.js"}
       :javascript
                 jQuery(function($){ // wait until the DOM is ready
-                    $("#datepicker").datepicker({ dateFormat: 'M dd, yy' });
+                    $(".datepicker").datepicker({ dateFormat: 'M dd, yy' });
                 });
       .calendar
-        %input#datepicker{:type => "text", :name => "adventure[adventure_date]", :start_year => Date.today.year, :placeholder => "CHOOSE DATE"}/
+        %input.datepicker{:type => "text", :name => "adventure[adventure_date]", :start_year => Date.today.year, :placeholder => "CHOOSE DATE"}/
       :javascript
         $(document).ready(function() {
                        $('.selectpicker').selectpicker();
@@ -720,9 +742,9 @@
         %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places&callback=initAutocomplete"}
 
       %p
-        = text_area :adventure, :description, :id => "inputtext", :placeholder => "ASK LOCALS ANYTHING YOU WANT TO KNOW OR TO DO (E.G. \"WANT TO PET A TIGER\")                      MAX 120 SYMBOLS", :style => "text-overflow: clip; overflow: hidden;"
+        = text_area :adventure, :description, :class => "inputtext", :placeholder => "Ask locals anything you want to know or to do (e.g. \"want to pet a tiger\")              max 120 symbols", :style => "text-overflow: clip; overflow: hidden;"
       %p
-        = text_area :adventure, :details, :id => "inputtextDetails", :placeholder => "DETAILS. HERE YOU CAN WRITE ANY DETAILS AND REFINEMENTS YOU NEED. THERE IS NO LIMIT OF SYMBOLS HERE. "
+        = text_area :adventure, :details, :class => "inputtextDetails", :placeholder => "Details: here you can write any details and refinements you need. There is no limit of symbols here. "
         = hidden_field :adventure, :completed, value: false
       %p
         %input.moneyinput{:type => "float", :name => "adventure[price]", :value => "0"}/
