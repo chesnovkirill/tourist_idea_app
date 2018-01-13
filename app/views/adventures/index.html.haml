@@ -881,10 +881,6 @@
 
       #fff.singularadventure.singularadventureontoggle
         .avatar
-        - if ad.user.avatar_url.to_s != ''
-          %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
-            %img{:src => ad.user.avatar_url.to_s}/
-        - else
           %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
             = image_tag "logos/user.png"
         .descriptionsecondary
