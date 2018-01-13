@@ -25,9 +25,9 @@ class AdventuresController < ApplicationController
         if params[:adventure]["adventure_date"] != ""
             format_str = "%m/%d/" + (params[:adventure]["adventure_date"] =~ /\d{4}/ ? "%Y" : "%y")
             date = Date.parse(params[:adventure]["adventure_date"]) rescue Date.strptime(date_str, format_str)
-            temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"], "completed"=>params[:adventure]["completed"], "paid" => false}
+            temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "adventure_date"=>date, "price"=>params[:adventure]["price"], "completed"=>params[:adventure]["completed"], "paid" => false, "state"=>params[:adventure]["state"]}
         else
-            temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "price"=>params[:adventure]["price"], "completed"=>params[:adventure]["completed"], "paid" => false}
+            temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "price"=>params[:adventure]["price"], "completed"=>params[:adventure]["completed"], "paid" => false, "state"=>params[:adventure]["state"]}
         end
         if !params[:adventure]["city"]
             temp.store("city", "Any City")
@@ -56,13 +56,13 @@ class AdventuresController < ApplicationController
             if params[:adventure]["adventure_date"] != ""
                 graph.put_object(553202955027429, "feed", {
                              :name => "Test post",
-                                 :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence} needs an #{@adventure.action_adventure} in #{@adventure.city},  #{@adventure.country} on #{@adventure.adventure_date.strftime("%b, %e %Y")}! #{@adventure.user.first_name} asked: \"#{@adventure.description} \". Eager to pay: $#{@adventure.price} for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com/adventures/" + "#{@adventure.id}"
+                                 :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence}, @{@adventure.state} needs an #{@adventure.action_adventure} in #{@adventure.city}, #{@adventure.state}  #{@adventure.country} on #{@adventure.adventure_date.strftime("%b, %e %Y")}! #{@adventure.user.first_name} asked: \"#{@adventure.description} \". Eager to pay: $#{@adventure.price} for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com/adventures/" + "#{@adventure.id}"
                          
                              })
             else
                 graph.put_object(553202955027429, "feed", {
                              :name => "Test post",
-                             :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence} needs an #{@adventure.action_adventure} in #{@adventure.city},  #{@adventure.country} any time! #{@adventure.user.first_name} asked: \"#{@adventure.description} \". Eager to pay: $#{@adventure.price} for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com/adventures/" + "#{@adventure.id}"
+                                 :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence} needs an #{@adventure.action_adventure} in #{@adventure.city}, #{@adventure.state}  #{@adventure.country} any time! #{@adventure.user.first_name} asked: \"#{@adventure.description} \". Eager to pay: $#{@adventure.price} for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com/adventures/" + "#{@adventure.id}"
                              
                              })
             end

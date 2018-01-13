@@ -196,7 +196,7 @@
       %input#autocomplete{:onfocus => "geolocate()", "data-style" => "autocomplete", :placeholder => "City of Residence", :type => "text"}/
       %input#locality.field{:name => "user[city_of_residence]", :type =>"hidden", :disabled => "false"}/
       %input#country.field{:name => "user[country_of_residence]", :type => "hidden", :disabled => "true"}/
-      %input#administrative_area_level_1.field{:type => "hidden", :disabled => "true"}/
+      %input#administrative_area_level_1.field{:name => "user[state]", :type => "hidden", :disabled => "true"}/
 
 
       :javascript

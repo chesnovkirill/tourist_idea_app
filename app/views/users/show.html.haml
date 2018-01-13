@@ -150,7 +150,7 @@
 .avatar
   %img{:src => "/assets/logos/user.png", :width => "120",}/
 .residence
-  from #{@user.city_of_residence}
+  from #{@user.city_of_residence}, #{@user.state}
 -if @var || @user.id == current_user.id || current_user.admin
   .mobile
     - if @user.contact_phone != ''
