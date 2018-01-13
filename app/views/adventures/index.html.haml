@@ -26,22 +26,6 @@
       $('#select')
         .dropdown()
       ;
-      function myFunction() {
-          var input, filter, ul, li, a, i;
-          input = document.getElementById("myInput");
-          filter = input.value.toUpperCase();
-          ul = document.getElementById("myUL");
-          li = ul.getElementsByTagName("li");
-          for (i = 0; i < li.length; i++) {
-              a = li[i].getElementsByTagName("a")[0];
-              if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                  li[i].style.display = "";
-              } else {
-                  li[i].style.display = "none";
-              }
-          }
-      }
-
       function changeZIndex(i,id) {
           document.getElementById(id).style.zIndex=i;
           document.getElementById("offer_your_price").style.zIndex=0;
@@ -132,6 +116,31 @@
         width: 660px;
         height: 140px;
         background-color: #d9f0fd;
+        border: 1px solid black;
+        padding: 10px;
+        margin: 10px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        float: left;
+      }
+      .singularadventuredone {
+        position: relative;
+        top: 308px;
+        left: 350px;
+        width: 660px;
+        background-color: #e8e8e6;
+        border: 1px solid black;
+        padding: 10px;
+        margin: 10px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        float: left;
+      }
+      .singularadventureontoggledone {
+        position: relative;
+        top: 308px;
+        left: 350px;
+        width: 660px;
+        height: 140px;
+        background-color: #e8e8e6;
         border: 1px solid black;
         padding: 10px;
         margin: 10px;
@@ -238,9 +247,6 @@
         left: 313px;
         z-index:99;
       }
-
-
-
       .showHiddenBlock2 {
         position: relative;
         top: -10px;
@@ -274,6 +280,41 @@
       }
       .noanswers:hover {
         background-color: #bee5fb;
+      }
+
+      .showHiddenBlock2done {
+        position: relative;
+        top: -10px;
+        left: 130px;
+        text-align: center;
+        cursor: pointer;
+        height: 30px;
+        width: 120px;
+        padding: 5px;
+        margin-bottom: 10px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        font-size: 12px;
+        z-index:99;
+      }
+      .showHiddenBlock2done:hover {
+        background-color: #c7c7c7;
+      }
+      .noanswersDone {
+        position: relative;
+        top: 10px;
+        left: 130px;
+        text-align: center;
+        cursor: pointer;
+        height: 30px;
+        width: 120px;
+        padding: 5px;
+        font-family: 'pproxima_nova_ltthin', sans-serif;
+        font-size: 12px;
+        margin-bottom: 10px;
+        z-index:99;
+      }
+      .noanswersDone:hover {
+        background-color: #c7c7c7;
       }
       .showHiddenBlock3 {
         text-align: center;
@@ -656,6 +697,7 @@
 
     .adventurelist {
       position: absolute;
+      float: left;
     }
     .showup {
       position: absolute;
@@ -804,7 +846,7 @@
         %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places&callback=initAutocomplete&language=en"}
 
       %p
-        = text_area :adventure, :description, :class => "inputtext", :placeholder => "Ask locals anything you want to know or to do (e.g. \"want to pet a tiger\")              max 80 symbols", :style => "text-overflow: clip; overflow: hidden;", :maxlength => "80"
+        = text_area :adventure, :description, :class => "inputtext", :placeholder => "Ask locals anything you want to know or to do (e.g. \"want to pet a tiger\")              max 80 symbols", :style => "text-overflow: clip; overflow: hidden;", :maxlength => "80", :required => 'required'
       %p
         = text_area :adventure, :details, :class => "inputtextDetails", :placeholder => "Any details and refinements you need.\nNo symbol limit here.\nPress ⌄ to see this section when your Twig is posted. "
         = hidden_field :adventure, :completed, value: false
@@ -845,8 +887,22 @@
           $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
       });
   });
+
+  $(document).ready(function() {
+      $('.showHiddenBlock2done').click(function() {
+          answers = !answers;
+          $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
+      });
+  });
     $(document).ready(function() {
       $('.noanswers').click(function() {
+          answers = !answers;
+          $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
+      });
+  });
+
+  $(document).ready(function() {
+      $('.noanswersDone').click(function() {
           answers = !answers;
           $(this).parent().children('.initiallyHiddenBlock2').slideToggle();
       });
@@ -874,6 +930,7 @@
     $( ".showHiddenBlock" ).on( "click", function() {
       if (answers == false && advise == false) {
         $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle",);
+        $(this).parent().parent().children( ".singularadventuredone" ).toggleClass( "singularadventureontoggledone",);
       }
     });
   } );
@@ -885,10 +942,28 @@
       }
     });
   } );
+
+  $( function() {
+    $( ".showHiddenBlock2done" ).on( "click", function() {
+      if (detailsvar == false && advise == false) {
+        $(this).parent().parent().children( ".singularadventuredone" ).toggleClass( "singularadventureontoggledone");
+      }
+    });
+  } );
+
   $( function() {
     $( ".noanswers" ).on( "click", function() {
       if (detailsvar == false && advise == false) {
         $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle");
+        $(this).parent().parent().children( ".singularadventuredone" ).toggleClass( "singularadventureontoggledone");
+      }
+    });
+  } );
+
+  $( function() {
+    $( ".noanswersDone" ).on( "click", function() {
+      if (detailsvar == false && advise == false) {
+        $(this).parent().parent().children( ".singularadventuredone" ).toggleClass( "singularadventureontoggledone");
       }
     });
   } );
@@ -897,6 +972,7 @@
     $( ".showHiddenBlock4" ).on( "click", function() {
       if (answers == false && detailsvar == false) {
         $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle");
+        $(this).parent().parent().children( ".singularadventuredone" ).toggleClass( "singularadventureontoggledone");
       }
     });
   } );
@@ -904,6 +980,7 @@
     $( ".nodetails" ).on( "click", function() {
       if (answers == false && detailsvar == false) {
         $(this).parent().parent().children( ".singularadventure" ).toggleClass( "singularadventureontoggle");
+        $(this).parent().parent().children( ".singularadventuredone" ).toggleClass( "singularadventureontoggledone");
       }
     });
   } );
@@ -922,71 +999,72 @@
 
 
 .adventurelist
+
   - @adventures.sort {|a,b| b.created_at <=> a.created_at }.each do |ad|
     #myUL
-      #fff.singularadventure.singularadventureontoggle
-        .avatar
-          %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
-            = image_tag "logos/user.png"
-        .descriptionsecondary
-          #{link_to "#{ad.user.first_name}", user_path(ad.user.id)}
-          -if ad.number_of_people != "only me"
-            #{ad.number_of_people}
-          from #{ad.user.city_of_residence} posted #{time_ago_in_words(ad.created_at)} ago;
-          %br/
-          needs #{ad.action_adventure} in #{ad.city},
-          -if ad.state != ""
-            #{ad.state},
-          #{ad.country}
-          -if ad.adventure_date
-            on #{ad.adventure_date.strftime("%B %d, %Y")}:
-          -else
-            at any time
-        .adventureprice
-          - if ad.price != 0
-            $#{ad.price}
-          - else
-            FREE
-        .descriptionpart
-          #{ad.description}
-        - if ad.details != ""
-          .initiallyHiddenBlock
-            #{ad.details}
-          .showHiddenBlock{:onclick => "myFunction()"}
-            %img{:src => "/assets/logos/ds.png", :width => "12", :id => "ds"}/
-          .detailslineone
-          .detailslinetwo
-        -else
-          .nodetailsline
-        - if ad.details != ""
-          .editdelete
-            - if user_signed_in? && ad.completed != true
-              .dropdown
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 623px; top: 14px; cursor: pointer;"}
-                  %img{:src => "/assets/logos/dots.png", :height => "15",}/
-                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 15px; cursor: pointer;"}
-                  %img{:src => "/assets/logos/chev.png", :height => "15",}/
-                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 35px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;   width: 60px; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
-                  - if ad.user.id == current_user.id
-                    -if ad.comments.count == 0
-                      = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
-                      = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;',data: { confirm: 'Are you sure?' }
-                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
-                  -else
-                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
-                    = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+      -if !ad.completed
+        .singularadventure.singularadventureontoggle
+          .avatar
+            %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
+              = image_tag "logos/user.png"
+          .descriptionsecondary
+            #{link_to "#{ad.user.first_name}", user_path(ad.user.id)}
+            -if ad.number_of_people != "only me"
+              #{ad.number_of_people}
+            from #{ad.user.city_of_residence} posted #{time_ago_in_words(ad.created_at)} ago;
+            %br/
+            needs #{ad.action_adventure} in #{ad.city},
+            -if ad.state != ""
+              #{ad.state},
+            #{ad.country}
+            -if ad.adventure_date
+              on #{ad.adventure_date.strftime("%B %d, %Y")}:
             -else
-              .fillvoid
-        -else
-          .editdelete
-            - if user_signed_in? && ad.completed != true
+              at any time
+          .adventureprice
+            - if ad.price != 0
+              $#{ad.price}
+            - else
+              FREE
+          .descriptionpart
+            #{ad.description}
+          - if ad.details != ""
+            .initiallyHiddenBlock
+              #{ad.details}
+            .showHiddenBlock{:onclick => "myFunction()"}
+              %img{:src => "/assets/logos/ds.png", :width => "12", :id => "ds"}/
+            .detailslineone
+            .detailslinetwo
+          -else
+            .nodetailsline
+          - if ad.details != ""
+            .editdelete
+              - if user_signed_in? && ad.completed != true
+                .dropdown
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 623px; top: 14px; cursor: pointer;"}
+                    %img{:src => "/assets/logos/dots.png", :height => "15",}/
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 15px; cursor: pointer;"}
+                    %img{:src => "/assets/logos/chev.png", :height => "15",}/
+                  .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 35px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;   width: 60px; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
+                    - if ad.user.id == current_user.id
+                      -if ad.comments.count == 0
+                        = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                        = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;',data: { confirm: 'Are you sure?' }
+                      = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                    -else
+                      = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                      = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+              -else
+                .fillvoid
+          -else
+            .editdelete
               .dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 623px; top: 35px; cursor: pointer;"}
                   %img{:src => "/assets/logos/dots.png", :height => "15",}/
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 35px; cursor: pointer;"}
                   %img{:src => "/assets/logos/chev.png", :height => "15",}/
                 .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 55px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;  width: 60px;  color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
-                  - if ad.user.id == current_user.id
+                  - if user_signed_in? && ad.user.id == current_user.id && ad.completed != true
                     -if ad.comments.count == 0
                       = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
                       = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; width: 60px; text-align: center; float: left;',data: { confirm: 'Are you sure?' }
@@ -994,87 +1072,182 @@
                   -else
                     = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
                     = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
-            -else
-              .fillvoid
-        -if !ad.completed
-          - if ad.details != ""
-            -if user_signed_in?
-              -if ad.user.id == current_user.id
-                .showHiddenBlock2{:style => "position: relative; margin-bottom: -10px; left: -200px;"}
-                  Answers (#{ad.comments.count})
+
+          -if !ad.completed
+            - if ad.details != ""
+              -if user_signed_in?
+                -if ad.user.id == current_user.id
+                  .showHiddenBlock2{:style => "position: relative; margin-bottom: -10px; left: -200px;"}
+                    ANSWERS (#{ad.comments.count})
+                -else
+                  .showHiddenBlock2{:style => "margin-bottom: -10px; float: left"}
+                    Other answers (#{ad.comments.count})
               -else
-                .showHiddenBlock2{:style => "margin-bottom: -10px; float: left"}
+                .showHiddenBlock2{:style => "position: relative; float: left; top: -20px; margin-bottom: -10px;"}
                   Other answers (#{ad.comments.count})
-            -else
-              .showHiddenBlock2{:style => "position: relative; float: left; top: -20px; margin-bottom: -10px;"}
-                Other answers (#{ad.comments.count})
-          - else
-            -if user_signed_in?
-              -if ad.user.id == current_user.id
-                .noanswers{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px; left: 0px; border: 1px solid black;"}
+            - else
+              -if user_signed_in?
+                -if ad.user.id == current_user.id
+                  .noanswers{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px; left: 0px; border: 1px solid black;"}
+                    ANSWERS (#{ad.comments.count})
+                -else
+                  .noanswers{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px;"}
+                    Other answers (#{ad.comments.count})
+              -else
+                .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
+                  Other answers (#{ad.comments.count})
+          -else
+            - if ad.details != ""
+              -if user_signed_in?
+                -if ad.user.id == current_user.id
+                  .showHiddenBlock2{:style => "margin-bottom: -20px; top: -20px; float: left; left: 0px; border: 1px solid black;"}
+                    ANSWERS (#{ad.comments.count})
+                -else
+                  .showHiddenBlock2{:style => "margin-bottom: -10px; float: left; top: -20px;"}
+                    Other answers (#{ad.comments.count})
+              -else
+                .showHiddenBlock2{:style => "position: relative; float: left; top: -20px; margin-bottom: 0px;"}
+                  Other answers (#{ad.comments.count})
+            - else
+              -if user_signed_in? && ad.user.id == current_user.id
+                .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px; left: 0px; border: 1px solid black;"}
                   ANSWERS (#{ad.comments.count})
               -else
-                .noanswers{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px;"}
+                .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
                   Other answers (#{ad.comments.count})
+          - if user_signed_in?
+            - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
+              - if ad.details != ""
+                .showHiddenBlock4
+                  ANSWER
+              - else
+                .nodetails
+                  ANSWER
+          -if ad.details != ""
+            .initiallyHiddenBlock2{:style => "top: 135px;"}
+              - ad.comments.each do |c|
+                = render c
+          -else
+            .initiallyHiddenBlock2
+              - ad.comments.each do |c|
+                = render c
+          - if user_signed_in?
+            .initiallyHiddenBlock4
+              - if ad.details != ""
+                .iftherearedetails
+                  .answerline
+                  .answeravatar
+                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -63px; left: 0px; float: left;"}
+                      = image_tag "logos/user.png"
+                  = form_for([ad,ad.comments.build]) do |f|
+                    %p
+                      = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig.", :style => "position: relative; top: -203px; left: 6px; float: left;", :required => 'required'
+                      %button.createcomment{:style => "position: relative; float: left; left: 519px; top: -199px; margin-bottom: 14px;"}
+                        POST
+              - else
+                .answerline{:style => "top: -218px;"}
+                .answeravatar
+                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -76px; left: 0px; float: left;"}
+                    = image_tag "logos/user.png"
+                = form_tag([ad,ad.comments.build]) do
+                  %p
+                    = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig.", :style => "position: relative; top: -215px; left: 6px; float: left;", :required => 'required'
+                    .mymodalgo
+                      %button.createcomment{:style => "position: relative; float: left; top: -211px; margin-bottom: 14px;"}
+                        POST
+      -else
+        .singularadventuredone.singularadventureontoggledone
+          .avatar
+            %a.img.ui.circular.avatar.image{:href => user_path(ad.user.id)}
+              = image_tag "logos/user.png"
+          .descriptionsecondary
+            #{link_to "#{ad.user.first_name}", user_path(ad.user.id)}
+            -if ad.number_of_people != "only me"
+              #{ad.number_of_people}
+            from #{ad.user.city_of_residence} posted #{time_ago_in_words(ad.created_at)} ago;
+            %br/
+            needs #{ad.action_adventure} in #{ad.city},
+            -if ad.state != ""
+              #{ad.state},
+            #{ad.country}
+            -if ad.adventure_date
+              on #{ad.adventure_date.strftime("%B %d, %Y")}:
             -else
-              .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
-                Other answers (#{ad.comments.count})
-        -else
+              at any time
+          .adventureprice
+            - if ad.price != 0
+              $#{ad.price}
+            - else
+              FREE
+          .descriptionpart
+            #{ad.description}
+          - if ad.details != ""
+            .initiallyHiddenBlock
+              #{ad.details}
+            .showHiddenBlock{:onclick => "myFunction()"}
+              %img{:src => "/assets/logos/ds.png", :width => "12", :id => "ds"}/
+            .detailslineone
+            .detailslinetwo
+          -else
+            .nodetailsline
+          - if ad.details != ""
+            .editdelete
+              - if user_signed_in? && ad.completed != true
+                .dropdown
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 623px; top: 14px; cursor: pointer;"}
+                    %img{:src => "/assets/logos/dots.png", :height => "15",}/
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 15px; cursor: pointer;"}
+                    %img{:src => "/assets/logos/chev.png", :height => "15",}/
+                  .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 35px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;   width: 60px; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
+                    - if ad.user.id == current_user.id
+                      -if ad.comments.count == 0
+                        = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                        = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;',data: { confirm: 'Are you sure?' }
+                      = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                    -else
+                      = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                      = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+              -else
+                .fillvoid
+          -else
+            .editdelete
+              .dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 623px; top: 35px; cursor: pointer;"}
+                  %img{:src => "/assets/logos/dots.png", :height => "15",}/
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 35px; cursor: pointer;"}
+                  %img{:src => "/assets/logos/chev.png", :height => "15",}/
+                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 55px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;  width: 60px;  color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
+                  - if user_signed_in? && ad.user.id == current_user.id && ad.completed != true
+                    -if ad.comments.count == 0
+                      = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                      = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; width: 60px; text-align: center; float: left;',data: { confirm: 'Are you sure?' }
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                  -else
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                    = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
           - if ad.details != ""
             -if user_signed_in?
               -if ad.user.id == current_user.id
-                .showHiddenBlock2{:style => "margin-bottom: -20px; top: -20px; float: left; left: 0px; border: 1px solid black;"}
-                  Answers (#{ad.comments.count})
+                .showHiddenBlock2done{:style => "margin-bottom: -20px; top: -20px; float: left; left: 0px; border: 1px solid black;"}
+                  ANSWERS (#{ad.comments.count})
               -else
-                .showHiddenBlock2{:style => "margin-bottom: -10px; float: left; top: -20px;"}
+                .showHiddenBlock2done{:style => "margin-bottom: -10px; float: left; top: -20px;"}
                   Other answers (#{ad.comments.count})
             -else
-              .showHiddenBlock2{:style => "position: relative; float: left; top: -20px; margin-bottom: 0px;"}
+              .showHiddenBlock2done{:style => "position: relative; float: left; top: -20px; margin-bottom: 0px;"}
                 Other answers (#{ad.comments.count})
           - else
             -if user_signed_in? && ad.user.id == current_user.id
-              .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px; left: 0px; border: 1px solid black;"}
+              .noanswersDone{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px; left: 0px; border: 1px solid black;"}
                 ANSWERS (#{ad.comments.count})
             -else
-              .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
+              .noanswersDone{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px;"}
                 Other answers (#{ad.comments.count})
-        - if user_signed_in?
-          - if ad.user.id != current_user.id && ad.comments.find_by(:user_id =>current_user.id) == nil && ad.completed != true
-            - if ad.details != ""
-              .showHiddenBlock4
-                ANSWER
-            - else
-              .nodetails
-                ANSWER
-        -if ad.details != ""
-          .initiallyHiddenBlock2{:style => "top: 135px;"}
-            - ad.comments.each do |c|
-              = render c
-        -else
-          .initiallyHiddenBlock2
-            - ad.comments.each do |c|
-              = render c
-        - if user_signed_in?
-          .initiallyHiddenBlock4
-            - if ad.details != ""
-              .iftherearedetails
-                .answerline
-                .answeravatar
-                  %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -63px; left: 0px; float: left;"}
-                    = image_tag "logos/user.png"
-                = form_for([ad,ad.comments.build]) do |f|
-                  %p
-                    = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig.", :style => "position: relative; top: -203px; left: 6px; float: left;"
-                    %button.createcomment{:style => "position: relative; float: left; left: 519px; top: -199px; margin-bottom: 14px;"}
-                      POST
-            - else
-              .answerline{:style => "top: -218px;"}
-              .answeravatar
-                %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -76px; left: 0px; float: left;"}
-                  = image_tag "logos/user.png"
-              = form_tag([ad,ad.comments.build]) do
-                %p
-                  = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig.", :style => "position: relative; top: -215px; left: 6px; float: left;"
-                  .mymodalgo
-                    %button.createcomment{:style => "position: relative; float: left; top: -211px; margin-bottom: 14px;"}
-                      POST
+          -if ad.details != ""
+            .initiallyHiddenBlock2{:style => "top: 135px;"}
+              - ad.comments.each do |c|
+                = render c
+          -else
+            .initiallyHiddenBlock2
+              - ad.comments.each do |c|
+                = render c

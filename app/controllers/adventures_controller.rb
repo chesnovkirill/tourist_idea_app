@@ -30,7 +30,7 @@ class AdventuresController < ApplicationController
             temp={"number_of_people"=>params[:adventure]["number_of_people"], "action_adventure"=>params[:adventure]["action_adventure"], "country"=>params[:adventure]["country"], "city"=>params[:adventure]["city"], "description"=>params[:adventure]["description"], "details"=>params[:adventure]["details"], "price"=>params[:adventure]["price"], "completed"=>params[:adventure]["completed"], "paid" => false, "state"=>params[:adventure]["state"]}
         end
         if !params[:adventure]["city"]
-            temp.store("city", "Any City")
+            temp.store("city", "any location")
         end
         if !params[:adventure]["price"]
             temp["price" => 0]
