@@ -1025,7 +1025,7 @@
                 .showHiddenBlock2{:style => "margin-bottom: -20px; top: -20px; float: left; "}
                   Answers (#{ad.comments.count})
               -else
-                .showHiddenBlock2{:style => "margin-bottom: -10px; float: left; "}
+                .showHiddenBlock2{:style => "margin-bottom: -10px; float: left; top: -20px;"}
                   Other answers (#{ad.comments.count})
             -else
               .showHiddenBlock2{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
@@ -1055,12 +1055,12 @@
                 .iftherearedetails
                   .answerline
                   .answeravatar
-                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -33px; left: -120px;"}
+                    %a.img.ui.circular.avatar.image{:href => user_path(current_user.id), :style => "position: relative; top: -35px; left: -240px;"}
                       = image_tag "logos/user.png"
                   = form_for([ad,ad.comments.build]) do |f|
                     %p
-                      = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig."
-                      %button.createcomment
+                      = text_area :comment, :body, :id => "advisetext", :placeholder => "Persuade #{ad.user.first_name} to choose you. Elaborate on how you can fulfill #{ad.user.first_name}'s Twig.", :style => "position: relative; top: -203px; left: 38px; float: left;"
+                      %button.createcomment{:style => "position: relative; float: left; left: 519px; top: -199px; margin-bottom: 14px;"}
                         POST
               - else
                 .answerline
