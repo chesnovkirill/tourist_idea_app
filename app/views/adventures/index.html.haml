@@ -766,7 +766,7 @@
               });
             }
           }
-        %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places&callback=initAutocomplete"}
+        %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBjrep_jwH3Ej6ZwWhRuoDILRNt2RpElqA&libraries=places&callback=initAutocomplete&language=en"}
 
       %p
         = text_area :adventure, :description, :class => "inputtext", :placeholder => "Ask locals anything you want to know or to do (e.g. \"want to pet a tiger\")              max 80 symbols", :style => "text-overflow: clip; overflow: hidden;", :maxlength => "80"
