@@ -56,13 +56,13 @@ class AdventuresController < ApplicationController
             if params[:adventure]["adventure_date"] != ""
                 graph.put_object(553202955027429, "feed", {
                              :name => "Test post",
-                                 :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence}, #{@adventure.state} needs an #{@adventure.action_adventure} in #{@adventure.city}, #{@adventure.state}  #{@adventure.country} on #{@adventure.adventure_date.strftime("%b, %e %Y")}! #{@adventure.user.first_name} asked: \"#{@adventure.description} \". Eager to pay: $#{@adventure.price} for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com/adventures/" + "#{@adventure.id}"
+                                 :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence}, #{@adventure.user.state} needs an #{@adventure.action_adventure} in #{@adventure.city}, #{@adventure.state}  #{@adventure.country} on #{@adventure.adventure_date.strftime("%b, %e %Y")}! #{@adventure.user.first_name} asked: \"#{@adventure.description} \". Eager to pay: $#{@adventure.price} for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com/adventures/" + "#{@adventure.id}"
                          
                              })
             else
                 graph.put_object(553202955027429, "feed", {
                              :name => "Test post",
-                                 :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence}, #{@adventure.state} needs an #{@adventure.action_adventure} in #{@adventure.city}, #{@adventure.state}  #{@adventure.country} any time! #{@adventure.user.first_name} asked: \"#{@adventure.description} \". Eager to pay: $#{@adventure.price} for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com/adventures/" + "#{@adventure.id}"
+                                 :message => "#{@adventure.user.first_name} from #{@adventure.user.city_of_residence}, #{@adventure.user.state} needs an #{@adventure.action_adventure} in #{@adventure.city}, #{@adventure.state}  #{@adventure.country} any time! #{@adventure.user.first_name} asked: \"#{@adventure.description} \". Eager to pay: $#{@adventure.price} for this #{@adventure.action_adventure}. https://ask-the-locals.herokuapp.com/adventures/" + "#{@adventure.id}"
                              
                              })
             end
