@@ -13,7 +13,12 @@ class FriendshipsController < ApplicationController
         guide = User.find(params[:chat_room][:friend_id])
         adventure = Adventure.find(params[:chat_room][:adventure_id])
         earned = number_with_precision(0.8 * adventure.price, :precision => 2)
-        temp = {"completed"=>true, "conducted_by" => params[:chat_room][:friend_id], "earned" => earned}
+        if params[:chat_room][:method] == "0"
+            met = "PayPal"
+        else
+            met = "offline"
+        end
+        temp = {"completed"=>true, "conducted_by" => params[:chat_room][:friend_id], "earned" => earned, "method" => met}
         if guide.gave_actions
             variable1 = {"gave_actions" => guide.gave_actions + 1}
             else

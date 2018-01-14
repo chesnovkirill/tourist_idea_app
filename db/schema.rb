@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180113070919) do
+ActiveRecord::Schema.define(version: 20180114041858) do
 
   create_table "adventures", force: :cascade do |t|
     t.string "number_of_people"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180113070919) do
     t.integer "conducted_by"
     t.integer "rating"
     t.string "state"
+    t.string "method"
     t.index ["user_id"], name: "index_adventures_on_user_id"
   end
 

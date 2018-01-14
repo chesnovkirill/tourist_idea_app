@@ -178,7 +178,7 @@
               %td Still Pending
       .little_box
         -if twig.paid
-          Paid
+          Paid #{twig.method}
         -else
           -if current_user.admin
             = link_to("Mark As Paid", edit_adventure_path(twig), :style => "font-size: 10px;")

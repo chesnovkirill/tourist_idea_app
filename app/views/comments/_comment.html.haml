@@ -96,6 +96,48 @@
     background-color: #bee5fb;
   }
 
+  button.accept {
+    position: relative;
+    left: -16px;
+    top: 13px;
+    height: 30px;
+    width: 120px;
+    -webkit-appearance: none;
+    margin-top: 15px;
+    margin-bottom: -10px;
+    display: inline-block;
+    border: 1px solid black;
+    padding-top: 5px;
+    text-align: center;
+    border-radius: 0px;
+    box-sizing: border-box;
+    color: black;
+    resize: none;
+    font-family: 'pproxima_nova_ltthin', sans-serif;
+    font-size: 12px;
+    background-color: #d9f0fd;
+
+    z-index: 400;
+    float: left;
+  }
+
+  button.accept:hover {
+    background-color: #bee5fb;
+  }
+
+  .linetogg {
+      position: relative;
+      top: 30px;
+      left: -10px;
+      width: 638px;
+      border:none;
+      border-top:1px black;
+      color: black;
+      background-color: black;
+      height:1px;
+      z-index:99;
+  }
+
 
 :javascript
   $(document).ready(function(){
@@ -103,6 +145,30 @@
     $(this).parent().children('.ui.container').children('.ui.modal').modal('show');
     });
   });
+
+  $(document).ready(function(){
+    $(".close").click(function(){
+    $(this).parent().parent().parent().children('.ui.modal').modal('hide');
+    });
+  });
+
+  $('.offline').click(function(){
+    $(this).parent().children('form').children('.count').val('1');
+    $(this).parent().children('.ifpaypal').css('z-index', '3');
+    $(this).parent().children('.ifinperson').css('z-index', '1');
+  });
+
+  $('.offline').click(function(){
+    $(this).parent().children('.ifpaypal').css('z-index', '1');
+    $(this).parent().children('.ifinperson').css('z-index', '3');
+  });
+
+  $('.online').click(function(){
+    $(this).parent().children('form').children('.count').val('0');
+    $(this).parent().children('.ifpaypal').css('z-index', '3');
+    $(this).parent().children('.ifinperson').css('z-index', '1');
+  });
+
 
 %body{:style => "margin-bottom: 0px;"}
   .upperline
@@ -126,27 +192,34 @@
       - if comment.user.id != current_user.id && comment.user.id != comment.adventure.user.id && current_user.id == comment.adventure.user.id && comment.adventure.completed != true
         .mymodalg{:style => "margin-bottom: 0px; float: left"}
           %button.choosethisguide CHOOSE & PAY
-        .ui.container{:style => "margin-bottom: 0px; float: left"}
-          .ui.modal{:style => "margin-top: 10px; float: left"}
-            %i.close.icon
-            .header
-              Choose Payment Method:
+        .ui.container{:style => ""}
+          .ui.modal{:close => "CloseModal()", :style => "padding-top:0px; margin-top: 10px; height: 355px; width: 660px; float: left -webkit-appearance: none; margin-bottom: 0px; float: left; position: fixed; top: 10px; left: 810px; border-radius: 0px;"}
             .content
-              %p
-              %h2
-                We apologise, but online payment is currently under construction. Please give the money to your guide in person.
-              = form_for :chat_room, method: :post, url: friendships_path, class: 'btn btn-primary'  do |f|
+              .close
+                %img{:src => "/assets/logos/cancel.png", :width => "15", :style => "float: left; position: relative; left: 0px; top:0px;"}/
+              .header{:style => "font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 33px; position: absolute; top: 10px; left: 8px;"}
+                CHOOSE PAYMENT METHOD:
+              .linetogg
+              .bodyparagraph{:style => "font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px; position: absolute; top: 58px; left: 10px;"}
+                First of all, you need to know that our service is still being tested. There are only friends and friends of our friends here. We hope for your responsibility and honesty. Thank you.
+              .secondbody{:style => "font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px; position: absolute; top: 110px; left: 10px;"}
+                When you choose the payment method and press "Accept" button, you and your TWIGS guide will get each others' private information (mobile and email) and access to chat. This way you can contact with each other and discuss the details.
+              .whitebackground{:style => "position: absolute; top: 250px; left: 0px; background-color: white; z-index: 2; height: 100px; width: 660px;"}
+              .ifpaypal{:style => "font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px; position: absolute; top: 250px; z-index: 3;"}
+                You chose PayPal, please transfer your money to our PayPal account: twigs.payments@gmail.com with this note: $#{comment.adventure.price}0 for #{comment.user.first_name}'s #{comment.adventure.action_adventure} ##{comment.adventure.id}
+              .ifinperson{:style => "font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px; position: absolute; top: 250px; z-index: 1;"}
+                You chose offline method to pay in person. Nice! It's a little old-fashioned but this way we do not take commission from the transaction (for now, lol)
+              %input.offline{:onclick => "change()", :type => "button", :value => "PAY IN PERSON", :style => "position: absolute; left: 330px; top: 160px; height: 45px; width: 315px; -webkit-appearance: none; margin-top: 15px; margin-bottom: -10px; display: inline-block; border: 1px solid black; padding-top: 5px; text-align: center; border-radius: 0px; box-sizing: border-box; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 12px; background-color: white; z-index: 100; float: left"}
+              %input.online.mnozstvi_sleva{:type => "button", :value => "PAYPAL", :style => "position: absolute; left: 10px; top:160px; height: 45px; width: 315px; -webkit-appearance: none; margin-top: 15px; margin-bottom: -10px; border: 1px solid black; padding-top: 5px; text-align: center; border-radius: 0px; box-sizing: border-box; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 12px; background-color: white; z-index: 100; float: left"}
+              = form_for :chat_room, method: :post, url: friendships_path, class: 'form'  do |f|
                 = f.hidden_field :host_name, value: comment.user.first_name
                 = f.hidden_field :friend_id, value: comment.user.id
                 = f.hidden_field :adventure_id, value: comment.adventure.id
+                = f.hidden_field :method, :class => "count", :value => 0
                 %b
-                .two.ui.buttons
-                  %button.massive.ui.left.attached.button
-                    %i.money.icon
-                    Pay in Person
-                  %button.massive.ui.disabled.right.attached.button
-                    %i.credit.card.alternative.icon
-                    Pay Online
+                %button.accept{:style => "font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px; position: absolute; top: 300px; left: 530px;"}
+                  ACCEPT
+
 
 
 

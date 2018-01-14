@@ -34,19 +34,6 @@
 
       var app = angular.module('app', ['ui.select']);
 
-      app.controller("myCtrl", function () {
-          vm = this;
-          vm.isLoaded = false;
-          vm.values = [{
-              'key': 22,
-              'value': 'Kevin'
-          }, {
-              'key': 24,
-              'value': 'Fiona'
-          }];
-          vm.selected;
-      });
-
     :css
       .initiallyHiddenBlock {
           display: none;
@@ -1080,7 +1067,7 @@
                   .showHiddenBlock2{:style => "position: relative; margin-bottom: -10px; left: 0px;"}
                     ANSWERS (#{ad.comments.count})
                 -else
-                  .showHiddenBlock2{:style => "margin-bottom: -10px; float: left"}
+                  .showHiddenBlock2{:style => "margin-bottom: 0px; float: left;"}
                     Other answers (#{ad.comments.count})
               -else
                 .showHiddenBlock2{:style => "position: relative; float: left; top: -20px; margin-bottom: -10px;"}
