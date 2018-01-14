@@ -1045,9 +1045,9 @@
                     %img{:src => "/assets/logos/dots.png", :height => "15",}/
                   %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 15px; cursor: pointer;"}
                     %img{:src => "/assets/logos/chev.png", :height => "15",}/
-                  .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 35px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;   width: 60px; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
-                    - if ad.user.id == current_user.id
-                      -if ad.comments.count == 0
+                  .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 35px; left: 470px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;   width: 60px; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
+                    - if ad.user.id == current_user.id || current_user.admin
+                      -if ad.comments.count == 0 || current_user.admin
                         = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
                         = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;',data: { confirm: 'Are you sure?' }
                       = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
@@ -1063,9 +1063,9 @@
                   %img{:src => "/assets/logos/dots.png", :height => "15",}/
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 35px; cursor: pointer;"}
                   %img{:src => "/assets/logos/chev.png", :height => "15",}/
-                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 55px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;  width: 60px;  color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
-                  - if user_signed_in? && ad.user.id == current_user.id && ad.completed != true
-                    -if ad.comments.count == 0
+                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 55px; left: 470px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;  width: 60px;  color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
+                  - if user_signed_in? && (ad.user.id == current_user.id || current_user.admin) && (ad.completed != true || current_user.admin)
+                    -if ad.comments.count == 0 || current_user.admin
                       = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
                       = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; width: 60px; text-align: center; float: left;',data: { confirm: 'Are you sure?' }
                     = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
@@ -1077,7 +1077,7 @@
             - if ad.details != ""
               -if user_signed_in?
                 -if ad.user.id == current_user.id
-                  .showHiddenBlock2{:style => "position: relative; margin-bottom: -10px; left: -200px;"}
+                  .showHiddenBlock2{:style => "position: relative; margin-bottom: -10px; left: 0px;"}
                     ANSWERS (#{ad.comments.count})
                 -else
                   .showHiddenBlock2{:style => "margin-bottom: -10px; float: left"}
@@ -1093,25 +1093,6 @@
                 -else
                   .noanswers{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px;"}
                     Other answers (#{ad.comments.count})
-              -else
-                .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
-                  Other answers (#{ad.comments.count})
-          -else
-            - if ad.details != ""
-              -if user_signed_in?
-                -if ad.user.id == current_user.id
-                  .showHiddenBlock2{:style => "margin-bottom: -20px; top: -20px; float: left; left: 0px; border: 1px solid black;"}
-                    ANSWERS (#{ad.comments.count})
-                -else
-                  .showHiddenBlock2{:style => "margin-bottom: -10px; float: left; top: -20px;"}
-                    Other answers (#{ad.comments.count})
-              -else
-                .showHiddenBlock2{:style => "position: relative; float: left; top: -20px; margin-bottom: 0px;"}
-                  Other answers (#{ad.comments.count})
-            - else
-              -if user_signed_in? && ad.user.id == current_user.id
-                .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px; left: 0px; border: 1px solid black;"}
-                  ANSWERS (#{ad.comments.count})
               -else
                 .noanswers{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px;"}
                   Other answers (#{ad.comments.count})
@@ -1192,23 +1173,20 @@
             .nodetailsline
           - if ad.details != ""
             .editdelete
-              - if user_signed_in? && ad.completed != true
-                .dropdown
-                  %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 623px; top: 14px; cursor: pointer;"}
-                    %img{:src => "/assets/logos/dots.png", :height => "15",}/
-                  %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 15px; cursor: pointer;"}
-                    %img{:src => "/assets/logos/chev.png", :height => "15",}/
-                  .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 35px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;   width: 60px; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
-                    - if ad.user.id == current_user.id
-                      -if ad.comments.count == 0
-                        = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
-                        = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;',data: { confirm: 'Are you sure?' }
-                      = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
-                    -else
-                      = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
-                      = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
-              -else
-                .fillvoid
+              .dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 623px; top: 14px; cursor: pointer;"}
+                  %img{:src => "/assets/logos/dots.png", :height => "15",}/
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 15px; cursor: pointer;"}
+                  %img{:src => "/assets/logos/chev.png", :height => "15",}/
+                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 35px; left: 470px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;   width: 60px; color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
+                  - if user_signed_in? && (ad.user.id == current_user.id || current_user.admin) && (ad.completed != true || current_user.admin)
+                    -if ad.comments.count == 0 || current_user.admin
+                      = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                      = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;',data: { confirm: 'Are you sure?' }
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                  -else
+                    = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
+                    = link_to 'SHARE', adventures_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
           -else
             .editdelete
               .dropdown
@@ -1216,9 +1194,9 @@
                   %img{:src => "/assets/logos/dots.png", :height => "15",}/
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :type => "button", :style => "position: relative; left: 568px; top: 35px; cursor: pointer;"}
                   %img{:src => "/assets/logos/chev.png", :height => "15",}/
-                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 55px; left: 355px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;  width: 60px;  color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
-                  - if user_signed_in? && ad.user.id == current_user.id && ad.completed != true
-                    -if ad.comments.count == 0
+                .dropdown-menu.ooohoo{"aria-labelledby" => "dropdownMenuButton", :style => "position: absolute; top: 55px; left: 470px; -webkit-appearance: none; margin: 5px 0; border-radius: 0px; box-sizing: border-box;  width: 60px;  color: black; resize: none; font-family: 'pproxima_nova_ltthin', sans-serif; font-size: 14px;"}
+                  - if user_signed_in? && (ad.user.id == current_user.id || current_user.admin) && (ad.completed != true || current_user.admin)
+                    -if ad.comments.count == 0 || current_user.admin
                       = link_to 'EDIT', edit_adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
                       = link_to 'DELETE', adventure_path(ad), :method => :delete, class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; width: 60px; text-align: center; float: left;',data: { confirm: 'Are you sure?' }
                     = link_to "DETAILS", adventure_path(ad), class: "dropdown-item.mine", :style=>'color:black; margin-left: 40px; text-align: center; float: left; width: 60px;'
@@ -1228,26 +1206,26 @@
           - if ad.details != ""
             -if user_signed_in?
               -if ad.user.id == current_user.id
-                .showHiddenBlock2done{:style => "margin-bottom: -20px; top: -20px; float: left; left: 0px; border: 1px solid black;"}
+                .showHiddenBlock2done{:style => "margin-bottom: -20px; top: -10px; float: left; left: 0px; border: 1px solid black;"}
                   ANSWERS (#{ad.comments.count})
               -else
-                .showHiddenBlock2done{:style => "margin-bottom: -10px; float: left; top: -20px;"}
+                .showHiddenBlock2done{:style => "margin-bottom: -10px; float: left; top: -10px;"}
                   Other answers (#{ad.comments.count})
             -else
-              .showHiddenBlock2done{:style => "position: relative; float: left; top: -20px; margin-bottom: 0px;"}
+              .showHiddenBlock2done{:style => "position: relative; float: left; top: -10px; margin-bottom: 0px;"}
                 Other answers (#{ad.comments.count})
           - else
             -if user_signed_in? && ad.user.id == current_user.id
-              .noanswersDone{:style => "position: relative; float: left; top: 0px; margin-bottom: 0px; left: 0px; border: 1px solid black;"}
+              .noanswersDone{:style => "position: relative; float: left; top: 10px; margin-bottom: 0px; left: 0px; border: 1px solid black;"}
                 ANSWERS (#{ad.comments.count})
             -else
               .noanswersDone{:style => "position: relative; float: left; top: 10px; margin-bottom: 10px;"}
                 Other answers (#{ad.comments.count})
           -if ad.details != ""
-            .initiallyHiddenBlock2{:style => "top: 135px;"}
+            .initiallyHiddenBlock2{:style => "top: 145px;"}
               - ad.comments.each do |c|
                 = render c
           -else
-            .initiallyHiddenBlock2
+            .initiallyHiddenBlock2{:style => "top: 155px;"}
               - ad.comments.each do |c|
                 = render c
