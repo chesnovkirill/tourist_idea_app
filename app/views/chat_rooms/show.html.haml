@@ -82,20 +82,23 @@
     z-index: 200;
   }
 
-.messagestitle
-  - if current_user.id == @user1
-    MESSAGES WITH #{@user2.first_name}
-  -else
-    MESSAGES WITH #{@user1.first_name}
-.titleline
-.messagebox
-  = render @chat_room.messages
-.newmessage
-  = form_for @message, url: chat_room_create_msg_path(@chat_room.id) do |f|
-    .form-group
-      = f.text_area :body, class: 'formcontrol', :required => 'required'
-    %button.accept{:class => "subbutton"}
-      SEND MESSAGE
+-if !current_user
+  %a{:href => adventures_path, :style => "position: relative; left: 500px; top: 400px; font-size: 33px;"} Please log in first
+-else
+  .messagestitle
+    - if current_user.id == @user1
+      MESSAGES WITH #{@user2.first_name}
+    -else
+      MESSAGES WITH #{@user1.first_name}
+  .titleline
+  .messagebox
+    = render @chat_room.messages
+  .newmessage
+    = form_for @message, url: chat_room_create_msg_path(@chat_room.id) do |f|
+      .form-group
+        = f.text_area :body, class: 'formcontrol', :required => 'required'
+      %button.accept{:class => "subbutton"}
+        SEND MESSAGE
 
 
 

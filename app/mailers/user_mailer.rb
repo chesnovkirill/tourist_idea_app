@@ -14,10 +14,11 @@ class UserMailer < ApplicationMailer
         @url = 'http://www.google.com'
         mail(to:@user1.email, subject: 'You got a New Answer on TWIGS')
     end
-    def chatroom_email(user1, user2)
+    def chatroom_email(user1, user2, chatroom)
         @user1 = user1
         @user2 = user2
         @url = 'http://www.google.com'
-        mail(to:@user2.email, subject: 'Your Answer Was Chosen on TWIGS')
+        @chatroom = chatroom
+        mail(to:@user1.email, subject: 'Your Answer Was Chosen on TWIGS')
     end
 end

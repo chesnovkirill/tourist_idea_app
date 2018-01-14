@@ -115,7 +115,7 @@
         = @message.user.first_name
       .timeposted
         %br
-        #{@message.created_at}
+          #{local_time(@message.created_at, format: '%b %e, %Y')}
       .textpart
         = @message.body
-      %a.singularchat{:href => 'https://staging-twigs.herokuapp.com'} ANSWER
+      %a.singularchat{:href => 'https://staging-twigs.herokuapp.com/adventures/' + '#{@message.adventure.id}'} ANSWER

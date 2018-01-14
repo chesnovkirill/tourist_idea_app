@@ -140,4 +140,4 @@
         Mobile: #{@user2.contact_phone}
         %br
         Email: #{@user2.email}
-    %a.singularchat{:href => 'https://staging-twigs.herokuapp.com'} SEND MESSAGE
+    %a.singularchat{:href => 'https://staging-twigs.herokuapp.com/chat_rooms/' + '#{@chatroom.id}'} SEND MESSAGE

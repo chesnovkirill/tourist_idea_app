@@ -39,7 +39,7 @@ class FriendshipsController < ApplicationController
         @chat_room.save
         @user1 = Adventure.find(@chat_room.adventure).user
         @user2 = current_user
-        UserMailer.chatroom_email(@user1, @user2).deliver
+        UserMailer.chatroom_email(@user1, @user2, @chat_room).deliver
         params.delete :adventure_id
         params.delete :friend_user_id
         redirect_to chat_room_path(@chat_room.id)
