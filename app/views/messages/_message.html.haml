@@ -51,12 +51,12 @@
 
 .container
   .avatar
-    %img{:href => user_path(message.user.id), :src => "/assets/logos/user.png", :width => "30"}
+    %img{:href => user_path(message.user.id), :src => "/assets/logos/user.png", :width => "30", :style => "cursor: pointer; z-index: 100"}
   .name
     = message.user.first_name
   .timeposted
     %br
-    #{local_time(message.timestamp, format: '%b %e, %Y %H:%M:%S')}
+    #{local_time(message.timestamp, format: '%b %e, %Y %H:%M')}
   .textpart
     = message.body
   .dividingline

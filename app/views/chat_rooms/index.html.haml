@@ -86,10 +86,10 @@
   .last_message_text {
     position: absolute;
     z-index: 100;
-    width: 300px;
+    width: 320px;
     height: 37px;
     top: -4px;
-    left: 180px;
+    left: 120px;
     margin-right: -2000px;
     float:left;
     font-family: 'pproxima_nova_ltthin', sans-serif;
@@ -127,7 +127,7 @@
 
   .adventureprice {
     position: absolute;
-    left: 490px;
+    left: 450px;
     z-index: 100;
     float: left;
     font-family: 'pproxima_nova_ltthin', sans-serif;
@@ -141,30 +141,34 @@
     -if c.user_id == current_user.id
       .box
         %a.singularchat{:href => chat_room_path(c.id)}
-        .avatar
-          %img{:href => user_path(c.host_id), :src => "/assets/logos/user.png", :width => "30"}
+        .avatar{:style => "z-index: 400"}
+          %img{:href => user_path(c.host_id), :src => "/assets/logos/user.png", :width => "30", :style => "z-index: 400" }
         .name
           #{User.find(c.host_id).first_name}
-        .last_message_at
-          #{local_time(c.messages.order("created_at").last.timestamp, format: '%b %e, %Y')}
+        -if c.messages.last
+          .last_message_at
+            #{local_time(c.messages.order("created_at").last.timestamp, format: '%b %e, %Y')}
         .adventureprice
           $ #{Adventure.find(c.adventure).price}
-        .last_message_text
-          #{c.messages.order("created_at").last.body}
+        -if c.messages.last
+          .last_message_text
+            #{c.messages.order("created_at").last.body}
 
       .dividingline
     -else
       .box
         %a.singularchat{:href => chat_room_path(c.id)}
-        .avatar
-          %img{:href => user_path(c.user_id), :src => "/assets/logos/user.png", :width => "30"}
+        .avatar{:style => "z-index: 400"}
+          %img{:href => user_path(c.user_id), :src => "/assets/logos/user.png", :width => "30", :style => "z-index: 400"}
         .name
           #{User.find(c.user_id).first_name}
-        .last_message_at
-          #{local_time(c.messages.order("created_at").last.timestamp, format: '%b %e, %Y')}
+        -if c.messages.last
+          .last_message_at
+            #{local_time(c.messages.order("created_at").last.timestamp, format: '%b %e, %Y')}
         .adventureprice
           $ #{Adventure.find(c.adventure).price}
-        .last_message_text
-          #{c.messages.order("created_at").last.body}
+        -if c.messages.last
+          .last_message_text
+            #{c.messages.order("created_at").last.body}
       .dividingline
 

@@ -56,7 +56,7 @@
     font-family: 'pproxima_nova_ltthin', sans-serif;
     font-size: 90%;
   }
-  .submitterbutton {
+  .subbutton {
     position: fixed;
     left: 901px;
     top: 588px;
@@ -69,16 +69,16 @@
     border: 1px solid black;
     border-radius: 0px;
     box-sizing: border-box;
-    color: black;
+    color: black; !important;
     resize: none;
     font-family: 'pproxima_nova_ltthin', sans-serif;
     font-size: 13px;
-    background-color: #bee5fb;
+    background-color: #D9F0FD;
     z-index: 200;
   }
 
-  .submitterbutton:hover {
-    background-color: #7FCCF7;
+  .subbutton:hover {
+    background-color: #BEE5FB;
     z-index: 200;
   }
 
@@ -94,7 +94,8 @@
   = form_for @message, url: chat_room_create_msg_path(@chat_room.id) do |f|
     .form-group
       = f.text_area :body, class: 'formcontrol'
-    = f.submit "SEND MESSAGE", class: 'submitterbutton'
+    %button.accept{:class => "subbutton"}
+      SEND MESSAGE
 
 
 

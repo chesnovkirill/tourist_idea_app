@@ -27,6 +27,6 @@
     = hidden_field :adventure, :inviter, value: @adventure.inviter
   -else
     -if current_user.id != @adventure.user.id
-      = number_field :adventure, :inviter
+      = number_field :adventure, :inviter, :value => 0
   = submit_tag 'Save Changes'
 = link_to 'Back to adventure list', adventures_path(@adventure)
